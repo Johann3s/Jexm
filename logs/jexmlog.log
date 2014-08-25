@@ -1,0 +1,19 @@
+# This file holds errorlogs from within Jexm application.
+
+Logged at 2014-08-17 23:04:51
+SQLSTATE[28000] [1045] Access denied for user 'rooht'@'localhost' (using password: YES)
+
+Logged at 2014-08-17 23:05:22
+SQLSTATE[28000] [1045] Access denied for user 'rooht'@'localhost' (using password: YES)
+
+Logged at 2014-08-17 23:31:54
+SQLSTATE[28000] [1045] Access denied for user 'rooht'@'localhost' (using password: YES)
+
+Logged at 2014-08-17 23:36:15
+An error occured during logging. Couldnt receive errormessage.
+
+Logged at 2014-08-17 23:36:44
+SQLSTATE[28000] [1045] Access denied for user 'rooht'@'localhost' (using password: YES)
+
+Logged at 2014-08-17 23:42:14
+SQLSTATE[28000] [1045] Access denied for user 'rooht'@'localhost' (using password: YES)

@@ -1,0 +1,8 @@
+# Redirects all traffic to public folder.
+# Enables app to work locally without a virtual host. 
+# If virtual host is set up with public folder as DocumentRoot this file is reduntant.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule    (.*) public/$1    [L]
+</IfModule>
