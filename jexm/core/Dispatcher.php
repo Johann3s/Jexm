@@ -43,9 +43,9 @@
 			$controllerFile = (!empty($this->routeparts['controller'])) ? $this->routeparts['controller'].".php" : "Index.php";
 			
 			/**
-			* If a request has been made but controllerfile is not found in dir its a 404.
+			* If a request has been made but controllerfile is not found in dir its a 404. Note to self (change default later)
 			*/
-			$controller = (file_exists($this->controllerDir.$controllerFile)) ? $this->routeparts['controller'] : "FileNotFound"; //Ändra till 404
+			$controller = (file_exists($this->controllerDir.$controllerFile)) ? $this->routeparts['controller'] : "FileNotFound"; 
 			
 			/**
 			* Include namespace for controllers and return controller.
