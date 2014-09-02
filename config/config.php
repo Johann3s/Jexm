@@ -28,7 +28,6 @@
 	* 
 	*/
 	define('JEXM_PATH',ROOT."jexm".DS);
-	define('THEMES_PATH',ROOT."themes".DS);
 	define('LOG_PATH',ROOT."logs".DS);
 	
 	

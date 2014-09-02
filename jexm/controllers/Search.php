@@ -1,7 +1,7 @@
 <?php
 	namespace jexm\controllers;
 	
-	class Search{
+	class Search extends BaseController{
 		
 		public function __construct(){
 			echo "im searchcontroller";

@@ -28,7 +28,7 @@
 	$x = new jexm\core\Dispatcher();
 	$x->getController();
 	
-	$model = new jexm\models\BaseModel();
+	//$model = new jexm\models\BaseModel();
 
 	echo "up n running";
 ?>
