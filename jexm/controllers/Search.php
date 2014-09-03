@@ -1,9 +1,12 @@
 <?php
 	namespace jexm\controllers;
 	
-	class Search extends BaseController{
+	class Search extends Controller{
 		
 		public function __construct(){
-			echo "im searchcontroller";
+			parent::__construct();
+			/*echo $this->controllerName;
+			echo "<br>";
+			var_dump($this->view);*/
 		}
 	}
