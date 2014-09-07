@@ -14,4 +14,5 @@
 			$nameSpaceArray = explode("\\",get_class($className));
 			return end($nameSpaceArray);
 		}
+		
 	}

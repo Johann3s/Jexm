@@ -25,8 +25,8 @@
 	*/
 	require_once(ROOT."config".DS."config.php");
 	
-	$x = new jexm\core\Dispatcher();
-	$x->getController();
+	$jexm = new jexm\core\Jexm();
+	$jexm->launch();
 	
 	//$model = new jexm\models\BaseModel();
 

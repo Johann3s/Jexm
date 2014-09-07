@@ -26,10 +26,16 @@
 		public function __construct(){
 			$this->router = new \jexm\core\Router();
 			$this->routeparts = $this->router->getRoute();
-			$this->controllerDir = ROOT."jexm".DS."controllers".DS;
+			$this->controllerDir = ROOT."jexm"."controllers".DS;
 		}
 		
-		
+		/**
+		* Gets th eurlrequests as associative array.
+		* @return array Chunked up Urlrequest.
+		*/
+		public function getUrlRequest(){
+			return $this->routeparts;
+		}
 		
 		/**
 		* Validates request and returns a controller.

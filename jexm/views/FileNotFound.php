@@ -8,7 +8,7 @@
 		public function __construct(){
 			parent::__construct();
 			$this->useTemplate("404");
-			$this->setData(array("currentRequest" => $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
-			$this->renderView();
+			$this->setData(array("testdata" => "We are ever so sorry!"));
+			//var_dump($this->data);
 		}
 	}

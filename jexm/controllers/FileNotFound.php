@@ -5,8 +5,10 @@
 		
 		public function __construct(){
 			parent::__construct();
-			//echo $this->controllerName . "<br>";
-			//var_dump($this->view);
+			$this->setData(array("currentRequest" => $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+			$this->render();
 		}
+		
+	
 		
 	}
