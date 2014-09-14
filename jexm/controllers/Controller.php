@@ -1,7 +1,9 @@
 <?php
 	namespace jexm\controllers;
+	
 	/**
-	* Appspecific controller which should be extended and include methods to be used by all controllers.
+	* This is the controller class. It can be extended by application controllers. Here you can (optional) define appspecific
+	* methods and properties.
 	*/
 	class Controller extends \jexm\core\BaseController{
 		

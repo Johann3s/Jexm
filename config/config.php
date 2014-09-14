@@ -28,6 +28,7 @@
 	* 
 	*/
 	define('JEXM_PATH',ROOT."jexm".DS);
+	define('TEMPLATE_PATH',JEXM_PATH."views".DS);
 	define('LOG_PATH',ROOT."logs".DS);
 	
 	

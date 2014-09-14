@@ -5,6 +5,11 @@
 	* Dispatcher class uses the routes and returns controller object.
 	*/
 	class Dispatcher{
+	
+		/**
+		* @var object CoreSession object.
+		*/
+		private $session;
 		
 		/**
 		* @var object Router parses the urlrequest.
@@ -25,17 +30,12 @@
 		
 		public function __construct(){
 			$this->router = new \jexm\core\Router();
-			$this->routeparts = $this->router->getRoute();
-			$this->controllerDir = ROOT."jexm"."controllers".DS;
+			$this->router->extractRoute();
+			$this->controllerDir = JEXM_PATH."controllers".DS;
+			$this->session = new CoreSession();
+			$this->routeparts = $this->session->getRoute();
 		}
 		
-		/**
-		* Gets th eurlrequests as associative array.
-		* @return array Chunked up Urlrequest.
-		*/
-		public function getUrlRequest(){
-			return $this->routeparts;
-		}
 		
 		/**
 		* Validates request and returns a controller.

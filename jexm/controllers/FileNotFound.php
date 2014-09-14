@@ -5,8 +5,7 @@
 		
 		public function __construct(){
 			parent::__construct();
-			$this->setData(array("currentRequest" => $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
-			$this->render();
+			View::render("404",array("currentRequest" => URL::getCurrentRequest()));
 		}
 		
 	

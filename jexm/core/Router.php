@@ -1,10 +1,16 @@
 <?php
-namespace jexm\core;
+	namespace jexm\core;
+
 	/**
 	* Router class prepares and extracts the URL requests and returns them for use in the application yes.
 	* @package Jexm
 	*/
 	class Router{
+		
+		/**
+		* @var object CoreSession object.
+		*/
+		private $session;
 		
 		/**
 		* @var array Holds prepared URL request
@@ -26,20 +32,26 @@ namespace jexm\core;
 		*/
 		private $args = array();
 		
+		public function __construct(){
+			$this->session = new CoreSession();
+		}
 
 		/**
 		* Public handle to execute classmethods.
-		* @return array associative with index[controller,method and args(array)]
+		* Populates class properties and sets the requested route.
 		*/
-		public function getRoute(){
+		public function extractRoute(){
 		
 			$this->prepareRequest();
 			$this->extractURL();
-			return array(
-				"controller" => $this->controller,
-				"method" => $this->method,
-				"args" => $this->args
-			);
+			
+			$this->session->setRoute(array
+				(
+					"controller" => $this->controller,
+					"method" => $this->method,
+					"args" => $this->args
+				));
+				
 		}
 		
 		
