@@ -6,5 +6,6 @@
 	</head>
 	<body>
 		<h1>Merchandise</h1>
+		<p><?php echo Link::create('merch/search','Varor'); ?></p>
 	</body>
 </html>

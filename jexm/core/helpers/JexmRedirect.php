@@ -1,5 +1,5 @@
 <?php
-	namespace jexm\core;
+	namespace jexm\core\helpers;
 	
 	/**
 	* Class for handling redirects.
