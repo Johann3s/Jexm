@@ -5,11 +5,6 @@
 	* Dispatcher class uses the routes and returns controller object.
 	*/
 	class Dispatcher{
-	
-		/**
-		* @var object CoreSession object.
-		*/
-		private $session;
 		
 		/**
 		* @var object Router parses the urlrequest.
@@ -32,8 +27,7 @@
 			$this->router = new \jexm\core\Router();
 			$this->router->extractRoute();
 			$this->controllerDir = JEXM_PATH."controllers".DS;
-			$this->session = new CoreSession();
-			$this->routeparts = $this->session->getRoute();
+			$this->routeparts = \jexm\core\helpers\JexmSession::getUrlRequest();
 		}
 		
 		
@@ -46,12 +40,12 @@
 			/**
 			* If no request has been made array[controller-index] is empty and the indexpage is requested.
 			*/
-			$controllerFile = (!empty($this->routeparts['controller'])) ? $this->routeparts['controller'].".php" : "Index.php";
+			$controllerFile = (!empty($this->routeparts['controller'])) ? ucfirst($this->routeparts['controller']).".php" : ucfirst(HOME).".php";
 			
 			/**
-			* If a request has been made but controllerfile is not found in dir its a 404. Note to self (change default later)
+			* If a request has been made but controllerfile is not found in dir its a 404. Strip $controllerfile of extension.
 			*/
-			$controller = (file_exists($this->controllerDir.$controllerFile)) ? $this->routeparts['controller'] : "FileNotFound"; 
+			$controller = (file_exists($this->controllerDir.$controllerFile)) ? basename($controllerFile,".php") : "FileNotFound"; 
 			
 			/**
 			* Include namespace for controllers and return controller.

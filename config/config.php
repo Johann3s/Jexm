@@ -12,6 +12,10 @@
 	*/
 	date_default_timezone_set('Europe/Stockholm');
 	
+	/**
+	* Define name of first page (home,start etc)
+	*/
+	define('HOME',"start");
 	
 	
 	/**

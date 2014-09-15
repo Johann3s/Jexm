@@ -2,7 +2,7 @@
 <html lang="sv">
 	<head>
 		<meta charset="UTF-8">
-		<title>Jexm || Merch-search</title>
+		<title>Jexm || Home</title>
 		<style>
 			a{
 				display:inline-block;
@@ -14,8 +14,7 @@
 		</style>
 	</head>
 	<body>
-		<h1>Search Merchandise</h1>
-		<p><?php echo(Link::breadcrumbs()); ?></p>
-		<p><?php echo Link::create('merch','Back'); ?></p>
+		<h1>JEXM</h1>
+		<p><?php echo(Link::create(HOME.'/stuff','Saker',array("id" => "tjoho","year"=>7879))); ?></p>
 	</body>
 </html>

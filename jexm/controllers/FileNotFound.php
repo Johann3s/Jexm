@@ -8,7 +8,7 @@
 		}
 		
 		public function index(){
-			View::render("404",array("currentRequest" => URL::getCurrentRequest()));
+			View::render("404",array("currentRequest" => URL::getCurrentURLString()));
 		}
 		
 	

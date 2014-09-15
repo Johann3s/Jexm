@@ -8,11 +8,6 @@
 	class Router{
 		
 		/**
-		* @var object CoreSession object.
-		*/
-		private $session;
-		
-		/**
 		* @var array Holds prepared URL request
 		*/
 		private $requests = array();
@@ -32,9 +27,6 @@
 		*/
 		private $args = array();
 		
-		public function __construct(){
-			$this->session = new CoreSession();
-		}
 
 		/**
 		* Public handle to execute classmethods.
@@ -45,7 +37,7 @@
 			$this->prepareRequest();
 			$this->extractURL();
 			
-			$this->session->setRoute(array
+			BaseHelper::setRoute(array
 				(
 					"controller" => $this->controller,
 					"method" => $this->method,
