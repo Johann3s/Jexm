@@ -5,13 +5,20 @@
 	* This is the basecontroller which is to be extended by an application specific controller.
 	*/
 	use \jexm\core\helpers\JexmSession as Session;
+	use \jexm\core\View as View;
+	use \jexm\core\helpers\JexmURL as URL;
 	
 	abstract class BaseController{
 		
-		
+		/**
+		* Constructor creates aliases and calls method when done traversing classes
+		*/
 		public function __construct(){
 			$this->createAliases();
-			$this->callMethod();
+			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst(Session::getControllerRequest())){
+				$this->callMethod();
+			}
+			
 		}
 		
 		/**
@@ -27,11 +34,15 @@
 		}
 		
 		/**
-		* Calls requested method(if any, otherwise index method)
+		* Calls requested method(if any) or sends a 404 if not method not found
 		*/
 		protected function callMethod(){
-			$request = Session::getMethodRequest();
-			$method = (method_exists($this, $request)) ? $request : "index";
+			$method = Session::getMethodRequest();
+			if(empty($method)){return;}
+			if(!method_exists($this, $method)){
+				View::render("404",array("currentRequest" => URL::getCurrentURLString()));
+				exit;
+			}
 			$this->{$method}();		
 		}
 		

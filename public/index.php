@@ -24,11 +24,9 @@
 	* Includes bootstrap and configs
 	*/
 	require_once(ROOT."config".DS."config.php");
+	require_once(JEXM_PATH."routes.php");
 	
 	$jexm = new jexm\core\Jexm();
 	$jexm->launch();
 	
-	//$model = new jexm\models\BaseModel();
-
-	echo "up n running";
 ?>

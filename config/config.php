@@ -12,10 +12,12 @@
 	*/
 	date_default_timezone_set('Europe/Stockholm');
 	
+	
 	/**
-	* Define name of first page (home,start etc)
+	* Define name of default HomeController. (home,start,index etc)
+	* Can be overriden by setting a route to ("/" in jexm/routes.php)
 	*/
-	define('HOME',"start");
+	define('HOME',"StartController");
 	
 	
 	/**

@@ -18,6 +18,7 @@
 		*/
 		public static function create($path, $text, $params = array()){
 			$path = (!empty($params)) ? $path . "?" .self::buildQueryString($params) : $path;
+			$path = URL_ROOT . $path;
 			return "<a href='{$path}'>{$text}</a>"; 
 		}
 		
@@ -41,11 +42,11 @@
 		* Adding URL_ROOT to each component for proper anchoring.
 		*/
 		public static function breadcrumbs(){
-			$crumb = self::create(URL_ROOT,"Hem");
+			$crumb = self::create("","Hem");
 			$controller = strtolower(JexmSession::getControllerRequest());
 			$method = strtolower(JexmSession::getMethodRequest());
-			$crumb .= (!empty($controller)) ? self::isCurrentURL(URL_ROOT.$controller, ucfirst($controller)) : "";
-			$crumb .= (!empty($method)) ? self::isCurrentURL(URL_ROOT.$controller."/".$method, ucfirst($method)) : "";
+			$crumb .= (!empty($controller)) ? self::isCurrentURL($controller, ucfirst($controller)) : "";
+			$crumb .= (!empty($method)) ? self::isCurrentURL($controller."/".$method, ucfirst($method)) : "";
 			return $crumb;
 		}
 		
@@ -56,8 +57,8 @@
 
 			//This is only a problem in indexpage. If controller is HOME constant it is displayed twice. If so return empty.
 			if(strtolower($linkpath) == strtolower(URL_ROOT . HOME)){return "";}
-			
-			if($linkpath == JexmURL::getCurrentURLWithoutQueryString()){
+
+			if(URL_ROOT.$linkpath == JexmURL::getCurrentURLWithoutQueryString()){
 				return "<span class='".self::$cssClass."'>".self::create($linkpath,$text)."</span>";
 			}
 			return self::create($linkpath,$text);

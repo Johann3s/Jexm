@@ -30,25 +30,23 @@
 			$this->routeparts = \jexm\core\helpers\JexmSession::getUrlRequest();
 		}
 		
+
 		
 		/**
 		* Validates request and returns a controller.
 		* @return object
 		*/
 		public function getController(){
-			
-			/**
-			* If no request has been made array[controller-index] is empty and the indexpage is requested.
-			*/
+	
+			//If no request has been made array[controller-index] is empty and the indexpage is requested.
 			$controllerFile = (!empty($this->routeparts['controller'])) ? ucfirst($this->routeparts['controller']).".php" : ucfirst(HOME).".php";
 			
-			/**
-			* If a request has been made but controllerfile is not found in dir its a 404. Strip $controllerfile of extension.
-			*/
+			//If a request has been made but controllerfile is not found in dir its a 404. Strip $controllerfile of extension.
 			$controller = (file_exists($this->controllerDir.$controllerFile)) ? basename($controllerFile,".php") : "FileNotFound"; 
 			
 			/**
 			* Include namespace for controllers and return controller.
+			* Eventual method is being set in Routerclass and pushed to session class. Then called via Session in BaseControllerClass
 			*/
 			$controller = "jexm\controllers\\" . $controller;
 			return new $controller();

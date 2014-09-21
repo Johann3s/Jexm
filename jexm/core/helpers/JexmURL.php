@@ -17,7 +17,10 @@
 		* Returns only requested path (without eventual querystrings)
 		*/
 		public static function getCurrentURLWithoutQueryString(){
-			return str_replace("?".$_SERVER['REDIRECT_QUERY_STRING'],"",$_SERVER['REQUEST_URI']);
+			if(isset($_SERVER['REDIRECT_QUERY_STRING'])){
+				return str_replace("?".$_SERVER['REDIRECT_QUERY_STRING'],"",$_SERVER['REQUEST_URI']);
+			}
+			return $_SERVER['REQUEST_URI'];
 		}
 		
 	}

@@ -8,6 +8,11 @@
 	class Router{
 		
 		/**
+		* @var object Class for userdefined routes
+		*/
+		protected $routes;
+		
+		/**
 		* @var array Holds prepared URL request
 		*/
 		private $requests = array();
@@ -27,6 +32,11 @@
 		*/
 		private $args = array();
 		
+		public function __construct(){
+			
+			$this->routes = Routes::getRoutesObject();
+			
+		}
 
 		/**
 		* Public handle to execute classmethods.
@@ -66,10 +76,23 @@
 		* Validate preparation and populate properties.
 		*/
 		protected function extractURL(){
-			
-			$this->controller = (!empty($this->requests[0])) ? ucfirst($this->requests[0]) : "";
-			$this->method = (!empty($this->requests[1])) ? $this->requests[1] : "";
-			$this->args = (count($this->requests) > 2) ? array_slice($this->requests,2) : array();
+			if(!$this->routes->routeMatches()){
+				$this->controller = (!empty($this->requests[0])) ? ucfirst($this->requests[0]) : "";
+				$this->method = (!empty($this->requests[1])) ? $this->requests[1] : "";
+				$this->args = (count($this->requests) > 2) ? array_slice($this->requests,2) : array();
+			}else{
+				$this->getControllerFromRoutes();
+			}
 		
+		}
+		
+		/**
+		* Uses the userdefined routes.
+		*/
+		private function getControllerFromRoutes(){
+			$routes = $this->routes->useRoute();
+			$this->controller = $routes['controller'];
+			$this->method = $routes['method'];
+			$this->args = array();
 		}
 	}
