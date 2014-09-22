@@ -7,5 +7,5 @@
 	*/
 	
 	$routes->set('/merch','merch@index');
-	$routes->set('/','test@helloWorld');
+	$routes->set('/pagination','test@helloWorld');
 	//var_dump($_SERVER);

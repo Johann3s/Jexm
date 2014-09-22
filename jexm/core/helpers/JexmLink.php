@@ -22,6 +22,16 @@
 			return "<a href='{$path}'>{$text}</a>"; 
 		}
 		
+		
+		/**
+		* Automates creation of pagination links.
+		*/
+		public static function paginate($path, $text, array $params){
+			$path = $path . "?" . self::buildQueryString($params);
+			return "<a href='{$path}'>{$text}</a>"; 
+		}
+		
+		
 		/**
 		* Builds querystrings.
 		*/

@@ -51,9 +51,12 @@
 		public function routeMatches(){
 			if(empty($this->routes)){return false;}
 			
+			//Remove eventual get-strings
+			$urlRequest = preg_replace("/[?].+/","",$_SERVER['REQUEST_URI']);
+
 			//If URL_ROOT is NOT set to / remove from request before extracting and append a slash.
-			$requestURI = (URL_ROOT != "/") ? "/" . str_replace(URL_ROOT,"",$_SERVER['REQUEST_URI']) : $_SERVER['REQUEST_URI'];
-			
+			$requestURI = (URL_ROOT != "/") ? "/" . str_replace(URL_ROOT,"",$urlRequest) : $urlRequest;
+
 			foreach($this->routes as $route){
 				if($route[0] == $requestURI || $route[0] . "/" == $requestURI){
 					$this->matchingRoute = $route;
