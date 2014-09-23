@@ -18,8 +18,11 @@
 		*/
 		private static $self;
 		
+		
+		
 		/**
 		* Singleton class
+		* @return object Routes(self)
 		*/
 		public static function getRoutesObject(){
 			if(!isset(self::$self)){
@@ -28,37 +31,41 @@
 			return self::$self;
 		}
 		
+		
+		
 		/**
-		* Sets a route
+		* Sets a userdefined route.
+		* @param string $url Route to be mapped
+		* @param string $location A controller and optional method to direct to.
 		*/
 		public function set($url,$location){
 			$this->routes[] = [$url,$location];
 		}
 		
 		
+		
 		/**
 		* Gets all routes
+		* @return array All userdefined routes
 		*/
 		public function get(){
 			return $this->routes;
 		}
 		
 		
+		
 		/**
 		* Determines if route matches current URLRequest
 		* Allows for following slash.
+		* @return boolean True if a userdefined route is found.
 		*/
 		public function routeMatches(){
 			if(empty($this->routes)){return false;}
 			
-			//Remove eventual get-strings
-			$urlRequest = preg_replace("/[?].+/","",$_SERVER['REQUEST_URI']);
-
-			//If URL_ROOT is NOT set to / remove from request before extracting and append a slash.
-			$requestURI = (URL_ROOT != "/") ? "/" . str_replace(URL_ROOT,"",$urlRequest) : $urlRequest;
+			$urlRequest = BaseHelper::stripURLRequest();
 
 			foreach($this->routes as $route){
-				if($route[0] == $requestURI || $route[0] . "/" == $requestURI){
+				if($route[0] == $urlRequest || $route[0] . "/" == $urlRequest){
 					$this->matchingRoute = $route;
 					return true;
 					break;
@@ -68,11 +75,15 @@
 			return false;
 		}
 		
+		
+		
 		/**
 		* Prepares and returns a matching route.
+		* @return array Associative array with userdefined controller and method to execute
 		*/
 		public function useRoute(){
 			$routeParts = explode("@", $this->matchingRoute[1]);
+			
 			//If a method has been declared the array has more than 1 index. Otherwise set method to "".
 			$method = (count($routeParts) > 1) ? $routeParts[1] : "";
 			return ["controller" => ucfirst($routeParts[0]), "method" => $method];

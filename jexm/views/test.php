@@ -16,6 +16,7 @@
 	<body>
 		<h1>Pagination</h1>
 		<div>
+			<?php var_dump($data);?>
 			<?php echo $links; ?>
 
 		</div>

@@ -1,10 +1,10 @@
 <?php
-	namespace jexm\models;
+	namespace jexm\core;
 	use PDO;
 	use PDOException;
 	
 	
-	class BaseModel{
+	abstract class BaseModel{
 		
 		/**
 		* @var object PDO object
@@ -35,6 +35,8 @@
 			$this->paginator = new \jexm\core\Paginator();
 		}
 		
+		
+		
 		/*
 		* Fetches from database.
 		*
@@ -44,19 +46,30 @@
 		* @return mixed Fetched data from db
 		*/
 		protected function fetch($query, $params = array(), $paginate = 0){
-			if($paginate > 0){
-				 return $this->doPaginationQuery($query,$params,$paginate);
-			}else{
-				$stmt = $this->db->prepare($query);
-				$stmt->execute($params);
-				return $stmt->fetchAll();
-			}
+			$resultset = ($paginate > 0) ? $this->doPaginationQuery($query,$params,$paginate) : $this->doQuery($query,$params);
+			return $resultset;
 		}
+		
+		
+		
+		/**
+		* If no pagination is requested the "normal" query runs.
+		* Takes params from fetch method.
+		* @return array Resultset from database.
+		*/
+		protected function doQuery($query,$params){
+			$stmt = $this->db->prepare($query);
+			$stmt->execute($params);
+			return $stmt->fetchAll();
+		}
+		
+		
 		
 		/**
 		* If pagination is set this block executes instead. It returns query after pagination has been performed and 
 		* a set of links with getparameters for current pagination.
 		* Params are taken from the fetch() method which is the method being called from the Model class.
+		* @return array Resultset from database and pagination links
 		*/
 		protected function doPaginationQuery($query,$params,$perPage){
 			
@@ -86,8 +99,9 @@
 			$result = $stmt->fetchAll();
 			$result['paginationLinks'] = $this->paginator->getLinks();
 			return $result;
-			
 		}
+		
+		
 		
 		/**
 		* Update database.
@@ -101,6 +115,7 @@
 		}
 		
 		
+		
 		/**
 		* Insert into database.
 		*
@@ -111,6 +126,8 @@
 		protected function insert($query,$params = array()){
 			return $this->cudData($query,$params);
 		}
+		
+		
 		
 		/**
 		* DELETE from database.
@@ -123,25 +140,27 @@
 			return $this->cudData($query,$params);
 		}
 		
+		
+		
 		/**
 		* Generic create,update,delete method used internally in class.
+		* Stores id if created.
+		* @return boolean True if any rows has been affected by query.
 		*/
 		protected function cudData($query,$params = array()){
 			$stmt = $this->db->prepare($query);
 			$stmt->execute($params);
 			$this->lastInsertedId = $this->db->lastInsertId();
-			if($stmt->rowCount() < 1){
-				return false;
-			}
-			return true;
-	  }
+			return ($stmt->rowCount() < 1);
+		}
 	  
 	  
-	  /*
-	  * Get last inserted id from database
-	  * @return int
-	  */
-	  protected function getLastInsertedId(){
+	  
+		/*
+		* Get last inserted id from database
+		* @return int
+		*/
+		protected function getLastInsertedId(){
 			return $this->lastInsertedId;
-	  }
+		}
 }

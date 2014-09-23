@@ -32,12 +32,12 @@
 		*/
 		private $args = array();
 		
+		
 		public function __construct(){
-			
 			$this->routes = Routes::getRoutesObject();
-			
 		}
 
+		
 		/**
 		* Public handle to execute classmethods.
 		* Populates class properties and sets the requested route.
@@ -53,27 +53,25 @@
 					"method" => $this->method,
 					"args" => $this->args
 				));
-				
 		}
+		
 		
 		
 		/**
-		* Prepare URL request for extraction
+		* Prepare URL request for extraction.
+		* Clean from getstrings and/or eventual reduntant folderpaths
+		* Extract routeparts from URLRequest.
 		*/
 		protected function prepareRequest(){
-			//Remove eventual get-strings
-			$urlRequest = preg_replace("/[?].+/","",$_SERVER['REQUEST_URI']);
-			
-			//If URL_ROOT is NOT set to / remove from request before extracting.
-			$urlRequest = (URL_ROOT != "/") ? str_replace(URL_ROOT,"",$urlRequest) : $urlRequest;
-			
-			//Extract urlparts into array
+			$urlRequest = BaseHelper::stripURLRequest();
 			$this->requests = (!empty($urlRequest)) ? explode("/", trim($urlRequest, "/")) : null;
-			
 		}
+		
+		
 		
 		/**
 		* Validate preparation and populate properties.
+		* Seeks userdefined routes first and if not found seeks for RESTful routing.
 		*/
 		protected function extractURL(){
 			if(!$this->routes->routeMatches()){
@@ -85,6 +83,7 @@
 			}
 		
 		}
+		
 		
 		/**
 		* Uses the userdefined routes.

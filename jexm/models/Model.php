@@ -1,7 +1,7 @@
 <?php
 	namespace jexm\models;
 	
-	class Model extends BaseModel{
+	class Model extends \jexm\core\BaseModel{
 		
 		protected $paginator;
 		
