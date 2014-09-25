@@ -30,6 +30,7 @@
 			\class_alias('jexm\core\helpers\JexmSession','jexm\controllers\Session');
 			\class_alias('jexm\core\helpers\JexmRedirect','jexm\controllers\Redirect');
 			\class_alias('jexm\core\helpers\JexmUserInput','jexm\controllers\Input');
+			\class_alias('jexm\core\helpers\JexmSanitizer','jexm\controllers\Sanitize');
 			\class_alias('jexm\core\helpers\JexmLink','\Link');
 		}
 		
