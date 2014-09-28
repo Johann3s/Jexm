@@ -25,28 +25,25 @@
 		
 		//Strips HTML tags
 		private static function tags($var){
-			$filtered;
-			if(is_array($var)){
-				foreach($var as $key => $val){
-					$filtered[$key] = strip_tags($val);
-				}
-				return $filtered;
-			}
-			return strip_tags($var);
+			return (is_array($var)) ? array_map('strip_tags',$var) : strip_tags($var);
 		}
 		
 		
 		//Trims text
 		private static function trim($var){
-			$filtered;
-			if(is_array($var)){
-				foreach($var as $key => $val){
-					$filtered[$key] = trim($val);
-				}
-				return $filtered;
-			}
-			return strip_tags($var);		
+			return (is_array($var)) ? array_map('trim',$var) : trim($var);	
 		}
 		
+		
+		//Uppercases first word (calls makeUpperFirst method)
+		private static function upperFirst($var){
+			return (is_array($var)) ? array_map(array("\jexm\core\helpers\JexmSanitizer",'makeUpperFirst'),$var) : $self::makeUpperFirst($var);
+		}
+		
+		
+		//Returns ut8 in consideration uppercased words.
+		private static function makeUpperFirst($str){
+			return mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
+		}
 		
 	}

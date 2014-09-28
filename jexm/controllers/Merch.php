@@ -8,8 +8,8 @@
 		}
 		
 		public function index(){
-			$var = ["first"=>"<p>Hejsan  </p>","<h2>  Hallå</h2>","<b>JAG är BLANDat</b>"];
-			$clean = Sanitize::filter($var,['tags','trim']);
+			$var = ["first"=>"<p>åkae ejsan  </p>","second"=>"<h2> öallå </h2>","<b>jAG är BLANDat</b>"];
+			$clean = Sanitize::filter($var,['tags','trim','upperFirst']);
 			var_dump($clean);
 			View::render("merchandise");
 		}
