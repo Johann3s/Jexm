@@ -27,7 +27,8 @@
 			$this->router = new \jexm\core\Router();
 			$this->router->extractRoute();
 			$this->controllerDir = JEXM_PATH."controllers".DS;
-			$this->routeparts = \jexm\core\helpers\JexmSession::getUrlRequest();
+			$routes = \jexm\core\Routes::getRoutesObject();
+			$this->routeparts = $routes->getCurrentRequest();
 		}
 		
 

@@ -8,7 +8,7 @@
 	class Router{
 		
 		/**
-		* @var object Class for userdefined routes
+		* @var object Class for userdefined routes (Will hold other routes parsed from URLrequest, setter in this class)
 		*/
 		protected $routes;
 		
@@ -47,12 +47,11 @@
 			$this->prepareRequest();
 			$this->extractURL();
 			
-			BaseHelper::setRoute(array
-				(
+			$this->routes->saveURLRequest([
 					"controller" => $this->controller,
 					"method" => $this->method,
 					"args" => $this->args
-				));
+				]);
 		}
 		
 		
@@ -74,24 +73,27 @@
 		* Seeks userdefined routes first and if not found seeks for RESTful routing.
 		*/
 		protected function extractURL(){
-			if(!$this->routes->routeMatches()){
-				$this->controller = (!empty($this->requests[0])) ? ucfirst($this->requests[0]) : "";
-				$this->method = (!empty($this->requests[1])) ? $this->requests[1] : "";
-				$this->args = (count($this->requests) > 2) ? array_slice($this->requests,2) : array();
-			}else{
-				$this->getControllerFromRoutes();
-			}
-		
+			(!$this->routes->routeMatches()) ? $this->useDataFromUndefinedRoutes() : $this->useDataFromDefinedRoutes();
 		}
 		
 		
 		/**
 		* Uses the userdefined routes.
 		*/
-		private function getControllerFromRoutes(){
+		private function useDataFromDefinedRoutes(){
 			$routes = $this->routes->useRoute();
 			$this->controller = $routes['controller'];
 			$this->method = $routes['method'];
 			$this->args = array();
+		}
+		
+		
+		/**
+		* Uses undefined routes
+		*/
+		private function useDataFromUndefinedRoutes(){
+			$this->controller = (!empty($this->requests[0])) ? ucfirst($this->requests[0]) : "";
+			$this->method = (!empty($this->requests[1])) ? $this->requests[1] : "";
+			$this->args = (count($this->requests) > 2) ? array_slice($this->requests,2) : array();
 		}
 	}

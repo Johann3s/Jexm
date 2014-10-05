@@ -9,6 +9,11 @@
 		protected $routes = array();
 		
 		/**
+		* $var array Holds current request. 
+		*/
+		protected $currentRequest = array();
+		
+		/**
 		* $var array holds only matching route
 		*/
 		protected $matchingRoute = null;
@@ -40,6 +45,22 @@
 		*/
 		public function set($url,$location){
 			$this->routes[] = [$url,$location];
+		}
+		
+		
+		
+		/**
+		* Sets current URLRoutes
+		* If no match is found in userdefined routes Jexm will try to match a route to a controller && method.
+		* This is decided with help from the router. This setter sets the array to what values has been decided. 
+		* Populates the session with same value to help out with constructing links etc.
+		* Either defined || undefined routes.
+		* $param array $routes Associative array with controller,method and args request.
+		* @return void
+		*/
+		public function saveURLRequest(array $routes){
+			$this->currentRequest = $routes;
+			$_SESSION['CurrentRequest'] = $routes;
 		}
 		
 		
@@ -87,5 +108,15 @@
 			//If a method has been declared the array has more than 1 index. Otherwise set method to "".
 			$method = (count($routeParts) > 1) ? $routeParts[1] : "";
 			return ["controller" => ucfirst($routeParts[0]), "method" => $method];
+		}
+		
+		
+		
+		/**
+		* Gets current URLRequest. Data is decided with regard of userdefined routes. They preceed undefined routes. 
+		* I.e this array will be populated with either defined routes or non-defined routes.
+		*/
+		public function getCurrentRequest(){
+			return $this->currentRequest;
 		}
 	}
