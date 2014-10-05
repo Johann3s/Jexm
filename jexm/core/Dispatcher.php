@@ -47,7 +47,7 @@
 			
 			/**
 			* Include namespace for controllers and return controller.
-			* Eventual method is being set in Routerclass and pushed to session class. Then called via Session in BaseControllerClass
+			* Eventual method is being set in Routes-class. Then retrieved and called via BaseControllerClass.
 			*/
 			$controller = "jexm\controllers\\" . $controller;
 			return new $controller();
