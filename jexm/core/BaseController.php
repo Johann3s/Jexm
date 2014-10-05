@@ -16,6 +16,12 @@
 		
 		
 		/**
+		* @var object For authentication.
+		*/
+		protected $auth;
+		
+		
+		/**
 		* Constructor creates aliases and calls method when done traversing classes
 		*/
 		public function __construct(){
@@ -24,7 +30,9 @@
 			$this->currentRequest = $routes->getCurrentRequest();
 	
 			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest['controller'])){
+				$this->auth = new \jexm\core\helpers\JexmAuthentication();
 				$this->callMethod();
+				
 			}
 			
 		}
@@ -40,6 +48,7 @@
 			\class_alias('jexm\core\helpers\JexmRedirect','jexm\controllers\Redirect');
 			\class_alias('jexm\core\helpers\JexmUserInput','jexm\controllers\Input');
 			\class_alias('jexm\core\helpers\JexmSanitizer','jexm\controllers\Sanitize');
+			\class_alias('jexm\core\helpers\JexmHasher','jexm\controllers\Hasher');
 			\class_alias('jexm\core\helpers\JexmLink','\Link');
 		}
 		

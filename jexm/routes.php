@@ -12,4 +12,5 @@
 	
 	$routes->set('/merch','merch@index');
 	$routes->set('/pagination','test@helloWorld');
+	$routes->set('/user','test@createUser');
 

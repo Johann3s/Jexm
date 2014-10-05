@@ -3,7 +3,6 @@
 	
 	class Model extends \jexm\core\BaseModel{
 		
-		protected $paginator;
 		
 		public function __construct(){
 			parent::__construct();
@@ -14,5 +13,6 @@
 			$resultset = $this->fetch("SELECT * FROM article_table WHERE articleid < ? ORDER BY title ASC",[50],10);
 			return $resultset;
 		}
+		
 		
 	}

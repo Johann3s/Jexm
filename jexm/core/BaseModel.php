@@ -151,10 +151,10 @@
 			$stmt = $this->db->prepare($query);
 			$stmt->execute($params);
 			$this->lastInsertedId = $this->db->lastInsertId();
-			return ($stmt->rowCount() < 1);
+			return ($stmt->rowCount() > 0);
 		}
 	  
-	  
+
 	  
 		/*
 		* Get last inserted id from database
