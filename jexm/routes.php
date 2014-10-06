@@ -10,7 +10,9 @@
 	*
 	*/
 	
-	$routes->set('/merch','merch@index');
+	$routes->set('/test','test2@index');
 	$routes->set('/pagination','test@helloWorld');
 	$routes->set('/user','test@createUser');
+	$routes->set('/user/auth','test@authUser');
+	$routes->set('/user/logout','test@logoutUser');
 

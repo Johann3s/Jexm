@@ -4,7 +4,6 @@
 	/**
 	* This is the basecontroller which is to be extended by an application specific controller.
 	*/
-	use \jexm\core\View as View;
 	use \jexm\core\helpers\JexmURL as URL;
 	
 	abstract class BaseController{
@@ -22,6 +21,11 @@
 		
 		
 		/**
+		* @var object View class
+		*/
+		protected $view;
+		
+		/**
 		* Constructor creates aliases and calls method when done traversing classes
 		*/
 		public function __construct(){
@@ -30,9 +34,9 @@
 			$this->currentRequest = $routes->getCurrentRequest();
 	
 			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest['controller'])){
+				$this->view = new \jexm\core\View();
 				$this->auth = new \jexm\core\helpers\JexmAuthentication();
 				$this->callMethod();
-				
 			}
 			
 		}
@@ -60,7 +64,7 @@
 			$method = $this->currentRequest['method'];
 			if(empty($method)){return;}
 			if(!method_exists($this, $method)){
-				View::render("404",array("currentRequest" => URL::getCurrentURLString()));
+				\jexm\core\BaseHelper::send404();
 				exit;
 			}
 			$this->{$method}();		

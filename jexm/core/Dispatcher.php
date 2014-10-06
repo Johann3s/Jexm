@@ -22,7 +22,6 @@
 		private $controllerDir;
 		
 		
-		
 		public function __construct(){
 			$this->router = new \jexm\core\Router();
 			$this->router->extractRoute();
@@ -43,7 +42,13 @@
 			$controllerFile = (!empty($this->routeparts['controller'])) ? ucfirst($this->routeparts['controller']).".php" : ucfirst(HOME).".php";
 			
 			//If a request has been made but controllerfile is not found in dir its a 404. Strip $controllerfile of extension.
-			$controller = (file_exists($this->controllerDir.$controllerFile)) ? basename($controllerFile,".php") : "FileNotFound"; 
+			$controller = (file_exists($this->controllerDir.$controllerFile)) ? basename($controllerFile,".php") : "404";
+			
+			//If its a 404. Send header and render 404 template
+			if($controller == "404"){
+				\jexm\core\BaseHelper::send404();
+				exit();
+			}
 			
 			/**
 			* Include namespace for controllers and return controller.

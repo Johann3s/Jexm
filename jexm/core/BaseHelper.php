@@ -27,5 +27,16 @@
 			$urlRequest = (URL_ROOT != "/") ? str_replace(URL_ROOT,"",$urlRequest) : $urlRequest;
 			return $urlRequest;
 		}
+		
+		
+		/**
+		* Sends a 404 response and renders 404 view
+		*/
+		public static function send404(){
+			header("HTTP/1.0 404 Not Found");
+			$view = new \jexm\core\View();
+			$view->send(["currentRequest" => \jexm\core\helpers\JexmURL::getCurrentURLString()])->render("404");
+			exit();
+		}
 
 	}

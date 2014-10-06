@@ -30,4 +30,10 @@
 			return $this->insert($sql,$params);
 		}
 		
+		/**
+		* Gets user credentials for authentication
+		*/
+		public function getCredentials($email){
+			return $this->fetch("SELECT id,email,password FROM users WHERE email = ? LIMIT 1",[$email]);
+		}
 	}

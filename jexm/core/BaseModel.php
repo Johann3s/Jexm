@@ -81,11 +81,8 @@
 			$stmt->execute($params);
 			
 			//Sets properties in paginatorobj.
-			$this->paginator->setCurrentPage($currentPage);
-			$this->paginator->setTotalCount($stmt->rowCount());
-			$this->paginator->setPerPage($perPage);
-			
-			
+			$this->paginator->setCurrentPage($currentPage)->setTotalCount($stmt->rowCount())->setPerPage($perPage);
+						
 			//Adds paginator sql to query and pushes corresponding bindparams to array
 			$params[] = $this->paginator->getLimit();
 			$params[] = $this->paginator->getOffset();

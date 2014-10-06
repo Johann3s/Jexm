@@ -20,6 +20,7 @@
 		*/
 		public function setPerPage($perPage){ 
 			$this->perPage = $perPage;
+			return $this;
 		}
 		
 		/**
@@ -27,6 +28,7 @@
 		*/
 		public function setTotalCount($totCount){ 
 			$this->totalCount = $totCount;
+			return $this;
 		}
 		
 		/**
@@ -34,6 +36,7 @@
 		*/
 		public function setCurrentPage($currentPage){
 			$this->currentPage = $currentPage;
+			return $this;
 		}
 		
 		protected function totalPages(){

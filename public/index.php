@@ -27,8 +27,10 @@
 	/**
 	* Include autoloader and settings.
 	*/
+	require_once(JEXM_PATH.DS."core".DS."FolderCrawler.php");
 	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
-	$autoLoader = new jexm\core\Autoloader();
+	$je = jexm\core\FolderCrawler::getFolderCrawler()->browseDirectory();
+	$xm = new jexm\core\Autoloader();
 
 	
 	

@@ -10,7 +10,7 @@
 		
 		
 		public function getAll(){
-			$resultset = $this->fetch("SELECT * FROM article_table WHERE articleid < ? ORDER BY title ASC",[50],10);
+			$resultset = $this->fetch("SELECT * FROM article_table WHERE articleid < ? ORDER BY articleid ASC",[50],10);
 			return $resultset;
 		}
 		

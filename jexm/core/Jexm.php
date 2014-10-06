@@ -27,6 +27,4 @@
 			$this->dispatcher = new Dispatcher();
 			$this->controller = $this->dispatcher->getController();
 		}
-		
-	
 	}

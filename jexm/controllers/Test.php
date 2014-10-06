@@ -11,7 +11,7 @@
 			$model = new \jexm\models\Model();
 			$data = $model->getAll();
 			$links = $data['paginationLinks'];
-			View::render("test",["data" => $data, "links" => $links]);
+			$this->view->send(["data" => $data])->render("test",["links" => $links]);
 		}
 	
 		public function createUser(){
@@ -24,5 +24,15 @@
 			$returnValue = $model->insertUser($userdata);
 			var_dump($returnValue);
 
+		}
+		
+		public function authUser(){
+			//$this->auth->login("tester@fakemail.com","passwordz");
+			$id = $this->auth->authenticate();
+			var_dump($id);
+		}
+		
+		public function logoutUser(){
+			unset($_SESSION['jexm_user']);
 		}
 	}
