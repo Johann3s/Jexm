@@ -23,10 +23,18 @@
 		
 		
 		public function __construct(){
+			$settings = include(ROOT."config".DS."database.php");
+
 			try {
-				$this->db = new PDO(DSN, USERNAME, PASSWORD);
-				$this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+				$this->db = new PDO(
+								$settings['connections'][$settings['driver']]['dsn'], 
+								$settings['connections'][$settings['driver']]['username'], 
+								$settings['connections'][$settings['driver']]['password']
+							);
+				$this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $settings['fetch_mode']);
 				$this->db->SetAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+				
+				if(!PRODUCTION){$this->db->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);}
 			}
 			catch(PDOException $e) {
 				\jexm\core\LogWriter::writeLog($e->getMessage());
