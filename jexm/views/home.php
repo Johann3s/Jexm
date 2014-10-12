@@ -15,6 +15,6 @@
 	</head>
 	<body>
 		<h1>JEXM</h1>
-		<p><?php echo(Link::create(HOME.'/stuff','Saker',array("id" => "tjoho","year"=>7879))); ?></p>
+		<p><?php echo($this->link->create(HOME.'/stuff','Saker',array("id" => "tjoho","year"=>7879))); ?></p>
 	</body>
 </html>

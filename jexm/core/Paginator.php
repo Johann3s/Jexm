@@ -62,6 +62,7 @@
 		public function getLinks(){
 			$this->link = jexm\core\helpers\JexmLink();
 			$url = URL::getCurrentURLWithoutQueryString();
+			
 			$links = "<p class='pagination-links'>";
 			if($this->totalPages() <= 1){ //Finns det inga fler sidor finns inga länkar att hämta.
 				return;

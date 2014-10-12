@@ -7,6 +7,10 @@
 			parent::__construct();
 		}
 		
+		public function idx(){
+			echo "Yay";
+		}
+		
 		public function helloWorld(){
 			$model = new \jexm\models\Model();
 			$data = $model->getAll();

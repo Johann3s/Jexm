@@ -51,10 +51,7 @@
 		
 		/**
 		* Sets current URLRoutes
-		* If no match is found in userdefined routes Jexm will try to match a route to a controller && method.
-		* This is decided with help from the router. This setter sets the array to what values has been decided. 
 		* Populates the session with same value to help out with constructing links etc.
-		* Either defined || undefined routes.
 		* $param array $routes Associative array with controller,method and args request.
 		* @return void
 		*/
@@ -113,8 +110,7 @@
 		
 		
 		/**
-		* Gets current URLRequest. Data is decided with regard of userdefined routes. They preceed undefined routes. 
-		* I.e this array will be populated with either defined routes or non-defined routes.
+		* Gets current URLRequest. Data is decided with regard of userdefined routes.
 		*/
 		public function getCurrentRequest(){
 			return $this->currentRequest;

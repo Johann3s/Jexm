@@ -26,14 +26,6 @@
 	
 	
 	/**
-	* Define name of default HomeController. (home,start,index etc)
-	* Can be overriden by setting a route to ("/" in jexm/routes.php)
-	*/
-	define('HOME',"StartController");
-	
-	
-	
-	/**
 	* Defining constants for routing and clientside scripts. 
 	* Switch comments if urlroot is NOT '/' (no virtual host i.e localhost/jexm/)
 	*/

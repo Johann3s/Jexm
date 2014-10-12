@@ -38,8 +38,7 @@
 		*/
 		public function getController(){
 	
-			//If no request has been made array[controller-index] is empty and the indexpage is requested.
-			$controllerFile = (!empty($this->routeparts['controller'])) ? ucfirst($this->routeparts['controller']).".php" : ucfirst(HOME).".php";
+			$controllerFile = ucfirst($this->routeparts['controller']).".php";
 			
 			//If a request has been made but controllerfile is not found in dir its a 404. Strip $controllerfile of extension.
 			$controller = (file_exists($this->controllerDir.$controllerFile)) ? basename($controllerFile,".php") : "404";

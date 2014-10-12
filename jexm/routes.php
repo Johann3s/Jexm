@@ -9,7 +9,7 @@
 	*
 	*
 	*/
-	
+	$routes->set('/','test@idx');
 	$routes->set('/test','test2@index');
 	$routes->set('/pagination','test@helloWorld');
 	$routes->set('/user','test@createUser');
