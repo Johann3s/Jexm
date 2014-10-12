@@ -1,5 +1,5 @@
 <?php
-	$routes = \jexm\core\Routes::getRoutesObject();
+	$route = \jexm\core\route\Routes::getRoutesObject();
 	
 	/**
 	*
@@ -9,10 +9,12 @@
 	*
 	*
 	*/
-	$routes->set('/','test@idx');
-	$routes->set('/test','test2@index');
-	$routes->set('/pagination','test@helloWorld');
-	$routes->set('/user','test@createUser');
-	$routes->set('/user/auth','test@authUser');
-	$routes->set('/user/logout','test@logoutUser');
+	$route->get('/','test@idx');
+	$route->post('/', 'test@postData');
+	$route->get('/params/<name>','test@showParam');
+	/*$route->set('/test','test2@index');
+	$route->set('/pagination','test@helloWorld');
+	$route->set('/user','test@createUser');
+	$route->set('/user/auth','test@authUser');
+	$route->set('/user/logout','test@logoutUser');*/
 

@@ -12,9 +12,9 @@
 		protected $router;
 		
 		/**
-		* @var array Holds the chunked up parts of a URLrequest.
+		* @var object Holds the chunked up parts of (current)URLrequest.
 		*/
-		protected $routeparts = array();
+		protected $route;
 		
 		/**
 		* @var string Full path to controller directory.
@@ -26,8 +26,8 @@
 			$this->router = new \jexm\core\Router();
 			$this->router->extractRoute();
 			$this->controllerDir = JEXM_PATH."controllers".DS;
-			$routes = \jexm\core\Routes::getRoutesObject();
-			$this->routeparts = $routes->getCurrentRequest();
+			$routes = \jexm\core\route\Routes::getRoutesObject();
+			$this->route = $routes->getCurrentRequest();
 		}
 		
 
@@ -38,7 +38,7 @@
 		*/
 		public function getController(){
 	
-			$controllerFile = ucfirst($this->routeparts['controller']).".php";
+			$controllerFile = ucfirst($this->route->getController()).".php";
 			
 			//If a request has been made but controllerfile is not found in dir its a 404. Strip $controllerfile of extension.
 			$controller = (file_exists($this->controllerDir.$controllerFile)) ? basename($controllerFile,".php") : "404";

@@ -13,10 +13,7 @@
 			var_dump($clean);
 			$x = $this->hasher->Create("Merchandise");
 			var_dump($x);
-			$this->view->render("merchandise");
+			//$this->view->render("merchandise");
 		}
 		
-		public function search(){
-			$this->view->render("merchandise_search");
-		}
 	}

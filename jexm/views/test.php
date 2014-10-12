@@ -14,10 +14,12 @@
 		</style>
 	</head>
 	<body>
-		<h1>Pagination</h1>
+		<h1>Post data</h1>
 		<div>
-			<?php var_dump($data);?>
-			<?php echo $links; ?>
+			<form action="/" method="post">
+				<input type="hidden" value="tjoho" name="val" />
+				<input type="submit" value="send" />
+			</form>
 
 		</div>
 	</body>

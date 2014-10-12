@@ -34,7 +34,7 @@
 		
 		
 		public function __construct(){
-			$this->routes = Routes::getRoutesObject();
+			$this->routes = \jexm\core\route\Routes::getRoutesObject();
 		}
 
 		
@@ -89,7 +89,7 @@
 			$routes = $this->routes->useRoute();
 			$this->controller = $routes['controller'];
 			$this->method = $routes['method'];
-			$this->args = array();
+			$this->args = $this->routes->getArgs();
 		}
 		
 		

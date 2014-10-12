@@ -9,10 +9,11 @@
 	abstract class BaseController{
 		
 		use \jexm\core\traits\ControllerHelpers;
+		
 		/**
-		* @var array Holds current request as associative array.
+		* @var obj Holds current request.
 		*/
-		protected $currentRequest = array();
+		protected $currentRequest;
 		
 		
 		/**
@@ -36,10 +37,10 @@
 		*/
 		public function __construct(){
 			$this->createAliases();
-			$routes = \jexm\core\Routes::getRoutesObject();
+			$routes = \jexm\core\route\Routes::getRoutesObject();
 			$this->currentRequest = $routes->getCurrentRequest();
 	
-			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest['controller'])){
+			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest->getController())){
 				$this->setControllerHelpers();
 				$this->callMethod();
 			}
@@ -62,7 +63,7 @@
 		* Calls requested method(if any) or sends a 404 if not method not found
 		*/
 		protected function callMethod(){
-			$method = $this->currentRequest['method'];
+			$method = $this->currentRequest->getMethod();
 			if(empty($method)){return;}
 			if(!method_exists($this, $method)){
 				\jexm\core\BaseHelper::send404();

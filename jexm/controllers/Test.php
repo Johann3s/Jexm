@@ -8,7 +8,14 @@
 		}
 		
 		public function idx(){
-			echo "Yay";
+			$this->view->render("test");
+		}
+		public function postData(){
+			var_dump($_POST);
+		}
+		
+		public function showParam(){
+			var_dump($this->currentRequest->getArgs());
 		}
 		
 		public function helloWorld(){
