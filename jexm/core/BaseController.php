@@ -4,10 +4,11 @@
 	/**
 	* This is the basecontroller which is to be extended by an application specific controller.
 	*/
-	use \jexm\core\helpers\JexmURL as URL;
+	//use \jexm\core\helpers\JexmURL as URL;
 	
 	abstract class BaseController{
 		
+		use \jexm\core\traits\ControllerHelpers;
 		/**
 		* @var array Holds current request as associative array.
 		*/
@@ -19,6 +20,11 @@
 		*/
 		protected $auth;
 		
+		
+		/**
+		* @var obj For hashing strings
+		*/
+		protected $hasher;
 		
 		/**
 		* @var object View class
@@ -34,8 +40,7 @@
 			$this->currentRequest = $routes->getCurrentRequest();
 	
 			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest['controller'])){
-				$this->view = new \jexm\core\View();
-				$this->auth = new \jexm\core\helpers\JexmAuthentication();
+				$this->setControllerHelpers();
 				$this->callMethod();
 			}
 			
@@ -46,14 +51,10 @@
 		* Create aliases for namespaced classes allowing them to be included in extended classes without "use"
 		*/
 		protected function createAliases(){
-			\class_alias('jexm\core\View','jexm\controllers\View');
 			\class_alias('jexm\core\helpers\JexmURL','jexm\controllers\URL');
 			\class_alias('jexm\core\helpers\JexmSession','jexm\controllers\Session');
-			\class_alias('jexm\core\helpers\JexmRedirect','jexm\controllers\Redirect');
 			\class_alias('jexm\core\helpers\JexmUserInput','jexm\controllers\Input');
-			\class_alias('jexm\core\helpers\JexmSanitizer','jexm\controllers\Sanitize');
-			\class_alias('jexm\core\helpers\JexmHasher','jexm\controllers\Hasher');
-			\class_alias('jexm\core\helpers\JexmLink','\Link');
+
 		}
 		
 		

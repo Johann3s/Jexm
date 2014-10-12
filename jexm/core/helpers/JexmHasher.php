@@ -12,7 +12,7 @@
 		* Hashformat for blowfish
 		* Cost and iterations
 		*/
-		private static $hashFormat = "$2y$10$";
+		private $hashFormat = "$2y$10$";
 
 		
 		/**
@@ -20,8 +20,8 @@
 		* @param string String to be hashed
 		* @return string Hashed string
 		*/
-		public static function create($hashMe){
-			return (!empty($hashMe)) ? self::hashData($hashMe) : false;
+		public function create($hashMe){
+			return (!empty($hashMe)) ? $this->hashData($hashMe) : false;
 		}
 		
 		
@@ -30,9 +30,9 @@
 		* @param string String to be hashed
 		* @return Hashed and salted string
 		*/
-		private static function hashData($stringToHash){
-			$salt = self::generateSalt();
-			$formatAndSalt = self::$hashFormat . $salt;
+		private function hashData($stringToHash){
+			$salt = $this->generateSalt();
+			$formatAndSalt = $this->hashFormat . $salt;
 			return crypt($stringToHash,$formatAndSalt);
 		}
 		

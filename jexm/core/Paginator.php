@@ -10,6 +10,7 @@
 		protected $perPage = 3;
 		protected $totalCount;
 		
+		protected $link;
 
 		/**
 		* SETTERS
@@ -59,23 +60,24 @@
 			return $this->perPage;
 		}
 		public function getLinks(){
+			$this->link = jexm\core\helpers\JexmLink();
 			$url = URL::getCurrentURLWithoutQueryString();
 			$links = "<p class='pagination-links'>";
 			if($this->totalPages() <= 1){ //Finns det inga fler sidor finns inga länkar att hämta.
 				return;
 			}
 			if($this->previousPage() > 0){
-				$links .= Link::paginate($url,"<<", ["page" => $this->previousPage()]);
+				$links .= $link->paginate($url,"<<", ["page" => $this->previousPage()]);
 			}
 			for($i = 1; $i<$this->totalPages() + 1;$i++){
 				if($i == $this->currentPage){ //Är det aktuell sida. Visa ingen länk.
 					$links .= "<b class='current'>" . $i . "</b>";
 				}else{
-					$links .= Link::paginate($url,$i,["page" => $i]);
+					$links .= $link->paginate($url,$i,["page" => $i]);
 				}
 			}
 			if($this->nextPage() <= $this->totalPages()){
-				$links .= Link::paginate($url,">>",["page" => $this->nextPage()]);;
+				$links .= $link->paginate($url,">>",["page" => $this->nextPage()]);;
 			}
 			$links .= "</p>";
 			return $links;

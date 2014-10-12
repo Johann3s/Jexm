@@ -6,6 +6,6 @@
 	</head>
 	<body>
 		<h1>Merchandise</h1>
-		<p><?php echo Link::create('test2/search','Varor',["id" => 1234]); ?></p>
+		<p><?php echo $this->link->create('test2/search','Varor',["id" => 12345]); ?></p>
 	</body>
 </html>

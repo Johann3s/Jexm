@@ -10,7 +10,7 @@
 		/**
 		* Redirect internally
 		*/
-		public static function to($redirection){
+		public function to($redirection){
 			header("Location:" . URL_ROOT . $redirection);
 			exit;
 		}
@@ -18,7 +18,7 @@
 		/**
 		* Redirect externally (out from site)
 		*/
-		public static function out($redirection){
+		public function out($redirection){
 			header("Location:" . $redirection);
 			exit;
 		}

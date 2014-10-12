@@ -6,7 +6,7 @@
 	*/
 	class View{
 		
-		
+		use \jexm\core\traits\ViewHelpers;
 		/**
 		* @var array Data to render with template
 		*/
@@ -31,6 +31,9 @@
 		public function render($templateName, array $data = array()){
 			$this->data = array_merge($this->data,$data);
 			//var_dump($this->data);
+			
+			//$link = new \jexm\core\helpers\JexmLink2();
+			$this->setHelpers();
 			extract($this->data);
 			require_once(TEMPLATE_PATH . $templateName . ".php");
 		}

@@ -19,7 +19,7 @@
 			$userdata = [
 				"firstname" => "Tester",
 				"email" => "tester@fakemail.com",
-				"password" => Hasher::Create("passwordz")
+				"password" => $this->hasher->Create("passwordz")
 			];
 			$returnValue = $model->insertUser($userdata);
 			var_dump($returnValue);
