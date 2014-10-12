@@ -84,9 +84,19 @@
 			$urlRequest = BaseHelper::stripURLRequest();
 
 			foreach($this->allRoutes as $route){
+			
+				//Parts prevents buggy behavior if argument is requested (/params/name) and preceeded with another route (/params).
 				$firstPart = ($route->hasParam) ? BaseHelper::getEverythingButLastPartOfUrl() : "";
-
-				if($route->url == $urlRequest && $route->requestMethod == $_SERVER['REQUEST_METHOD'] || $route->url == $firstPart && $route->requestMethod == $_SERVER['REQUEST_METHOD']){
+				$lastPart = BaseHelper::getLastPartOfUrl();
+				
+				//Runs if no argument has been declared
+				if($route->url == $urlRequest && $route->requestMethod == $_SERVER['REQUEST_METHOD'] && !($route->hasParam)){
+					$this->matchingRoute = $route;
+					return true;
+					break;
+				}
+				//Runs if argument has been declared
+				if($route->url == $firstPart && $route->requestMethod == $_SERVER['REQUEST_METHOD'] && !empty($firstPart)){
 					$this->matchingRoute = $route;
 					return true;
 					break;

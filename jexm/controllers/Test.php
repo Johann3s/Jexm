@@ -17,7 +17,9 @@
 		public function showParam(){
 			var_dump($this->currentRequest->getArgs());
 		}
-		
+		public function doRockAndRoll(){
+			echo "Hello rockers";
+		}
 		public function helloWorld(){
 			$model = new \jexm\models\Model();
 			$data = $model->getAll();

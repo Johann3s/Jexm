@@ -44,7 +44,6 @@
 		*/
 		public function extractRoute(){
 		
-			$this->prepareRequest();
 			$this->extractURL();
 			
 			$this->routes->saveURLRequest([
@@ -55,16 +54,6 @@
 		}
 		
 		
-		
-		/**
-		* Prepare URL request for extraction.
-		* Clean from getstrings and/or eventual reduntant folderpaths
-		* Extract routeparts from URLRequest.
-		*/
-		protected function prepareRequest(){
-			$urlRequest = BaseHelper::stripURLRequest();
-			$this->requests = (!empty($urlRequest)) ? explode("/", trim($urlRequest, "/")) : null;
-		}
 		
 		
 		
