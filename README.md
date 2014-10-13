@@ -19,7 +19,7 @@ Setting up routes is very simple in Jexm. All you have to do define the url you 
 #####
 Jexm allows you to define a param based on the url. Note that the name wrapped in <> will be the paramname when retreiving the data. 
 #####
-#####$route->get('/params/<name\>','test@showParam');
+#####$route->get('/params/\<name\>','test@showParam');
 #####
 Example above with url /params/foo and retreived from controller test in method showParam with $this->currentRequest->getArgs(); That would return an associative array ["name" => "foo"]
 ###Controllers###
