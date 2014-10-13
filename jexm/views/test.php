@@ -20,7 +20,9 @@
 				<input type="hidden" value="tjoho" name="val" />
 				<input type="submit" value="send" />
 			</form>
-
+			
+			<p>Imma a link <?php echo $this->link->create('test@doRockAndRoll',"cool link with controller"); ?></p>
+			<p>Im also a link <?php echo $this->link->create('',"regular link"); ?></p>
 		</div>
 	</body>
 </html>

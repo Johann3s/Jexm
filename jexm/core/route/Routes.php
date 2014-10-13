@@ -143,4 +143,20 @@
 		public function getCurrentRequest(){
 			return $this->currentRequest;
 		}
+		
+		/**
+		* Check if a route location matches a link
+		* @param string $link Coming from JexmLink::create()
+		*/
+		public function linkControllerRequest($linkpath){
+			foreach($this->allRoutes as $route){
+				if($linkpath == $route->location){
+					
+					//If route matches URL_ROOT return "as is" otherwise strip first slash for proper pathcreation
+					return (URL_ROOT != $route->url) ? substr($route->url,1) : $route->url;
+				}
+				
+			} 
+			return $linkpath;
+		}
 	}

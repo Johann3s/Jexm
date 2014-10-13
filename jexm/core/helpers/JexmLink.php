@@ -8,6 +8,12 @@
 		
 		private $cssClass = "crumbs-current-url";
 		
+		private $routes;
+		
+		public function __construct(){
+			$this->routes = \jexm\core\route\Routes::getRoutesObject();
+		}
+		
 		/**
 		* Creates an a element.
 		* @var string $path href-attribute
@@ -17,6 +23,10 @@
 		* @return mixed Html element
 		*/
 		public function create($path, $text, $params = array()){
+		
+			//Checks if given path is a controller request or regular path. Returns either as it were or with the url specified in matching route.
+			$path = $this->routes->linkControllerRequest($path);
+			
 			$path = (!empty($params)) ? $path . "?" .$this->buildQueryString($params) : $path;
 			$path = URL_ROOT . $path;
 			return "<a href='{$path}'>{$text}</a>"; 
