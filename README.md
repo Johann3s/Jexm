@@ -14,8 +14,8 @@ After downloading you need to configure Jexm slightly. You need to set up your d
 In the same directory theres a config.php file which allows you to alter the urlroot (if not using a virtual host), the timezone and define if in production mode or not.
 ###Getting started - Routes###
 Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and [OPTIONAL] method. Note there are two different request methods.
-#####$this->route->get( '/', 'FooBarController@fooMethod' );
-#####$this->route->post( '/', 'FooBarController@fooMethod' );
+#####$route->get( '/', 'FooBarController@fooMethod' );
+#####$route->post( '/', 'FooBarController@fooMethod' );
 #####
 Jexm allows you to define a param based on the url. Note that the name wrapped in <> will be the paramname when retreiving the data. 
 #####
