@@ -1,7 +1,7 @@
 #Jexm Framework#
 This framework was created as a graduating project for JensenEducation. Jexm is free to use and manipulate and what not. See license.
 ##Dependencies##
-Jexm is very easy to set up. Note though that is tested more thoroughly 
+Jexm is very easy to set up. Note though that it is tested more thoroughly 
 with use of a virtual host. Although the aim is to have it run flawlessly "as-is" this might not be the case. All methods might not be available without setting up a virtual host.
 #####
 #####Jexm requires >= PHP 5.4
@@ -15,6 +15,7 @@ In the same directory theres a config.php file which allows you to alter the url
 ###Getting started - Routes###
 Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and [OPTIONAL] method. Note there are two different request methods.
 #####$this->route->get( '/', 'FooBarController@fooMethod' );
+#####$this->route->post( '/', 'FooBarController@fooMethod' );
 #####
 Jexm allows you to define a param based on the url. Note that the name wrapped in <> will be the paramname when retreiving the data. 
 #####
