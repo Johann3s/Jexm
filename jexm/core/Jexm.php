@@ -18,6 +18,10 @@
 		*/
 		protected $controller;
 		
+		/**
+		* @var object view
+		*/
+		protected $view;
 		
 		/**
 		* Starts the application
@@ -26,5 +30,11 @@
 			$initTable = new CreateUserTable();
 			$this->dispatcher = new Dispatcher();
 			$this->controller = $this->dispatcher->getController();
+			$this->view = $this->controller->invoke();
+			$this->renderResponse();
+		}
+		
+		protected function renderResponse(){
+			$this->view->display();
 		}
 	}

@@ -12,6 +12,7 @@
 		*/
 		protected $data = array();
 		
+		protected $templateName;
 		
 		
 		/**
@@ -27,14 +28,23 @@
 		
 		/**
 		* Renders the defined template and extracts passed data.
+		* @return this object
 		*/
 		public function render($templateName, array $data = array()){
 			$this->data = array_merge($this->data,$data);
-			$this->setHelpers();
-			extract($this->data);
-			require_once(TEMPLATE_PATH . $templateName . ".php");
+			$this->templateName = $templateName;
+			return $this;
 		}
 		
+		
+		/**
+		* Renders the data and template.
+		*/
+		public function display(){
+			$this->setHelpers();
+			extract($this->data);
+			require_once(TEMPLATE_PATH . $this->templateName . ".php");
+		}
 		
 		
 	}

@@ -8,7 +8,7 @@
 		}
 		
 		public function idx(){
-			$this->view->render("test");
+			return $this->view->send(["first"=>"moahahah"])->render("test");
 		}
 		public function postData(){
 			var_dump($_POST);
@@ -18,7 +18,8 @@
 			var_dump($this->currentRequest->getArgs());
 		}
 		public function doRockAndRoll(){
-			echo "Hello rockers";
+			return "Hello rockers";
+			exit;
 		}
 		public function helloWorld(){
 			$model = new \jexm\models\Model();
