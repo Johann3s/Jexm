@@ -1,5 +1,5 @@
 #Jexm Framework#
-This framework was created as a graduating project for JensenEducation. Jexm is free to use and manipulate and what not. See license.
+This framework was created as a graduating project for JensenEducation. Jexm is free to use and manipulate and what not. See license..
 ##Dependencies##
 Jexm is very easy to set up. Note though that it is tested more thoroughly 
 with use of a virtual host. Although the aim is to have it run flawlessly "as-is" this might not be the case. All methods might not be available without setting up a virtual host.
