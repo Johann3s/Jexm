@@ -26,4 +26,4 @@ Example above with url /params/foo point to controller Test::showParam(). Callin
 When you create a controller you extend the Controller in the controllers directory.
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
-The controllers all have access to helpers which will ease the coding and save you time. See the helpers section futher down.
+The controllers all have access to helpers which will ease the coding and save you time. See the helpers section further down.
