@@ -8,7 +8,7 @@
 		}
 		
 		public function idx(){
-			$this->view->render("test");
+			return $this->view->send(["first"=>"moahahah"])->render("test");
 		}
 		public function postData(){
 			var_dump($_POST);
@@ -18,13 +18,13 @@
 			var_dump($this->currentRequest->getArgs());
 		}
 		public function doRockAndRoll(){
-			echo "Hello rockers";
+			return "Hello rockers";
 		}
 		public function helloWorld(){
 			$model = new \jexm\models\Model();
 			$data = $model->getAll();
 			$links = $data['paginationLinks'];
-			$this->view->send(["data" => $data])->render("test",["links" => $links]);
+			return $this->view->send(["data" => $data])->render("test",["links" => $links]);
 		}
 	
 		public function createUser(){
@@ -36,7 +36,7 @@
 			];
 			$returnValue = $model->insertUser($userdata);
 			var_dump($returnValue);
-
+			
 		}
 		
 		public function authUser(){

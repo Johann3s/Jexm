@@ -38,13 +38,7 @@
 		public function __construct(){
 			$this->createAliases();
 			$routes = \jexm\core\route\Routes::getRoutesObject();
-			$this->currentRequest = $routes->getCurrentRequest();
-	
-			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest->getController())){
-				$this->setControllerHelpers();
-				$this->callMethod();
-			}
-			
+			$this->currentRequest = $routes->getCurrentRequest();		
 		}
 		
 		
@@ -60,18 +54,27 @@
 		
 		
 		/**
-		* Calls requested method(if any) or sends a 404 if not method not found
+		* Calls requested method or sends a 404 if no method exists or is not found
 		*/
 		protected function callMethod(){
 			$method = $this->currentRequest->getMethod();
-			if(empty($method)){return;}
-			if(!method_exists($this, $method)){
+			if(empty($method) || !method_exists($this, $method)){
 				\jexm\core\BaseHelper::send404();
 				exit;
 			}
-			$this->{$method}();		
+			return $this->{$method}();		
 		}
 		
+		/**
+		* Invokes the controller
+		* @return obj View
+		*/
+		public function invoke(){
+			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest->getController())){
+				$this->setControllerHelpers();
+				return $this->callMethod();
+			}
+		}
 		
 	}                                                                             
 	

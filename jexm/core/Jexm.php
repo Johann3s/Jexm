@@ -18,6 +18,10 @@
 		*/
 		protected $controller;
 		
+		/**
+		* @var object || string Viewclass or plain string
+		*/
+		protected $view;
 		
 		/**
 		* Starts the application
@@ -26,5 +30,16 @@
 			$initTable = new CreateUserTable();
 			$this->dispatcher = new Dispatcher();
 			$this->controller = $this->dispatcher->getController();
+			$this->view = $this->controller->invoke();
+			$this->renderResponse();
+		}
+		
+		protected function renderResponse(){
+			if(is_object($this->view)){
+				$this->view->display();
+			}
+			if(is_string($this->view)){
+				echo $this->view;
+			}
 		}
 	}
