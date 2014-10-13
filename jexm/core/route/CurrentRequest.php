@@ -21,9 +21,6 @@
 			return $this->controller;
 		}
 		
-		/*public function setMethod($method){
-			$this->method = $method;
-		}*/
 		
 		public function getMethod(){
 			return $this->method;

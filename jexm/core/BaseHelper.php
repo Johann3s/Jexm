@@ -28,17 +28,28 @@
 			return $urlRequest;
 		}
 		
+		
+		/**
+		* Gets last part of urlstring.
+		* @return string 
+		*/
 		public static function getLastPartOfUrl(){
 			$urlArray = explode("/",$_SERVER['REQUEST_URI']);
 			return end($urlArray);
 		}
 		
+		
+		/**
+		* Gets everything up to last bit of urlstring.
+		* @return string
+		*/
 		public static function getEverythingButLastPartOfUrl(){
 			$urlArray = explode("/",$_SERVER['REQUEST_URI']);
 			$popped = array_pop($urlArray);
 			$url = implode("/",$urlArray);
 			return $url;
 		}
+		
 		
 		/**
 		* Sends a 404 response and renders 404 view
