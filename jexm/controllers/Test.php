@@ -19,13 +19,12 @@
 		}
 		public function doRockAndRoll(){
 			return "Hello rockers";
-			exit;
 		}
 		public function helloWorld(){
 			$model = new \jexm\models\Model();
 			$data = $model->getAll();
 			$links = $data['paginationLinks'];
-			$this->view->send(["data" => $data])->render("test",["links" => $links]);
+			return $this->view->send(["data" => $data])->render("test",["links" => $links]);
 		}
 	
 		public function createUser(){
@@ -37,7 +36,7 @@
 			];
 			$returnValue = $model->insertUser($userdata);
 			var_dump($returnValue);
-
+			
 		}
 		
 		public function authUser(){

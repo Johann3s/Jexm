@@ -19,7 +19,7 @@
 		protected $controller;
 		
 		/**
-		* @var object view
+		* @var object || string Viewclass or plain string
 		*/
 		protected $view;
 		
@@ -35,6 +35,11 @@
 		}
 		
 		protected function renderResponse(){
-			$this->view->display();
+			if(is_object($this->view)){
+				$this->view->display();
+			}
+			if(is_string($this->view)){
+				echo $this->view;
+			}
 		}
 	}
