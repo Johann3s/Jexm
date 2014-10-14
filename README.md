@@ -27,7 +27,13 @@ Jexm allows you to define a param based on the url. Note that the name wrapped i
 $route->get('/params/\<name\>','test@showParam');
 ```
 Example above with url /params/foo point to controller Test::showParam(). 
-Calling ```php $this->currentRequest->getArgs();``` from that scope would return an associative array as such : ```php ["name" => "foo"] ```
+Calling the method below from that scope would return as associative array as in following : 
+
+```php 
+$foo = $this->currentRequest->getArgs();
+print_r($foo); // Array ( [name] => foo )
+``` 
+
 ###Controllers###
 When you create a controller you extend the Controller in the controllers directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.

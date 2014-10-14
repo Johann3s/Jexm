@@ -17,7 +17,7 @@
 		}
 		
 		public function showParam(){
-			var_dump($this->currentRequest->getArgs());
+			print_r($this->currentRequest->getArgs());
 		}
 		public function doRockAndRoll(){
 			$this->redirect->to("test2@index");
