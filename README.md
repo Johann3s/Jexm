@@ -15,15 +15,19 @@ In the same directory theres a config.php file which allows you to alter the tim
 ###Getting started - Routes###
 Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and method. Note there are two different request methods.
 (Note that if NOT using a Vhost, the url should be the same. DONT include the path preceeding the jexm directory).
-######$route->get( '/', 'FooBarController@fooMethod' );
-######$route->post( '/', 'FooBarController@fooMethod' );
-#####
+
+```php
+$route->get( '/', 'FooBarController@fooMethod' );
+$route->post( '/', 'FooBarController@fooMethod' );
+```
+
 Jexm allows you to define a param based on the url. Note that the name wrapped in <> will be the key when retreiving the data. 
-######
-######$route->get('/params/\<name\>','test@showParam');
-######
+
+```php
+$route->get('/params/\<name\>','test@showParam');
+```
 Example above with url /params/foo point to controller Test::showParam(). 
-Calling $this->currentRequest->getArgs() from that scope would return an associative array as such : ["name" => "foo"]
+Calling ```php $this->currentRequest->getArgs();``` from that scope would return an associative array as such : ```php ["name" => "foo"] ```
 ###Controllers###
 When you create a controller you extend the Controller in the controllers directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
@@ -31,18 +35,22 @@ When you create a controller you extend the Controller in the controllers direct
 To pass data to the view you use the send method. 
 The data must be passed as an associative array ['myVar' => $anydata]. 
 The data is then retrieved from the defined template as $myVar.
-######$this->view->send(['myVar' => $anydata, 'foo' => 'bar']);
-######
+
+```php
+$this->view->send(['myVar' => $anydata, 'foo' => 'bar']);
+```
 Defining a template to use is done last and with the render method. This is when you return the view. 
 If template recides in a deeper folderstructure (/views/foobar/foo) the folderpath must be appended. 
 *nix users also use the windows directory separators. These will be converted inside Jexm.
 
 ```php
 return $this->view->render('foo');
+return $this->view->render('foobar/foo');
 ```
-######return $this->view->render('foobar/foo');
 ######
 These methods can be chained aswell as example below.
-######return $this->view->send(["myVar" => $anydata])->render('foo');
+```php
+return $this->view->send(["myVar" => $anydata])->render('foo');
+```
 ######
 The controllers all have access to helpers which will ease the coding and save you time. See the helpers section further down.
