@@ -8,10 +8,22 @@
 	class JexmRedirect{
 		
 		/**
+		* @var object LinkClass
+		*/
+		protected $routes;
+		
+		
+		public function __construct(){
+			$this->routes = \jexm\core\route\Routes::getRoutesObject();
+		}
+		
+		/**
 		* Redirect internally
 		*/
 		public function to($redirection){
-			header("Location:" . URL_ROOT . $redirection);
+			$location = $this->routes->linkControllerRequest($redirection);
+			$location = (URL_ROOT != '/') ? URL_ROOT . $location : $location;
+			header("Location:" . $location);
 			exit;
 		}
 		

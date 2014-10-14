@@ -18,7 +18,7 @@
 			var_dump($this->currentRequest->getArgs());
 		}
 		public function doRockAndRoll(){
-			return "Hello rockers";
+			$this->redirect->to("test2@index");
 		}
 		public function helloWorld(){
 			$model = new \jexm\models\Model();

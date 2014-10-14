@@ -22,7 +22,7 @@
 			</form>
 			
 			<p>Imma a link <?php echo $this->link->create('test@doRockAndRoll',"cool link with controller"); ?></p>
-			<p>Im also a link <?php echo $this->link->create('',"regular link"); ?></p>
+			<p>Im also a link <?php echo $this->link->create('/test',"regular link"); ?></p>
 		</div>
 	</body>
 </html>

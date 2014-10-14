@@ -38,6 +38,7 @@
 	* Include configs and userdefined routes
 	*/
 	require_once(ROOT."config".DS."config.php");
+	require_once(ROOT."config".DS."root.php");
 	require_once(JEXM_PATH."routes.php");
 	
 	

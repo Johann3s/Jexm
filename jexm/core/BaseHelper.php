@@ -34,7 +34,8 @@
 		* @return string 
 		*/
 		public static function getLastPartOfUrl(){
-			$urlArray = explode("/",$_SERVER['REQUEST_URI']);
+			$urlRequest = self::stripURLRequest();
+			$urlArray = explode("/",$urlRequest);
 			return end($urlArray);
 		}
 		
@@ -44,7 +45,8 @@
 		* @return string
 		*/
 		public static function getEverythingButLastPartOfUrl(){
-			$urlArray = explode("/",$_SERVER['REQUEST_URI']);
+			$urlRequest = self::stripURLRequest();
+			$urlArray = explode("/",$urlRequest);
 			$popped = array_pop($urlArray);
 			$url = implode("/",$urlArray);
 			return $url;

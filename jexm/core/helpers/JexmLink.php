@@ -26,9 +26,11 @@
 		
 			//Checks if given path is a controller request or regular path. Returns either as it were or with the url specified in matching route.
 			$path = $this->routes->linkControllerRequest($path);
-			
+			//if path is root remove and add later ( wont work properly when not using vhost otherwise ).
+			//$path = ($path == '/') ? "" : $path;
 			$path = (!empty($params)) ? $path . "?" .$this->buildQueryString($params) : $path;
-			$path = URL_ROOT . $path;
+			
+			$path = (URL_ROOT != '/') ? URL_ROOT . $path : $path;
 			return "<a href='{$path}'>{$text}</a>"; 
 		}
 		

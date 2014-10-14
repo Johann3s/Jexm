@@ -4,7 +4,6 @@
 	/**
 	* This is the basecontroller which is to be extended by an application specific controller.
 	*/
-	//use \jexm\core\helpers\JexmURL as URL;
 	
 	abstract class BaseController{
 		

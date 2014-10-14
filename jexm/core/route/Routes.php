@@ -153,7 +153,8 @@
 				if($linkpath == $route->location){
 					
 					//If route matches URL_ROOT return "as is" otherwise strip first slash for proper pathcreation
-					return (URL_ROOT != $route->url) ? substr($route->url,1) : $route->url;
+					//return (URL_ROOT != $route->url) ? substr($route->url,1) : $route->url;
+					return $route->url;
 				}
 				
 			} 

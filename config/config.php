@@ -24,15 +24,6 @@
 	date_default_timezone_set('Europe/Stockholm');
 	
 	
-	
-	/**
-	* Defining constants for routing and clientside scripts. 
-	* Switch comments if urlroot is NOT '/' (no virtual host i.e localhost/jexm/)
-	*/
-	define('URL_ROOT',"/");
-	//define('URL_ROOT',"/".basename(dirname(__DIR__))."/");
-	
-	
 
 
 	
