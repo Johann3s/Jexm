@@ -14,6 +14,13 @@
 		
 		protected $templateName;
 		
+		protected $loader;
+		protected $twig;
+		
+		public function __construct(){
+			$this->loader = new \Twig_Loader_Filesystem(TEMPLATE_PATH);
+			$this->twig = new \Twig_Environment($this->loader, ['debug' => true]);
+		}
 		
 		/**
 		* Passes data to property
@@ -49,10 +56,26 @@
 		* Renders the data and template.
 		*/
 		public function display(){
+			(strpos($this->templateName,".tpl") == true) ? $this->renderTwig() : $this->renderNormal();
+		}
+		
+		
+		/**
+		* Renders view with twig. Helpers must be passed into twig environment
+		*/
+		protected function renderTwig(){
+			$this->send(["link" => new \jexm\core\helpers\JexmLink()]);
+			echo $this->twig->render($this->osSafe($this->templateName) . ".php", $this->data);
+		}
+		
+		
+		/**
+		* Renders view with plain php
+		*/
+		protected function renderNormal(){
 			$this->setHelpers();
 			extract($this->data);
 			require_once(TEMPLATE_PATH . $this->osSafe($this->templateName) . ".php");
 		}
-		
 		
 	}

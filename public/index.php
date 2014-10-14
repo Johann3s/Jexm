@@ -31,8 +31,15 @@
 	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
 	$je = jexm\core\FolderCrawler::getFolderCrawler()->browseDirectory();
 	$xm = new jexm\core\Autoloader();
-
 	
+	/**
+	* Include composers vendor autoload
+	*/
+	require_once(ROOT.'vendor/autoload.php');
+	
+	Twig_Autoloader::register();
+	//$loader = new Twig_Loader_Filesystem(TEMPLATE_PATH);
+	//$twig = new Twig_Environment($loader, array('debug' => true));
 	
 	/**
 	* Include configs and userdefined routes
