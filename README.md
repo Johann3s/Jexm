@@ -11,9 +11,10 @@ Namespaces are used for autoloading classes. If you want to use your own classes
 ##Configuration##
 After downloading you need to configure Jexm slightly. You need to set up your database credentials in jexm/config/database.php (Jexm currently supports a mysql and sqlite connection).
 #####
-In the same directory theres a config.php file which allows you to alter the urlroot (if not using a virtual host), the timezone and define if in production mode or not.
+In the same directory theres a config.php file which allows you to alter the timezone and define if in production mode or not.
 ###Getting started - Routes###
 Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and method. Note there are two different request methods.
+(Note that if not using a Vhost the adress is the same. DONT include the path preceeding the jexm directory).
 #####$route->get( '/', 'FooBarController@fooMethod' );
 #####$route->post( '/', 'FooBarController@fooMethod' );
 #####
