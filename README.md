@@ -58,11 +58,15 @@ These methods can be chained aswell as example below.
 ```php
 return $this->view->send(["myVar" => $anydata])->render('foo');
 ```
-Jexm comes with Twig templating. To render a twig template save the template as foo.tpl.php.
+Jexm comes with Twig templating. To render a twig template save the template as foo.tpl.php. 
 Then return it from controller as below : 
 
 ```php
 return $this->view->send(["myVar" => $anydata])->render('foo.tpl');
 ```
+Note that using Twig alters the scope of the helper objects. 
+See more in section about View helpers.
+
+
 ######
 The controllers all have access to helpers which will ease the coding and save you time. See the helpers section further down.
