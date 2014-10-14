@@ -24,7 +24,18 @@ Jexm allows you to define a param based on the url. Note that the name wrapped i
 #####
 Example above with url /params/foo point to controller Test::showParam(). Calling $this->currentRequest->getArgs() from that scope would return an associative array as such : ["name" => "foo"]
 ###Controllers###
-When you create a controller you extend the Controller in the controllers directory.
+When you create a controller you extend the Controller in the controllers directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
+To pass data to the view you use the send method. The data must be passed as an associative array ['myVar' => $anydata]. The data is then retrieved from the defined template as $myVar.
+######this->view->send(['myVar' => $anydata, 'foo' => 'bar']);
+######
+Defining a template to use is done last and with the render method. This is when you return the view. If template recides in a deeper folderstructure (/views/foobar/foo) the folderpaths
+must be appended. *nix users also use the windows directory separators. These will be converted inside Jexm.
+######return $this->view->render('foo');
+######return $this->view->render('foobar/foo');
+######
+These methods can be chained aswell as example below.
+######return $this->view->send(["myVar" => $anydata])->render('foo');
+######
 The controllers all have access to helpers which will ease the coding and save you time. See the helpers section further down.

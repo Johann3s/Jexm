@@ -36,6 +36,14 @@
 			return $this;
 		}
 		
+		/**
+		* Returns a string with os safe directory separators
+		* @return string		
+		*/
+		private function osSafe($path){
+			return str_replace("/",DS,$path);
+		}
+		
 		
 		/**
 		* Renders the data and template.
@@ -43,7 +51,7 @@
 		public function display(){
 			$this->setHelpers();
 			extract($this->data);
-			require_once(TEMPLATE_PATH . $this->templateName . ".php");
+			require_once(TEMPLATE_PATH . $this->osSafe($this->templateName) . ".php");
 		}
 		
 		

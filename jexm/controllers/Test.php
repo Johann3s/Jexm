@@ -8,7 +8,9 @@
 		}
 		
 		public function idx(){
-			return $this->view->send(["first"=>"moahahah"])->render("test");
+			$this->view->send(["first"=>"moahahah","second"=>"hehehe"]);
+			$this->view->send(["third"=>"hiihii"]);
+			return $this->view->render("test");
 		}
 		public function postData(){
 			var_dump($_POST);

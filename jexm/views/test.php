@@ -23,6 +23,9 @@
 			
 			<p>Imma a link <?php echo $this->link->create('test@doRockAndRoll',"cool link with controller"); ?></p>
 			<p>Im also a link <?php echo $this->link->create('/test',"regular link"); ?></p>
+			<h2><?php echo $first; ?></h2>
+			<h2><?php echo $second; ?></h2>
+			<h2><?php echo $third; ?></h2>
 		</div>
 	</body>
 </html>
