@@ -4,7 +4,7 @@ This framework was created as a graduating project for JensenEducation. Jexm is 
 Jexm is very easy to set up. Note though that it is tested more thoroughly 
 with use of a virtual host. Although the aim is to have it run flawlessly "as-is" this might not be the case. All methods might not be available without setting up a virtual host.
 #####
-#####Jexm requires >= PHP 5.4 and [composer](https://getcomposer.org/)
+#####Jexm requires >= PHP 5.4 the rewrite_module enabled and [composer](https://getcomposer.org/)
 #####
 Namespaces are used for autoloading classes. If you want to use your own classes you can put them in the jexm/classes directory with namespace jexm\classes;
 
