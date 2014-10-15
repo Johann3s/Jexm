@@ -34,7 +34,7 @@
 		
 		
 		public function __construct(){
-			$this->routes = \jexm\core\route\Routes::getRoutesObject();
+			$this->routes = \jexm\core\route\Routes::getInstance();
 		}
 
 		

@@ -13,7 +13,7 @@ After downloading you need to run composer install and configure Jexm slightly.
 You need to set up your database credentials in jexm/config/database.php (Jexm currently supports a mysql and sqlite connection).
 #####
 In the same directory theres a config.php file which allows you to alter the timezone and define if in production mode or not.
-###Getting started - Routes###
+##Getting started - Routes##
 Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and method. Note there are two different request methods.
 (Note that if NOT using a Vhost, the url should be the same. DONT include the path preceeding the jexm directory).
 
@@ -35,9 +35,10 @@ $foo = $this->currentRequest->getArgs();
 print_r($foo); // Array ( [name] => foo )
 ``` 
 
-###Controllers###
+##Controllers##
 When you create a controller you extend the Controller in the controllers directory. (Dont forget the namespace)
-####Note that there must be a a constructor calling parent::__construct() before anything else.
+Everything listed below until the model section is available and has scope from within the controllers.
+#####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
 #####Returning views
 To pass data to the view you use the send method. 

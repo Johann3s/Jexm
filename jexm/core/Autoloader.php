@@ -15,7 +15,7 @@
 		
 		
 		public function __construct(){
-			$this->allowedFilesToRequire = FolderCrawler::getFolderCrawler()->getValidFilesToRequire();
+			$this->allowedFilesToRequire = FolderCrawler::getInstance()->getValidFilesToRequire();
 			spl_autoload_register(array($this,"autoLoadClasses"));
 		}
 		

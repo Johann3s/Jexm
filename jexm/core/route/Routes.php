@@ -29,7 +29,7 @@
 		* Singleton class
 		* @return object Routes(self)
 		*/
-		public static function getRoutesObject(){
+		public static function getInstance(){
 			if(!isset(self::$self)){
 				self::$self = new \jexm\core\route\Routes();
 			}

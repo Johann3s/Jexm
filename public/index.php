@@ -29,7 +29,7 @@
 	*/
 	require_once(JEXM_PATH.DS."core".DS."FolderCrawler.php");
 	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
-	$je = jexm\core\FolderCrawler::getFolderCrawler()->browseDirectory();
+	$je = jexm\core\FolderCrawler::getInstance()->browseDirectory();
 	$xm = new jexm\core\Autoloader();
 	
 	/**
@@ -38,8 +38,7 @@
 	require_once(ROOT.'vendor/autoload.php');
 	
 	Twig_Autoloader::register();
-	//$loader = new Twig_Loader_Filesystem(TEMPLATE_PATH);
-	//$twig = new Twig_Environment($loader, array('debug' => true));
+
 	
 	/**
 	* Include configs and userdefined routes
@@ -55,7 +54,6 @@
 	*/
 	session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
 	session_start();
-	
 	
 	
 	/**

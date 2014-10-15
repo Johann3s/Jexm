@@ -21,7 +21,7 @@
 		* Singleton class
 		* @return object FolderCrawler(self)
 		*/
-		public static function getFolderCrawler(){
+		public static function getInstance(){
 			if(!isset(self::$self)){
 				self::$self = new FolderCrawler();
 			}

@@ -36,7 +36,7 @@
 		*/
 		public function __construct(){
 			$this->createAliases();
-			$routes = \jexm\core\route\Routes::getRoutesObject();
+			$routes = \jexm\core\route\Routes::getInstance();
 			$this->currentRequest = $routes->getCurrentRequest();		
 		}
 		

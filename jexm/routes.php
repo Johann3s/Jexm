@@ -1,5 +1,5 @@
 <?php
-	$route = \jexm\core\route\Routes::getRoutesObject();
+	$route = \jexm\core\route\Routes::getInstance();
 	
 	/**
 	*

@@ -22,16 +22,15 @@
 		private $path;
 		
 		public function __construct(){
-			$this->routes = \jexm\core\route\Routes::getRoutesObject();
+			$this->routes = \jexm\core\route\Routes::getInstance();
 		}
 		
 		/**
 		* Creates an a element.
 		* @var string $path href-attribute
 		* @var string $text Text to be displayed
-		* @var string $class Optional css-class.
 		* @var array $params Optional getparams (requires assocative array)
-		* @return mixed Html element
+		* @return mixed <a> element
 		*/
 		public function create($path, $text, $params = array()){
 		

@@ -1,21 +1,20 @@
 <?php
-	namespace jexm\core\user;
+	namespace jexm\core\tables;
 	
 	/**
 	* Class creates a table for users.
 	*/
-	class CreateUserTable Extends \jexm\core\BaseModel{
+	class CreateTables Extends \jexm\core\BaseModel{
 		
 		public function __construct(){
 			parent::__construct();
-			$this->create();
 		}
 		
 		
 		/**
 		* Creates the usertable if not yet exists.
 		*/
-		public function create(){
+		public function createUserTable(){
 			$table = "users";
 			$sql = "CREATE TABLE IF NOT EXISTS {$table} ({$this->getCols()})";
 			$this->db->exec($sql);

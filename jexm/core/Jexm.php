@@ -1,6 +1,6 @@
 <?php
 	namespace jexm\core;
-	use \jexm\core\user\CreateUserTable as CreateUserTable;
+	use \jexm\core\tables\CreateTables as Tables;
 	/**
 	* This is the Jexm obj.
 	*
@@ -27,7 +27,8 @@
 		* Starts the application
 		*/
 		public function launch(){
-			$initTable = new CreateUserTable();
+			$tables = new Tables();
+			$tables->createUserTable();
 			$this->dispatcher = new Dispatcher();
 			$this->controller = $this->dispatcher->getController();
 			$this->view = $this->controller->invoke();
