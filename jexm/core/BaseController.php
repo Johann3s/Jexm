@@ -47,7 +47,7 @@
 		protected function createAliases(){
 			\class_alias('jexm\core\helpers\JexmURL','jexm\controllers\URL');
 			\class_alias('jexm\core\helpers\JexmSession','jexm\controllers\Session');
-			\class_alias('jexm\core\helpers\JexmUserInput','jexm\controllers\Input');
+			\class_alias('jexm\core\helpers\JexmGlobals','jexm\controllers\Globals');
 
 		}
 		

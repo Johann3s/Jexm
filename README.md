@@ -25,7 +25,7 @@ $route->post( '/', 'FooBarController@fooMethod' );
 Jexm allows you to define a param based on the url. Note that the name wrapped in <> will be the key when retreiving the data. 
 
 ```php
-$route->get('/params/\<name\>','test@showParam');
+$route->get('/params/<name>','test@showParam');
 ```
 Example above with url /params/foo point to controller Test::showParam(). 
 Calling the method below from that scope would return as associative array as in following : 
@@ -37,8 +37,9 @@ print_r($foo); // Array ( [name] => foo )
 
 ###Controllers###
 When you create a controller you extend the Controller in the controllers directory. (Dont forget the namespace)
-#####Note that there must be a a constructor calling parent::__construct() before anything else.
+####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
+#####Returning views
 To pass data to the view you use the send method. 
 The data must be passed as an associative array ['myVar' => $anydata]. 
 The data is then retrieved from the defined template as $myVar.
@@ -67,6 +68,32 @@ return $this->view->send(["myVar" => $anydata])->render('foo.tpl');
 ```
 Note that using Twig alters the scope of the helper objects. 
 See more in section about View helpers.
+#####
+#####Redirects
+Redirections is straightforward in Jexm. 
+You can redirect with a path /path/to/something or with a controller@method request.
+
+```php
+$this->redirect->to('/path/to/something');
+$this->redirect->to('FooController@barMethod');
+```
+
+You may pass variables along with the redirection aswell. 
+Prepend the to() method with the with() method. The params must be an associative array.
+
+```php
+$this->redirect->with(["id" => 1])->to('FooController@barMethod');
+```
+
+#####Collecting GET & POST
+Jexm comes with a smooth method for collecting data. Note that these are static methods. 
+Methods below return null or populated. A null value doesnt throw a warning, Jexm checks for population internally.
+```php
+$id = Globals::get('id'); //returns $_GET['id']
+$all = Globals::getAll(); //returns $_GET
+$id = Globals::post('id'); //returns $_POST['id']
+$all = Globals::postAll(); //returns $_POST
+```
 
 
 ######

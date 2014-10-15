@@ -10,21 +10,32 @@
 		/**
 		* @var object LinkClass
 		*/
-		protected $routes;
+		protected $link;
+		
+		/**
+		* @var Holds eventual params from with() method
+		*/
+		protected $params = [];
 		
 		
 		public function __construct(){
-			$this->routes = \jexm\core\route\Routes::getRoutesObject();
+			$this->link = new \jexm\core\helpers\JexmLink();
 		}
 		
 		/**
 		* Redirect internally
 		*/
 		public function to($redirection){
-			$location = $this->routes->linkControllerRequest($redirection);
+			$garbage = $this->link->create($redirection,"",$this->params);
+			$location = $this->link->getPath();
 			$location = (URL_ROOT != '/') ? URL_ROOT . $location : $location;
 			header("Location:" . $location);
 			exit;
+		}
+		
+		public function with(array $params){
+			$this->params = $params;
+			return $this;
 		}
 		
 		/**

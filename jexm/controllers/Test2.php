@@ -8,12 +8,14 @@
 		}
 		
 		public function index(){
-			$var = ["first"=>"<p>åkae ejsan  </p>","second"=>"<h2> öallå </h2>","<b>jAG är BLANDat</b>"];
+			/*$var = ["first"=>"<p>åkae ejsan  </p>","second"=>"<h2> öallå </h2>","<b>jAG är BLANDat</b>"];
 			$clean = $this->sanitize->filter($var,['tags','trim','upperFirst']);
 			var_dump($clean);
 			$x = $this->hasher->Create("Merchandise");
-			var_dump($x);
-			//$this->view->render("merchandise");
+			var_dump($x);*/
+			$get = Globals::get('id');
+			var_dump($_GET['id']);
+			var_dump($get);
 		}
 		
 	}

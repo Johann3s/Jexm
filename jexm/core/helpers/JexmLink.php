@@ -6,9 +6,20 @@
 	*/
 	class JexmLink{
 		
+		/**
+		* @var Css class given to current page in breadcrumbs
+		*/
 		private $cssClass = "crumbs-current-url";
 		
+		/**
+		* @var object Routes instance
+		*/
 		private $routes;
+		
+		/**
+		* Path created in links. Useful for some other classes
+		*/
+		private $path;
 		
 		public function __construct(){
 			$this->routes = \jexm\core\route\Routes::getRoutesObject();
@@ -31,6 +42,7 @@
 			$path = (!empty($params)) ? $path . "?" .$this->buildQueryString($params) : $path;
 			
 			$path = (URL_ROOT != '/') ? URL_ROOT . $path : $path;
+			$this->path = $path;
 			return "<a href='{$path}'>{$text}</a>"; 
 		}
 		
@@ -84,5 +96,12 @@
 				return "<span class='".$this->cssClass."'>".$this->create($linkpath,$text)."</span>";
 			}
 			return $this->create($linkpath,$text);
+		}
+		
+		/**
+		* Getter for path property
+		*/
+		public function getPath(){
+			return $this->path;
 		}
 	}

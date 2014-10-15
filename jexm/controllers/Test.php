@@ -20,7 +20,7 @@
 			print_r($this->currentRequest->getArgs());
 		}
 		public function doRockAndRoll(){
-			$this->redirect->to("test2@index");
+			$this->redirect->with(["id" => 45])->to("test2@index");
 		}
 		public function helloWorld(){
 			$model = new \jexm\models\Model();

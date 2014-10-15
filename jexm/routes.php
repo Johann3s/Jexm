@@ -9,7 +9,7 @@
 	*
 	*
 	*/
-	$route->get('/','test@idx');
+	$route->get('/','Test@idx');
 	$route->post('/', 'test@postData');
 	$route->get('/params/<name>','test@showParam');
 	$route->get('/params','test@doRockAndRoll');
