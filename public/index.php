@@ -22,15 +22,15 @@
 	define('TEMPLATE_PATH',JEXM_PATH."views".DS);
 	define('LOG_PATH',ROOT."logs".DS);
 	
-	
+	//error_reporting(E_ALL);
 
 	/**
 	* Include autoloader and settings.
 	*/
 	require_once(JEXM_PATH.DS."core".DS."FolderCrawler.php");
 	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
-	$je = jexm\core\FolderCrawler::getInstance()->browseDirectory();
-	$xm = new jexm\core\Autoloader();
+	$validFiles = jexm\core\FolderCrawler::getInstance()->browseDirectory()->getValidFilesToRequire();
+	new jexm\core\Autoloader($validFiles);
 	
 	/**
 	* Include composers vendor autoload
@@ -59,7 +59,6 @@
 	/**
 	* Launch application
 	*/
-	$jexm = new jexm\core\Jexm();
-	$jexm->launch();
+	(new jexm\core\Jexm())->launch();
 	
 ?>

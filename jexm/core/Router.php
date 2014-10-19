@@ -65,6 +65,7 @@
 			if($this->routes->routeMatches()){
 				$this->useDataFromDefinedRoutes();
 			}else{
+				//BaseHelper::warn("Route not found",E_USER_WARNING);
 				BaseHelper::send404();
 				exit;
 			} 

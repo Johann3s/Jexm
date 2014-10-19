@@ -35,6 +35,7 @@
 		*/
 		public function browseDirectory(){
 			$this->validateDirectory(JEXM_PATH);
+			return $this;
 		}
 		
 		
