@@ -43,17 +43,13 @@
 		* Populates class properties and sets the requested route.
 		*/
 		public function extractRoute(){
-		
 			$this->extractURL();
-			
-			$this->routes->saveURLRequest([
+			$this->routes->setCurrentRequest([
 					"controller" => $this->controller,
 					"method" => $this->method,
 					"args" => $this->args
 				]);
 		}
-		
-		
 		
 		
 		
@@ -65,15 +61,14 @@
 			if($this->routes->routeMatches()){
 				$this->useDataFromDefinedRoutes();
 			}else{
-				//BaseHelper::warn("Route not found",E_USER_WARNING);
 				BaseHelper::send404();
-				exit;
 			} 
 		}
 		
 		
+		
 		/**
-		* Uses the userdefined routes.
+		* Uses the userdefined routes and preps properties.
 		*/
 		private function useDataFromDefinedRoutes(){
 			$routes = $this->routes->useRoute();

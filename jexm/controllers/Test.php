@@ -17,7 +17,7 @@
 		}
 		
 		public function showParam(){
-			print_r($this->currentRequest->getArgs());
+			var_dump($this->currentRequest->getArgs());
 		}
 		public function doRockAndRoll(){
 			$this->redirect->with(["id" => 45])->to("test2@index");

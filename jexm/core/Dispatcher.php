@@ -46,7 +46,6 @@
 			//If its a 404. Send header and render 404 template
 			if($controller == "404"){
 				\jexm\core\BaseHelper::send404();
-				exit();
 			}
 			
 			/**

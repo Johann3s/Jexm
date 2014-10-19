@@ -1,6 +1,7 @@
 <?php
 	namespace jexm\core\route;
 	use \jexm\core\BaseHelper as BaseHelper;
+	use \jexm\core\helpers\JexmURL as URL;
 	
 	class Routes{
 		
@@ -56,57 +57,16 @@
 			$this->set($url,$location,'GET');
 		}
 		
-		
-		/**
-		* Sets current URLRoutes
-		* Populates the session with same value to help out with constructing links etc.
-		* $param array $routes Associative array with controller,method and args request.
-		* @return void
-		*/
-		public function saveURLRequest(array $parsedRequest){
-			$this->currentRequest = new CurrentRequest($parsedRequest);
-			$_SESSION['CurrentRequest'] = $parsedRequest;
+		public function getAllRoutes(){
+			return $this->allRoutes;
 		}
 		
 		
-		
-		
-		
-		/**
-		* Determines if route matches current URLRequest
-		* Allows for following slash.
-		* IF an argument has been defined in route 'firstPart' will hold a value and be compared with instead of full url.
-		* @return boolean True if a userdefined route is found.
-		*/
 		public function routeMatches(){
-			if(empty($this->allRoutes)){return false;}
-			
-			$urlRequest = BaseHelper::stripURLRequest();
-
-			foreach($this->allRoutes as $route){
-			
-				//Parts prevents buggy behavior if argument is requested (/params/name) and preceeded with another route (/params).
-				$firstPart = ($route->hasParam) ? BaseHelper::getEverythingButLastPartOfUrl() : "";
-				$lastPart = BaseHelper::getLastPartOfUrl();
-				
-				//Runs if no argument has been declared
-				if($route->url == $urlRequest && $route->requestMethod == $_SERVER['REQUEST_METHOD'] && !($route->hasParam)){
-					$this->matchingRoute = $route;
-					return true;
-					break;
-				}
-				//Runs if argument has been declared
-				if($route->url == $firstPart && $route->requestMethod == $_SERVER['REQUEST_METHOD'] && !empty($firstPart)){
-					$this->matchingRoute = $route;
-					return true;
-					break;
-				}
-				
-			}
-			$this->matchingRoute = null;
-			return false;
+			 $matchingRoute = (new \jexm\core\route\RouteMatcher($this))->matchRouteAndUrl();
+			 $this->matchingRoute = (is_object($matchingRoute)) ? $matchingRoute : null;
+			 return (is_object($matchingRoute)) ? true : false;
 		}
-		
 		
 		
 		/**
@@ -123,41 +83,42 @@
 		
 		
 		/**
-		* Determines if a parameter has been within current route.
-		* If so returns that argument as an associative array with named parameter as key and last part of url as value
-		* @return array
+		* Returns requested param as an object with named parameter as property and last part of url as propvalue
+		* @return object
 		*/
 		public function getArgs(){
-			if(!$this->matchingRoute->hasParam){
-				return array();
-			}
-			$param = \jexm\core\BaseHelper::getLastPartOfUrl();
-			return [$this->matchingRoute->paramName => $param];
+			return $this->matchingRoute->getParam(URL::getLastPartOfUrl());
+		}
+		
+		
+		
+		/**
+		* Sets current URLRrequest parsed into controller, method and args.
+		* $param array $parsedRequest Associative array with controller,method and args request.
+		* @return void
+		*/
+		public function setCurrentRequest(array $parsedRequest){
+			$this->currentRequest = new CurrentRequest($parsedRequest); //(object)$parsedRequest;//
 		}
 		
 		
 		/**
-		* Gets current URLRequest. Data is decided with regard of userdefined routes.
+		* Gets current URLRequest.
 		* @return object Current request including requestmethod.
 		*/
 		public function getCurrentRequest(){
 			return $this->currentRequest;
 		}
 		
+		
 		/**
 		* Check if a route location matches a link
 		* @param string $link Coming from JexmLink::create()
 		*/
-		public function linkControllerRequest($linkpath){
-			foreach($this->allRoutes as $route){
-				if($linkpath == $route->location){
-					
-					//If route matches URL_ROOT return "as is" otherwise strip first slash for proper pathcreation
-					//return (URL_ROOT != $route->url) ? substr($route->url,1) : $route->url;
-					return $route->url;
-				}
-				
-			} 
-			return $linkpath;
+		public function matchLinkAndRoute($linkpath){
+			return (new \jexm\core\route\RouteMatcher($this))->matchRouteAndLink($linkpath);
+			
 		}
+		
+		
 	}

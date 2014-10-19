@@ -26,6 +26,7 @@
 		* Redirect internally
 		*/
 		public function to($redirection){
+			//method runs to set up property in obj.
 			$garbage = $this->link->create($redirection,"",$this->params);
 			$location = $this->link->getPath();
 			$location = (URL_ROOT != '/') ? URL_ROOT . $location : $location;

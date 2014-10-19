@@ -33,5 +33,17 @@
 			}
 		}
 		
+		
+		/**
+		* Returns param based on url. 
+		* @param string @param Realurl, Last part only (paramname defined in route)
+		*/
+		public function getParam($urlParam){
+			if(!$this->hasParam){
+				return array();
+			}
+			return (object)[$this->paramName => $urlParam];		
+		}
+		
 	
 	}

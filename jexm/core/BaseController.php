@@ -59,7 +59,6 @@
 			$method = $this->currentRequest->getMethod();
 			if(empty($method) || !method_exists($this, $method)){
 				\jexm\core\BaseHelper::send404();
-				exit;
 			}
 			return $this->{$method}();		
 		}
