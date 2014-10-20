@@ -32,6 +32,14 @@
 	$validFiles = jexm\core\FolderCrawler::getInstance()->browseDirectory()->getValidFilesToRequire();
 	new jexm\core\Autoloader($validFiles);
 	
+	
+	/**
+	* Load the injector
+	*/
+	//$di = new jexm\core\di\JexmDi();
+	//$di->get('\jexm\core\Dispatcher');
+	
+	
 	/**
 	* Include composers vendor autoload
 	*/
