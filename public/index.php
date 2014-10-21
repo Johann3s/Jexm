@@ -8,7 +8,7 @@
 	
 	
 	/**
-	* Shortcut for MAGIC_CONSTANT ( / || \ ).
+	* Shortcut for directory separator.
 	*/
 	define('DS',DIRECTORY_SEPARATOR);
 	
@@ -29,8 +29,12 @@
 	*/
 	require_once(JEXM_PATH.DS."core".DS."FolderCrawler.php");
 	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
-	$validFiles = jexm\core\FolderCrawler::getInstance()->browseDirectory()->getValidFilesToRequire();
-	new jexm\core\Autoloader($validFiles);
+	
+	$validFiles = jexm\core\FolderCrawler::getInstance()
+				  ->browseDirectory()
+				  ->getValidFilesToRequire();
+				  
+	(new jexm\core\Autoloader())->setDirectories($validFiles);
 	
 	
 	/**
@@ -43,7 +47,7 @@
 	/**
 	* Include composers vendor autoload
 	*/
-	require_once(ROOT.'vendor/autoload.php');
+	require_once(ROOT."vendor".DS."autoload.php");
 	
 	Twig_Autoloader::register();
 

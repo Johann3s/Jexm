@@ -48,7 +48,6 @@
 			\class_alias('jexm\core\helpers\JexmURL','jexm\controllers\URL');
 			\class_alias('jexm\core\helpers\JexmSession','jexm\controllers\Session');
 			\class_alias('jexm\core\helpers\JexmGlobals','jexm\controllers\Globals');
-
 		}
 		
 		
@@ -65,7 +64,7 @@
 		
 		/**
 		* Invokes the controller
-		* @return obj View
+		* @return obj View mostly
 		*/
 		public function invoke(){
 			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest->getController())){

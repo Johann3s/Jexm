@@ -14,9 +14,17 @@
 		private $allowedFilesToRequire = array();
 		
 		
-		public function __construct(array $validFiles){
-			$this->allowedFilesToRequire = $validFiles;
+		public function __construct(){
 			spl_autoload_register([$this,"autoLoadClasses"]);
+		}
+		
+		
+		
+		/**
+		* Setter for property
+		*/
+		public function setDirectories(array $validFiles){
+			$this->allowedFilesToRequire = $validFiles;
 		}
 		
 		
