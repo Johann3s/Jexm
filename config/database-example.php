@@ -22,7 +22,7 @@
 		"connections" => [
 			
 			"mysql" => [
-				"dsn" => "mysql:host=localhost;dbname=jexm;charset=utf8;",
+				"dsn" => "mysql:host=localhost;dbname=databasename;charset=utf8;",
 				"username" => "username",
 				"password" => "password"
 			],
