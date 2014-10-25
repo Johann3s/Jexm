@@ -35,6 +35,10 @@
 		*/
 		private function autoLoadClasses($class){
 			
+			if(file_exists(JEXM_PATH.DS."core".DS."facades".DS.$class.".php")){
+				require_once(JEXM_PATH.DS."core".DS."facades".DS.$class.".php");
+				return;
+			}
 			//Replace namespaces to work on all OS's.
 			$class = str_replace("\\",DS,$class);
 			

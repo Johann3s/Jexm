@@ -18,8 +18,8 @@
 		protected $params = [];
 		
 		
-		public function __construct(){
-			$this->link = new \jexm\core\helpers\JexmLink();
+		public function __construct(\jexm\core\helpers\JexmLink $link){
+			$this->link = $link;
 		}
 		
 		/**

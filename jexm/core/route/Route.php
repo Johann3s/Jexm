@@ -1,7 +1,7 @@
 <?php
 	namespace jexm\core\route;
 	
-	class JexmRoute{
+	class Route{
 		
 		public $url;
 		public $location;
@@ -9,12 +9,18 @@
 		public $paramName;
 		public $hasParam;
 		
-		public function __construct($url,$location,$reqMethod){
+		
+		/**
+		* Sets properties and returns itself
+		*/
+		public function set($url,$location,$reqMethod){
 			$this->hasParam = false;
 			$this->url = $this->parseUrl($url);
 			$this->location = $location;
 			$this->requestMethod = $reqMethod;
+			return $this;
 		}
+		
 		
 		/**
 		* IF an argument has been declared in route. Extract argumentname and strip url of last bit.

@@ -13,7 +13,6 @@
 	define('DS',DIRECTORY_SEPARATOR);
 	
 	
-	
 	/**#@+
 	* Defining constants with path to applicationfolders directly.
 	*/
@@ -30,18 +29,13 @@
 	require_once(JEXM_PATH.DS."core".DS."FolderCrawler.php");
 	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
 	
+
 	$validFiles = jexm\core\FolderCrawler::getInstance()
 				  ->browseDirectory()
 				  ->getValidFilesToRequire();
 				  
 	(new jexm\core\Autoloader())->setDirectories($validFiles);
 	
-	
-	/**
-	* Load the injector
-	*/
-	//$di = new jexm\core\di\JexmDi();
-	//$di->get('\jexm\core\Dispatcher');
 	
 	
 	/**
@@ -51,7 +45,8 @@
 	
 	Twig_Autoloader::register();
 
-	
+	//Routes::get('fdsa','asdda');
+	//die();
 	/**
 	* Include configs and userdefined routes
 	*/
@@ -67,10 +62,14 @@
 	session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
 	session_start();
 	
-	
 	/**
 	* Launch application
 	*/
+	//class_alias('\jexm\core\facades\Router','\Router');
+	
+	//$registryContainer = (new \jexm\core\di\JexmContainerRegistry())->doRegisterObjects();
+	//Router::say("Johannes");
+
 	(new jexm\core\Jexm())->launch();
 	
 ?>

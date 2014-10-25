@@ -21,8 +21,8 @@
 		*/
 		private $path;
 		
-		public function __construct(){
-			$this->routes = \jexm\core\route\Routes::getInstance();
+		public function __construct(\jexm\core\route\Routes $routes){
+			$this->routes = $routes;
 		}
 		
 		/**

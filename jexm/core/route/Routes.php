@@ -46,7 +46,7 @@
 		* @param string $reqMethod REQUEST_METHOD (POST || GET) 
 		*/
 		private function set($url,$location,$reqMethod){
-			$this->allRoutes[] = new JexmRoute($url,$location,$reqMethod);
+			$this->allRoutes[] = \Route::set($url,$location,$reqMethod);
 		}
 		
 		public function post($url,$location){
@@ -63,7 +63,7 @@
 		
 		
 		public function routeMatches(){
-			 $matchingRoute = (new \jexm\core\route\RouteMatcher($this))->matchRouteAndUrl();
+			 $matchingRoute = \RouteMatcher::matchRouteAndUrl();
 			 $this->matchingRoute = (is_object($matchingRoute)) ? $matchingRoute : null;
 			 return (is_object($matchingRoute)) ? true : false;
 		}
@@ -98,7 +98,7 @@
 		* @return void
 		*/
 		public function setCurrentRequest(array $parsedRequest){
-			$this->currentRequest = new CurrentRequest($parsedRequest); //(object)$parsedRequest;//
+			$this->currentRequest = \CurrentRequest::set($parsedRequest); 
 		}
 		
 		
@@ -116,7 +116,7 @@
 		* @param string $link Coming from JexmLink::create()
 		*/
 		public function matchLinkAndRoute($linkpath){
-			return (new \jexm\core\route\RouteMatcher($this))->matchRouteAndLink($linkpath);
+			return \RouteMatcher::matchRouteAndLink($linkpath);
 			
 		}
 		

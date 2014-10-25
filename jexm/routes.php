@@ -1,5 +1,5 @@
 <?php
-	$route = \jexm\core\route\Routes::getInstance();
+	//$route = \jexm\core\route\Routes::getInstance();
 	
 	/**
 	*
@@ -9,11 +9,11 @@
 	*
 	*
 	*/
-	$route->get('/','Test@idx');
-	$route->post('/', 'test@postData');
-	$route->get('/params/<name>','test@showParam');
-	$route->get('/params','test@doRockAndRoll');
-	$route->get('/test','test2@index');
+	Routes::get('/','Test@idx');
+	Routes::post('/', 'test@postData');
+	Routes::get('/params/<name>','test@showParam');
+	Routes::get('/params','test@doRockAndRoll');
+	Routes::get('/test','test2@index');
 	/*
 	$route->set('/pagination','test@helloWorld');
 	$route->set('/user','test@createUser');

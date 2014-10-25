@@ -27,10 +27,10 @@
 		* Starts the application
 		*/
 		public function launch(){
-			$tables = new Tables();
-			$tables->createUserTable();
-			$this->dispatcher = new Dispatcher();
-			$this->controller = $this->dispatcher->getController();
+			$tables = (new Tables())->createUserTable();
+			//$tables->createUserTable();
+			//$this->dispatcher = new Dispatcher();
+			$this->controller = \Dispatcher::getController();
 			$this->view = $this->controller->invoke();
 			$this->renderResponse();
 		}

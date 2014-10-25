@@ -33,11 +33,13 @@
 		private $args = array();
 		
 		
-		public function __construct(){
-			$this->routes = \jexm\core\route\Routes::getInstance();
+		public function __construct(\jexm\core\route\Routes $routes){
+			$this->routes = $routes;
 		}
 
-		
+		public function say($what){
+			echo $what;
+		}
 		/**
 		* Public handle to execute classmethods.
 		* Populates class properties and sets the requested route.

@@ -8,9 +8,7 @@
 		}
 		
 		public function idx(){
-			$this->view->send(["first"=>"moahahah","second"=>"hehehe"]);
-			$this->view->send(["third"=>"hiihii"]);
-			return $this->view->render("test");
+			return View::send(["first"=>"moahahah","second"=>"hehehe"])->send(["third"=>"hiihii"])->render("test");
 		}
 		public function postData(){
 			var_dump($_POST);
@@ -20,13 +18,13 @@
 			var_dump($this->currentRequest->getArgs());
 		}
 		public function doRockAndRoll(){
-			$this->redirect->with(["id" => 45])->to("test2@index");
+			Redirect::with(["id" => 45])->to("test2@index");
 		}
 		public function helloWorld(){
 			$model = new \jexm\models\Model();
 			$data = $model->getAll();
 			$links = $data['paginationLinks'];
-			return $this->view->send(["data" => $data])->render("test",["links" => $links]);
+			return View::send(["data" => $data])->render("test",["links" => $links]);
 		}
 	
 		public function createUser(){
@@ -43,7 +41,7 @@
 		
 		public function authUser(){
 			//$this->auth->login("tester@fakemail.com","passwordz");
-			$id = $this->auth->authenticate();
+			Authenticate::authenticate();
 			var_dump($id);
 		}
 		

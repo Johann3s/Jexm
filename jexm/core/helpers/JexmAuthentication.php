@@ -4,7 +4,6 @@
 	/**
 	* Class for authentication
 	*/
-	use \jexm\models\User as User;
 	
 	class JexmAuthentication{
 		
@@ -13,8 +12,8 @@
 		*/
 		protected $user;
 		
-		public function __construct(){
-			$this->user = new User();
+		public function __construct(\jexm\models\User $user){
+			$this->user = $user;
 		}
 		
 		

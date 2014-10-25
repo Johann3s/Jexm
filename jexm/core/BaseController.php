@@ -15,29 +15,13 @@
 		protected $currentRequest;
 		
 		
-		/**
-		* @var object For authentication.
-		*/
-		protected $auth;
-		
-		
-		/**
-		* @var obj For hashing strings
-		*/
-		protected $hasher;
-		
-		/**
-		* @var object View class
-		*/
-		protected $view;
 		
 		/**
 		* Constructor creates aliases and calls method when done traversing classes
 		*/
 		public function __construct(){
 			$this->createAliases();
-			$routes = \jexm\core\route\Routes::getInstance();
-			$this->currentRequest = $routes->getCurrentRequest();		
+			$this->currentRequest = \Routes::getCurrentRequest();		
 		}
 		
 		
@@ -47,7 +31,7 @@
 		protected function createAliases(){
 			\class_alias('jexm\core\helpers\JexmURL','jexm\controllers\URL');
 			\class_alias('jexm\core\helpers\JexmSession','jexm\controllers\Session');
-			\class_alias('jexm\core\helpers\JexmGlobals','jexm\controllers\Globals');
+			//\class_alias('jexm\core\helpers\JexmGlobals','jexm\controllers\Globals');
 		}
 		
 		

@@ -22,11 +22,10 @@
 		private $controllerDir;
 		
 		
-		public function __construct(){
-			$this->router = new \jexm\core\Router();
+		public function __construct(\jexm\core\Router $router,\jexm\core\route\Routes $routes){
+			$this->router = $router;
 			$this->router->extractRoute();
 			$this->controllerDir = JEXM_PATH."controllers".DS;
-			$routes = \jexm\core\route\Routes::getInstance();
 			$this->route = $routes->getCurrentRequest();
 		}
 		

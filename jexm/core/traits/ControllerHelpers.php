@@ -4,11 +4,13 @@
 	trait ControllerHelpers{
 		
 		protected function setControllerHelpers(){
-			$this->view = new \jexm\core\View();
-			$this->auth = new \jexm\core\helpers\JexmAuthentication();
-			$this->hasher = new \jexm\core\helpers\JexmHasher();
-			$this->redirect = new \jexm\core\helpers\JexmRedirect();
-			$this->sanitize = new \jexm\core\helpers\JexmSanitizer();
+			class_alias('\View','\jexm\controllers\View');
+			class_alias('\Authenticate','\jexm\controllers\Authenticate');
+			class_alias('\Hasher','\jexm\controllers\Hasher');
+			class_alias('\Redirect','\jexm\controllers\Redirect');
+			class_alias('\Sanitizer','\jexm\controllers\Sanitizer');
+			class_alias('\Globals','\jexm\controllers\Globals');
+			class_alias('\Link','\jexm\controllers\Link');
 		}
 		
 	}

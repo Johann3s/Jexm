@@ -10,11 +10,11 @@
 		protected $args;
 		
 		
-		
-		public function __construct(array $request){
+		public function set(array $request){
 			$this->controller = $request['controller'];
 			$this->method = $request['method'];
 			$this->args = $request['args']; 
+			return $this;
 		}
 	
 		public function getController(){
