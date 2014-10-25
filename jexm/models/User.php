@@ -20,9 +20,16 @@
 		* Inserts a user to database.
 		* @param array Associative array that needs to match property "userTableData" (otherwise value from property will be used, i.e null).
 		*/
-		public function insertUser(array $userData){
+		public function create(array $userData){
+			
+			if(empty($userData['password']) || empty($userData['email'])){
+				throw new \Exception("Email and password are required for a user");
+			}
+			
 			$comparison = array_intersect_key($userData,$this->userTableData);
 			$this->userTableData = array_merge($this->userTableData,$comparison);
+			
+			$this->userTableData['password'] = \Hasher::create($this->userTableData['password']);
 			
 			$sql = "INSERT INTO users (first_name,last_name,username,email,password) VALUES (?,?,?,?,?)";
 			$params = array_values($this->userTableData);

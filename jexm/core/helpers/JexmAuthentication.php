@@ -47,7 +47,7 @@
 		* Checks if user is logged in.
 		* @return boolean || int False if not logged in and userid if logged in.
 		*/
-		public function authenticate(){
+		public function check(){
 			return (!isset($_SESSION['jexm_user']) || !$_SESSION['jexm_user']['authenticated']) ? false : $_SESSION['jexm_user']['id'];
 		}
 		

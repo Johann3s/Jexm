@@ -37,7 +37,7 @@
 				if(!PRODUCTION){$this->db->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);}
 			}
 			catch(PDOException $e) {
-				\LogWriter::writeLog($e->getMessage());
+				\Log::write($e->getMessage());
 				die("Couldnt connect to database. Please check logfile for further information.");
 			}
 			$this->paginator = \Di::get("\jexm\core\Paginator");
@@ -129,7 +129,7 @@
 		* @return bool True when row has been affected, false if not
 		*/
 		protected function insert($query,$params = array()){
-			return $this->cudData($query,$params);
+			return $this->cudData($query,$params,true);
 		}
 		
 		
@@ -152,11 +152,12 @@
 		* Stores id if created.
 		* @return boolean True if any rows has been affected by query.
 		*/
-		protected function cudData($query,$params = array()){
+		protected function cudData($query,$params = array(),$returnCreatedId = false){
 			$stmt = $this->db->prepare($query);
 			$stmt->execute($params);
 			$this->lastInsertedId = $this->db->lastInsertId();
-			return ($stmt->rowCount() > 0);
+			if($stmt->rowCount() > 0 && $returnCreatedId == true){ return $this->lastInsertedId; }
+			return ($stmt->rowCount());
 		}
 	  
 

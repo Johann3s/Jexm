@@ -11,7 +11,7 @@
 	*/
 	Routes::get('/','Test@idx');
 	Routes::post('/', 'test@postData');
-	Routes::get('/params/<name>','test@showParam');
+	Routes::get('/params/<anything>','test@showParam');
 	Routes::get('/params','test@doRockAndRoll');
 	Routes::get('/test','test2@index');
 	

@@ -14,8 +14,8 @@
 			var_dump($_POST);
 		}
 		
-		public function showParam(){
-			var_dump($this->currentRequest->getArgs());
+		public function showParam($idx){
+			var_dump($idx);
 		}
 		public function doRockAndRoll(){
 			Redirect::with(["id" => 45])->to("test2@index");
@@ -28,21 +28,21 @@
 		}
 	
 		public function createUser(){
-			$model = new \jexm\models\User();
+			//$model = new \jexm\models\User();
 			$userdata = [
-				"firstname" => "Tester",
-				"email" => "tester@fakemail.com",
-				"password" => $this->hasher->Create("passwordz")
+				"firstname" => "Testperson1",
+				"email" => "tester69@fakemail.com",
+				"password" => "passwordz"
 			];
-			$returnValue = $model->insertUser($userdata);
+			$returnValue = User::create($userdata);
 			var_dump($returnValue);
 			
 		}
 		
 		public function authUser(){
-			//$this->auth->login("tester@fakemail.com","passwordz");
-			Authenticate::authenticate();
-			var_dump($id);
+			$loginId = Authenticate::login("tester@fakemail.com","passwordz");
+			//$id = Authenticate::check();
+			var_dump($loginId);
 		}
 		
 		public function logoutUser(){

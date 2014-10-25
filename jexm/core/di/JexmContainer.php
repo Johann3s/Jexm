@@ -19,6 +19,7 @@
 		private static $self;
 		
 		
+		
 		/**
 		* Instantiates registry and registration
 		*/
@@ -40,22 +41,22 @@
 		/**
 		* Regsistrers an object. Saves classname(same alias as the facade) and function to execute.
 		*/
-		public function register($className, $callback){
-			$this->registeredObjects[$className] = ["callback" => $callback];
+		public function register($classname, $callback){
+			$this->registeredObjects[$classname] = ["callback" => $callback];
 		}
 		
 		
 		/**
 		* Executes function coresponding to registred class. 
 		*/
-		public function getFromContainer($className){
-			//var_dump($className);
-			//var_dump($this->registeredObjects);
-			if(isset($this->registeredObjects[$className])){
-				return $this->registeredObjects[$className]['callback']();
-			}else{
-				//Throw exception
-			}	
+		public function getFromContainer($classname){
+
+			if(isset($this->registeredObjects[$classname])){
+				return $this->registeredObjects[$classname]['callback']();
+			}
+
+			//Throw exception
+			
 		}
 	
 	}

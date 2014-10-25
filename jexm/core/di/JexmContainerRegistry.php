@@ -57,7 +57,7 @@
 			* ----> Helpers <----
 			*/	
 			$container->register("Authenticate",function(){
-				return new \jexm\core\helpers\JexmAuthentication(new \jexm\core\models\User());
+				return new \jexm\core\helpers\JexmAuthentication(new \jexm\models\User());
 			});		
 			
 			$container->register("Hasher",function(){
@@ -75,11 +75,20 @@
 						)
 					);
 			});		
+			
 			$container->register("Globals",function(){
 				return new \jexm\core\helpers\JexmGlobals;
-			});			
+			});		
+			
 			$container->register("Link",function(){
 				return new \jexm\core\helpers\JexmLink(\jexm\core\route\Routes::getInstance());
-			});				
+			});	
+				
+			/**
+			* ----> Models <-----
+			*/
+			$container->register("User",function(){
+				return new \jexm\models\User();
+			});					
 		}
 	}

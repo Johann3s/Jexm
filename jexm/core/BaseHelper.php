@@ -25,8 +25,7 @@
 		*/
 		public static function send404(){
 			header("HTTP/1.0 404 Not Found");
-			$view = new \jexm\core\View();
-			$view->send(["currentRequest" => \jexm\core\helpers\JexmURL::getCurrentURLString()])->render("404")->display();
+			\View::send(["currentRequest" => \jexm\core\helpers\JexmURL::getCurrentURLString()])->render("404")->display();
 			exit();
 		}
 		

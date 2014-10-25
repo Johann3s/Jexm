@@ -11,6 +11,7 @@
 			class_alias('\Sanitizer','\jexm\controllers\Sanitizer');
 			class_alias('\Globals','\jexm\controllers\Globals');
 			class_alias('\Link','\jexm\controllers\Link');
+			class_alias('\User','\jexm\controllers\User');
 		}
 		
 	}

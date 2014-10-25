@@ -9,29 +9,32 @@ with use of a virtual host. Although the aim is to have it run flawlessly "as-is
 
 ##Install & Configuration##
 After downloading you need to run composer install and configure Jexm slightly. 
-You need to set up your database credentials in jexm/config/database.php (Jexm currently supports a mysql and sqlite connection).
+Save the database-example.php file in directory /jexm/config/ as database.php and set up your database credentials. 
+(Jexm currently supports a mysql and sqlite connection).
 #####
 In the same directory theres a config.php file which allows you to alter the timezone and define if in production mode or not.
 ##Getting started - Routes##
-Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and method. Note there are two different request methods.
-(Note that if NOT using a Vhost, the url should be the same. DONT include the path preceeding the jexm directory).
+Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and method. 
+Note there are two different request methods.
 
 ```php
 Routes::get( '/', 'FooBarController@fooMethod' );
 Routes::post( '/', 'FooBarController@fooMethod' );
 ```
 
-Jexm allows you to define a param based on the url. Note that the name wrapped in <> will be the key when retreiving the data. 
+Jexm allows you to define a parameter based on the url. 
+Note that the string wrapped in <> will be the accessor (propertyname) when retreiving the data. 
 
 ```php
-Routes::get('/params/<name>','test@showParam');
+Routes::get('/params/<anything>','test@showParam');
 ```
-Example above with url /params/foo point to controller Test::showParam(). 
-Calling the method below from that scope would return an object as in following : 
+Consider example above with url /params/foobar point to a controller named 'Test' with method 'showParam()'. 
+The variable is available as a method parameter Test::showParam($myvar) as below :
 
 ```php 
-$foo = $this->currentRequest->getArgs();
-var_dump($foo); // object(stdClass)[16] public 'name' => string 'foo' (length=3)
+public function showParam($myvar){
+	var_dump($myvar); // object(stdClass)[36] public 'anything' => string 'foobar' (length=6)
+}
 ``` 
 
 ##Controllers##
@@ -97,5 +100,44 @@ $all = Globals::postAll(); //returns $_POST
 ```
 
 
-######
-The controllers all have access to helpers which will ease the coding and save you time. See the helpers section further down.
+#####
+#####Handling users
+If you use the jexm user model you may use the jexm Authenticate class.
+It comes with easy methods to handle users within the application.
+
+######Create a user
+To create a user pass an associative array with userdata to User::create().
+A user comes with these attributes below and email and password are required and cannot be empty.
+Jexm will hash the password for you using blowfish.
+```php
+$newUser = [
+	"firstname" => "", 
+	"lastname" => "",
+	"username" => "", 
+	"email" => "cant be empty", 
+	"password" => "cant be empty"
+];
+
+User::create($newUser); //returns user id or false on failure
+```
+This method returns created user id on success or false on failure.
+If you want to hash another column you can utilize the hasher class.
+```php
+$hash = Hasher::create('somestring');
+```
+You cannot hash the email column nor hash the password column further though.
+#####
+######Login a user
+To login a user simply call the built in method login in with email and password.
+Method returns userid if a succesful login was completed or false on failure
+```php
+$id = Authenticate::login("tester@fakemail.com","secret"); //$id == int||false 
+```
+To check if a user is logged use the check method: 
+Method returns userid if logged in and false if not.
+```php
+$id = Authenticate::check();$id == int||false 
+```
+#####
+
+

@@ -44,9 +44,9 @@
 	require_once(ROOT."vendor".DS."autoload.php");
 	
 	Twig_Autoloader::register();
+	
 
-	//Routes::get('fdsa','asdda');
-	//die();
+	
 	/**
 	* Include configs and userdefined routes
 	*/
@@ -56,20 +56,19 @@
 	
 	
 	
+	
 	/**
 	* Start session.
 	*/
 	session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
 	session_start();
 	
+	
+	
+	
 	/**
 	* Launch application
 	*/
-	//class_alias('\jexm\core\facades\Router','\Router');
-	
-	//$registryContainer = (new \jexm\core\di\JexmContainerRegistry())->doRegisterObjects();
-	//Router::say("Johannes");
-
 	(new jexm\core\Jexm())->launch();
 	
 ?>

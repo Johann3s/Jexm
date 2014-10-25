@@ -31,19 +31,19 @@
 		protected function createAliases(){
 			\class_alias('jexm\core\helpers\JexmURL','jexm\controllers\URL');
 			\class_alias('jexm\core\helpers\JexmSession','jexm\controllers\Session');
-			//\class_alias('jexm\core\helpers\JexmGlobals','jexm\controllers\Globals');
 		}
 		
 		
 		/**
 		* Calls requested method or sends a 404 if no method exists or is not found
+		* If args exist pass along as parameters
 		*/
 		protected function callMethod(){
 			$method = $this->currentRequest->getMethod();
 			if(empty($method) || !method_exists($this, $method)){
 				\jexm\core\BaseHelper::send404();
 			}
-			return $this->{$method}();		
+			return (count($this->currentRequest->getArgs()) > 0) ? $this->{$method}($this->currentRequest->getArgs()) : $this->{$method}();		
 		}
 		
 		/**

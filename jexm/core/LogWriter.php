@@ -15,7 +15,7 @@
 		* @param string $logMessage Error to write to log
 		* @param string $filename OPTIONAL file to write to
 		*/
-		public function writeLog($logMessage, $filename = "jexmlog"){
+		public function write($logMessage, $filename = "jexmlog"){
 			$logfile = $this->replaceCharsConcat($filename);
 			$errorLog = $this->createLog($logMessage);
 			file_put_contents($logfile,$errorLog,FILE_APPEND);
