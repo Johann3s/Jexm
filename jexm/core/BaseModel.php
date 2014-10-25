@@ -37,10 +37,10 @@
 				if(!PRODUCTION){$this->db->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);}
 			}
 			catch(PDOException $e) {
-				\jexm\core\LogWriter::writeLog($e->getMessage());
+				\LogWriter::writeLog($e->getMessage());
 				die("Couldnt connect to database. Please check logfile for further information.");
 			}
-			$this->paginator = new \jexm\core\Paginator();
+			$this->paginator = \Di::get("\jexm\core\Paginator");
 		}
 		
 		

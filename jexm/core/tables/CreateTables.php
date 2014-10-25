@@ -32,7 +32,7 @@
 		
 		private function getMysqlQuery(){
 			return 
-			"id INT(11) AUTO_INCREMENT PRIMARY KEsY,
+			"id INT(11) AUTO_INCREMENT PRIMARY KEY,
 			first_name VARCHAR(40),
 			last_name VARCHAR(40),
 			username VARCHAR(40),

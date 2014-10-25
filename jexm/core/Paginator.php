@@ -1,7 +1,6 @@
 <?php
 	namespace jexm\core;
 	
-	use \jexm\core\helpers\JexmLink as Link;
 	use \jexm\core\helpers\JexmURL as URL;
 	
 	class Paginator{
@@ -60,7 +59,6 @@
 			return $this->perPage;
 		}
 		public function getLinks(){
-			$this->link = jexm\core\helpers\JexmLink();
 			$url = URL::getCurrentURLWithoutQueryString();
 			
 			$links = "<p class='pagination-links'>";
@@ -68,17 +66,17 @@
 				return;
 			}
 			if($this->previousPage() > 0){
-				$links .= $link->paginate($url,"<<", ["page" => $this->previousPage()]);
+				$links .= \Link::paginate($url,"<<", ["page" => $this->previousPage()]);
 			}
 			for($i = 1; $i<$this->totalPages() + 1;$i++){
 				if($i == $this->currentPage){ //Är det aktuell sida. Visa ingen länk.
 					$links .= "<b class='current'>" . $i . "</b>";
 				}else{
-					$links .= $link->paginate($url,$i,["page" => $i]);
+					$links .= \Link::paginate($url,$i,["page" => $i]);
 				}
 			}
 			if($this->nextPage() <= $this->totalPages()){
-				$links .= $link->paginate($url,">>",["page" => $this->nextPage()]);;
+				$links .= \Link::paginate($url,">>",["page" => $this->nextPage()]);;
 			}
 			$links .= "</p>";
 			return $links;

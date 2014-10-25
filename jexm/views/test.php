@@ -20,7 +20,7 @@
 				<input type="hidden" value="tjoho" name="val" />
 				<input type="submit" value="send" />
 			</form>
-			
+			<p><?php echo $links; ?></p>
 			<p>Imma a link <?php echo Link::create('test@doRockAndRoll',"cool link with controllerz"); ?></p>
 			<p>Im also a link <?php echo Link::create('/test',"regular link"); ?></p>
 			<h2><?php echo $first; ?></h2>

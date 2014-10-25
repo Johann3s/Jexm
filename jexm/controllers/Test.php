@@ -24,7 +24,7 @@
 			$model = new \jexm\models\Model();
 			$data = $model->getAll();
 			$links = $data['paginationLinks'];
-			return View::send(["data" => $data])->render("test",["links" => $links]);
+			return View::send(["data" => $data])->send(["first"=>"moahahah","second"=>"hehehe"])->send(["third"=>"hiihii"])->render("test",["links" => $links]);
 		}
 	
 		public function createUser(){

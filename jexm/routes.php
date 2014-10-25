@@ -14,9 +14,9 @@
 	Routes::get('/params/<name>','test@showParam');
 	Routes::get('/params','test@doRockAndRoll');
 	Routes::get('/test','test2@index');
-	/*
-	$route->set('/pagination','test@helloWorld');
-	$route->set('/user','test@createUser');
-	$route->set('/user/auth','test@authUser');
-	$route->set('/user/logout','test@logoutUser');*/
+	
+	Routes::get('/pagination','test@helloWorld');
+	Routes::get('/user','test@createUser');
+	Routes::get('/user/auth','test@authUser');
+	Routes::get('/user/logout','test@logoutUser');
 

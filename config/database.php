@@ -17,7 +17,7 @@
 		/**
 		* Defines which connection to use.
 		*/
-		"driver" => "sqlite",
+		"driver" => "mysql",
 		
 		"connections" => [
 			
