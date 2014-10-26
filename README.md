@@ -153,11 +153,13 @@ anyway to use the built in pagination.
 ```php
 $result = $this->fetch("SELECT something FROM sometable WHERE somevalue = ?",[$param1],10); //displaying 10 rows per page
 ```
-When paginating a query Jexm returns a complete set of links wrapped in a <p class='pagination-links'> tag.
-All the links are <a> tags and the The current page a bold tag <b class='current>
+
+When paginating a query Jexm returns a complete set of links wrapped in a p tag with css-class 'pagination-links'.
+All the links are a tags and the The current page a b tag with css-class 'current'
 They come completely unstyled containing pagenumbers corresponding to its position in the paginated query.
 If there is a next page there will be a >> anchor and if there is a previous page there will be a << anchor.
 The linkset come appended to the resultset as an associative array and are retrieved as below:
+
 ```php
 $result = $this->fetch("SELECT something FROM sometable WHERE somevalue = ?",[$param1],10); //displaying 10 rows per page
 $linkset = $result['paginationLinks'];
