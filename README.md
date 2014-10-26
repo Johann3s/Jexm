@@ -33,7 +33,8 @@ The variable is available as a method parameter Test::showParam($myvar) as below
 
 ```php 
 public function showParam($myvar){
-	var_dump($myvar); // object(stdClass)[36] public 'anything' => string 'foobar' (length=6)
+	var_dump($myvar); 
+	// object(stdClass)[36] public 'anything' => string 'foobar' (length=6)
 }
 ``` 
 
