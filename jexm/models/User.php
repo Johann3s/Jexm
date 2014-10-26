@@ -1,46 +1,28 @@
 <?php
 	namespace jexm\models;
 	
-	class User extends \jexm\core\BaseModel{
+	class User extends Model{
 		
-		protected $userTableData = [
-			"firstname" => "", 
-			"lastname" => "",
-			"username" => "", 
-			"email" => null, 
-			"password" => null
-		];
+		protected $table = "users";
 		
 		public function __construct(){
 			parent::__construct();
-		}
-		
-		
-		/**
-		* Inserts a user to database.
-		* @param array Associative array that needs to match property "userTableData" (otherwise value from property will be used, i.e null).
-		*/
-		public function create(array $userData){
-			
-			if(empty($userData['password']) || empty($userData['email'])){
-				throw new \Exception("Email and password are required for a user");
+			if(!$tableExist = $this->tableExist($this->table)){
+				throw new \Exception("Unable to find table ".$this->table);
 			}
-			
-			$comparison = array_intersect_key($userData,$this->userTableData);
-			$this->userTableData = array_merge($this->userTableData,$comparison);
-			
-			$this->userTableData['password'] = \Hasher::create($this->userTableData['password']);
-			
-			$sql = "INSERT INTO users (first_name,last_name,username,email,password) VALUES (?,?,?,?,?)";
-			$params = array_values($this->userTableData);
-			
-			return $this->insert($sql,$params);
 		}
+		
+		
 		
 		/**
 		* Gets user credentials for authentication
+		* Values injected into sqlstring are NOT coming from user.
+		* @param array Associative array for fetching userdata given column. [colname => value]
+		* @return credentials or false
 		*/
-		public function getCredentials($email){
-			return $this->fetch("SELECT id,email,password FROM users WHERE email = ? LIMIT 1",[$email]);
+		public function getCredentials(array $accessors){
+			$accessorColName = array_keys($accessors);
+			$accessorValue = array_values($accessors);
+			return $this->fetch("SELECT * FROM {$this->table} WHERE {$accessorColName[0]} = ? LIMIT 1",[$accessorValue[0]]);
 		}
 	}

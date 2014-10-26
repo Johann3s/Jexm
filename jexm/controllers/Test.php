@@ -26,21 +26,14 @@
 			$links = $data['paginationLinks'];
 			return View::send(["data" => $data])->send(["first"=>"moahahah","second"=>"hehehe"])->send(["third"=>"hiihii"])->render("test",["links" => $links]);
 		}
-	
-		public function createUser(){
-			//$model = new \jexm\models\User();
-			$userdata = [
-				"firstname" => "Testperson1",
-				"email" => "tester69@fakemail.com",
-				"password" => "passwordz"
-			];
-			$returnValue = User::create($userdata);
-			var_dump($returnValue);
-			
+		
+		public function updateSomething(){
+			$model = new \jexm\models\Model();
+			$model->updateSomething();
 		}
 		
 		public function authUser(){
-			$loginId = Authenticate::login("tester@fakemail.com","passwordz");
+			$loginId = Authenticate::login(["email" => "tester@fakemail.com","password" => "passwordz"]);
 			//$id = Authenticate::check();
 			var_dump($loginId);
 		}

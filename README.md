@@ -104,40 +104,65 @@ $all = Globals::postAll(); //returns $_POST
 #####Handling users
 If you use the jexm user model you may use the jexm Authenticate class.
 It comes with easy methods to handle users within the application.
+To use the User model you only need to enter the tablename the model is using.
 
-######Create a user
-To create a user pass an associative array with userdata to User::create().
-A user comes with these attributes below and email and password are required and cannot be empty.
-Jexm will hash the password for you using blowfish.
+######Authenticating a user
+Jexm uses blowfish as hashing algorithm and your users passwords must be hashed with Jexms' hashing method 
+for authentication to work. However this is easy in Jexm with hasher class. Simply call the method
+below before saving passwords. 
 ```php
-$newUser = [
-	"firstname" => "", 
-	"lastname" => "",
-	"username" => "", 
-	"email" => "cant be empty", 
-	"password" => "cant be empty"
-];
-
-User::create($newUser); //returns user id or false on failure
+$hash = Hasher::create('somestring'); //Returns hashed and salted string
 ```
-This method returns created user id on success or false on failure.
-If you want to hash another column you can utilize the hasher class.
-```php
-$hash = Hasher::create('somestring');
-```
-You cannot hash the email column nor hash the password column further though.
+Note that you cannot hash something more than once and expect it to work.
 #####
 ######Login a user
-To login a user simply call the built in method login in with email and password.
-Method returns userid if a succesful login was completed or false on failure
+To login a user utilize the Authenticate class and call the method login().
+You need to pass an associative array with 2 checkups. No more, no less. The checkups
+must contain columnname and corresponding value. (See codeexample below).
+Method returns a userid if a succesful login was completed or false on failure
 ```php
-$id = Authenticate::login("tester@fakemail.com","secret"); //$id == int||false 
+$userid = Authenticate::login(["columnname" => "tester@fakemail.com","columnname" => "secret"); //$userid == int||false 
 ```
 To check if a user is logged use the check method: 
 Method returns userid if logged in and false if not.
 ```php
-$id = Authenticate::check();$id == int||false 
+$id = Authenticate::check(); //$id == int||false 
 ```
 #####
-
-
+##Models
+When you create a Model you extend the Model in the models directory. (Dont forget the namespace)
+#####Note that there must be a a constructor calling parent::__construct() before anything else.
+#####Query the database
+When quering the database Jexm comes with 4 methods, create,update,delete and fetch.
+The query is parameterized and should look like below:
+```php
+$result = $this->fetch("SELECT something FROM sometable WHERE somevalue = ?",[$param]);
+```
+The bindvalues array are optional meaning if your query is not containing any userinput you
+do not have to pass the array along.
+######Fetching data
+When fetching data you use the fetch method like demonstrated above. If you have a parameterized query
+pass the params as an array in corresponding order.
+```php
+$result = $this->fetch("SELECT something FROM sometable WHERE somevalue = ? AND someothervalue = ?",[$param1,$param2]);
+```
+Jexm comes with an easy way to paginate your query using the paginator class. Simply add how many rows you want
+displayed per page after your parameters. Note that if you dont pass any parameters you must pass an empty array
+anyway to use the built in pagination.
+```php
+$result = $this->fetch("SELECT something FROM sometable WHERE somevalue = ?",[$param1],10); //displaying 10 rows per page
+```
+When paginating a query Jexm returns a complete set of links wrapped in a <p class='pagination-links'> tag.
+All the links are <a> tags and the The current page a bold tag <b class='current>
+They come completely unstyled containing pagenumbers corresponding to its position in the paginated query.
+If there is a next page there will be a >> anchor and if there is a previous page there will be a << anchor.
+The linkset come appended to the resultset as an associative array and are retrieved as below:
+```php
+$result = $this->fetch("SELECT something FROM sometable WHERE somevalue = ?",[$param1],10); //displaying 10 rows per page
+$linkset = $result['paginationLinks'];
+```
+######Updating data
+When updating Jexm returns the number of affected rows. I.e if nothing was updated method returns 0.
+```php
+$rowcount = $this->update("UPDATE sometable SET somecolumn = 'somevalue' WHERE id = ?",[7]);
+```

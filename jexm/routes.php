@@ -16,7 +16,8 @@
 	Routes::get('/test','test2@index');
 	
 	Routes::get('/pagination','test@helloWorld');
-	Routes::get('/user','test@createUser');
 	Routes::get('/user/auth','test@authUser');
 	Routes::get('/user/logout','test@logoutUser');
+	
+	Routes::get('/update','test@updateSomething');
 

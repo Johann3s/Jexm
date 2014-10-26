@@ -19,14 +19,25 @@
 		
 		
 		/**
-		* Attempts to login user via email and password
-		* @param string $email Email
-		* @param string $password Unhashed password coming from user
+		* Attempts to login user.
+		* @param array Associative array with [column name => credentials of unhashed accessor,[columnname => unhashed password coming from user] 
 		* @return boolean || int False if unsuccesful and userid if succesful
 		*/
-		public function login($email,$password){
-			$credentials = $this->user->getCredentials($email);
-			return (!empty($credentials) && crypt($password,$credentials[0]->password) === $credentials[0]->password) ? $this->doLoginUser($credentials) : false;
+		public function login(array $columnsAndValues){
+			if(count($columnsAndValues) != 2){
+				throw new \Exception("Incorrect number of arguments given. Expecting exactly 2.");
+			}
+			
+			
+			$chunk = array_chunk($columnsAndValues,1,true); //split array two two arrays each [tablename => value]
+			$accessorData = $chunk[0];
+			$passwordData = $chunk[1];
+			
+			$credentials = $this->user->getCredentials($accessorData); //Fetch credentials from model (must be usermodel)
+			
+			$passwordValue = array_values($passwordData);
+			$passwordColName = array_keys($passwordData);
+			return (!empty($credentials) && crypt($passwordValue[0],$credentials[0]->$passwordColName[0]) === $credentials[0]->$passwordColName[0]) ? $this->doLoginUser($credentials) : false;
 		}
 		
 		
