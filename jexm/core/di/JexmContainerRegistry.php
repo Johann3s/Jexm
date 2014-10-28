@@ -6,12 +6,15 @@
 		
 		public function registerObjects(\jexm\core\di\JexmContainer $container){
 			
-			$container->register("Router",function(){
-				return new \jexm\core\Router(\jexm\core\route\Routes::getInstance());
+			$container->register("Router",function() use ($container){
+				$routes = $container->getFromContainer("Routes");
+				return new \jexm\core\Router($routes);
 			});
 			
-			$container->register("Dispatcher",function(){
-				return new \jexm\core\Dispatcher(new \jexm\core\Router(\jexm\core\route\Routes::getInstance()), \jexm\core\route\Routes::getInstance());
+			$container->register("Dispatcher",function() use ($container){
+				$routes = $container->getFromContainer("Routes");
+				$router = $container->getFromContainer("Router");
+				return new \jexm\core\Dispatcher($router,$routes);
 			});
 			
 			$container->register("FolderCrawler",function(){
@@ -49,15 +52,17 @@
 				return new \jexm\core\route\Route();
 			});		
 			
-			$container->register("RouteMatcher",function(){
-				return new \jexm\core\route\RouteMatcher(\jexm\core\route\Routes::getInstance());
+			$container->register("RouteMatcher",function() use ($container){
+				$routes = $container->getFromContainer("Routes");
+				return new \jexm\core\route\RouteMatcher($routes);
 			});		
 			
 			/**
 			* ----> Helpers <----
 			*/	
-			$container->register("Authenticate",function(){
-				return new \jexm\core\helpers\JexmAuthentication(new \jexm\models\User());
+			$container->register("Authenticate",function() use ($container){
+				$user = $container->getFromContainer("User");
+				return new \jexm\core\helpers\JexmAuthentication($user);
 			});		
 			
 			$container->register("Hasher",function(){
@@ -68,20 +73,18 @@
 				return new \jexm\core\helpers\JexmSanitizer();
 			});		
 			
-			$container->register("Redirect",function(){
-				return new \jexm\core\helpers\JexmRedirect(
-					new \jexm\core\helpers\JexmLink(
-							\jexm\core\route\Routes::getInstance()
-						)
-					);
+			$container->register("Redirect",function() use ($container){
+				$link = $container->getFromContainer("Link");
+				return new \jexm\core\helpers\JexmRedirect($link);
 			});		
 			
 			$container->register("Globals",function(){
 				return new \jexm\core\helpers\JexmGlobals;
 			});		
 			
-			$container->register("Link",function(){
-				return new \jexm\core\helpers\JexmLink(\jexm\core\route\Routes::getInstance());
+			$container->register("Link",function() use ($container){
+				$routes = $container->getFromContainer("Routes");
+				return new \jexm\core\helpers\JexmLink($routes);
 			});	
 				
 			/**

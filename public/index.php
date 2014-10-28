@@ -36,7 +36,7 @@
 				  
 	(new jexm\core\Autoloader())->setDirectories($validFiles);
 	
-	
+	$container = \jexm\core\di\JexmContainer::getInstance(new \jexm\core\di\JexmDi());
 	
 	/**
 	* Include composers vendor autoload
