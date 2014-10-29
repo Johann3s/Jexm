@@ -26,19 +26,14 @@
 	/**
 	* Include autoloader and settings.
 	*/
-	require_once(JEXM_PATH.DS."core".DS."FolderCrawler.php");
-	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
-	
 
-	$validFiles = jexm\core\FolderCrawler::getInstance()
-				  ->browseDirectory()
-				  ->getValidFilesToRequire();
-				  
-	(new jexm\core\Autoloader())->setDirectories($validFiles);
-	
+	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
+	new jexm\core\Autoloader();	
 	$container = \jexm\core\di\JexmContainer::getInstance(new \jexm\core\di\JexmDi());
-	
 	(new \jexm\core\facades\alias\Aliases())->init();
+	
+	
+	
 	
 	/**
 	* Include composers vendor autoload

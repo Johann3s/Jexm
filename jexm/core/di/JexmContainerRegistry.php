@@ -18,7 +18,7 @@
 			});
 			
 			$container->register("FolderCrawler",function(){
-				return \jexm\core\FolderCrawler::getInstance();
+				return new \jexm\core\FolderCrawler();
 			});
 
 			$container->register("Log",function(){

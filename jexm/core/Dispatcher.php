@@ -36,8 +36,12 @@
 		* @return object
 		*/
 		public function getController(){
-	
+			$validFiles = \FolderCrawler::returnDirectory($this->controllerDir);
 			$controllerFile = ucfirst($this->route->getController()).".php";
+			
+			if(!in_array($controllerFile,$validFiles)){
+				\jexm\core\BaseHelper::send404();
+			}
 			
 			//If a request has been made but controllerfile is not found in dir its a 404. Strip $controllerfile of extension.
 			$controller = (file_exists($this->controllerDir.$controllerFile)) ? basename($controllerFile,".php") : "404";

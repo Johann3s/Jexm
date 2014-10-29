@@ -8,44 +8,19 @@
 	class FolderCrawler{
 		
 		
-		/**
-		* @var object Holds itself,singleton.
-		*/
-		private static $self;
-		
 		
 		private $allowedFilesToRequest = array();
-		
-		
-		/**
-		* Singleton class
-		* @return object FolderCrawler(self)
-		*/
-		public static function getInstance(){
-			if(!isset(self::$self)){
-				self::$self = new FolderCrawler();
-			}
-			return self::$self;
-		}
 		
 		
 		
 		/**
 		* Sets property array with files valid to require
 		*/
-		public function browseDirectory(){
-			$this->validateDirectory(JEXM_PATH);
-			return $this;
-		}
-		
-		
-		
-		/**
-		* Gets array with valid files to require.
-		*/
-		public function getValidFilesToRequire(){
+		public function returnDirectory($dir){
+			$this->validateDirectory($dir);
 			return $this->allowedFilesToRequest;
 		}
+		
 		
 		
 		
@@ -62,9 +37,9 @@
 					$this->validateDirectory($item.DS);
 				}
 				
-				// .php extension (ONLY) will be stripped out and remainder pushed to array for comparison.
+				// push to array
 				if(is_file($item)){
-					$this->allowedFilesToRequest[] = basename($item,".php");
+					$this->allowedFilesToRequest[] = basename($item);
 				}
 			}
 			

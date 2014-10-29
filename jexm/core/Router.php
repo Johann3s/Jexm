@@ -37,9 +37,6 @@
 			$this->routes = $routes;
 		}
 
-		public function say($what){
-			echo $what;
-		}
 		/**
 		* Public handle to execute classmethods.
 		* Populates class properties and sets the requested route.
