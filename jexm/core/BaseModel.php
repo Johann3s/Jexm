@@ -21,6 +21,8 @@
 		*/
 		protected $lastInsertedId;
 		
+		protected $rowCount;
+		
 		
 		public function __construct(){
 			$settings = include(ROOT."config".DS."database.php");
@@ -41,6 +43,7 @@
 				die("Couldnt connect to database. Please check logfile for further information.");
 			}
 			$this->paginator = \Di::get("\jexm\core\Paginator");
+			
 		}
 		
 		
@@ -68,6 +71,7 @@
 		protected function doQuery($query,$params){
 			$stmt = $this->db->prepare($query);
 			$stmt->execute($params);
+			$this->rowCount = $stmt->rowCount();
 			return $stmt->fetchAll();
 		}
 		
@@ -169,4 +173,14 @@
 		protected function getLastInsertedId(){
 			return $this->lastInsertedId;
 		}
+		
+		
+		
+		protected function tableExist($tablename){
+			$sql = "SELECT * FROM information_schema.tables 
+					WHERE TABLE_NAME = ? 
+					AND TABLE_SCHEMA != 'mysql'";
+			$result = $this->fetch($sql,[$tablename]);
+			return (count($result) > 0) ? true : false;
+		}		
 }

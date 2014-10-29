@@ -41,4 +41,11 @@
 		public function logoutUser(){
 			unset($_SESSION['jexm_user']);
 		}
+		
+		public function modelTest(){
+			$model = new \jexm\models\testModel();
+			$result = $model->getArticle(5);
+			var_dump($result);
+		
+		}
 	}

@@ -92,6 +92,10 @@
 			*/
 			$container->register("User",function(){
 				return new \jexm\models\User();
+			});	
+			
+			$container->register("DB",function(){
+				return new \jexm\core\db\DatabaseQuery();
 			});					
 		}
 	}
