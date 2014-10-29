@@ -1,4 +1,5 @@
 <?php
+	namespace jexm\core\facades;
 	class Facades{
 		
 		public static function __callStatic($method,$args){

@@ -38,6 +38,8 @@
 	
 	$container = \jexm\core\di\JexmContainer::getInstance(new \jexm\core\di\JexmDi());
 	
+	(new \jexm\core\facades\alias\Aliases())->init();
+	
 	/**
 	* Include composers vendor autoload
 	*/
