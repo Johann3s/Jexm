@@ -134,7 +134,7 @@ $id = Authenticate::check(); //$id == int||false
 When you create a Model you extend the Model in the models directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
-#####Query the database with Jexms' querybuilder
+###Query the database with Jexms' querybuilder
 Jexm comes with a light and easy to use querybuilder.
 To use the querybuilder use the DB class which lets you build
 up your query. All values are parameterized.
