@@ -3,8 +3,9 @@
 	
 	trait ModelAlias{
 		
-		protected function setAlias(){
-			class_alias('\User','\jexm\models\User');
+		public function createAliases(){
+			class_alias('jexm\core\facades\User','jexm\models\User');
+			class_alias('jexm\core\facades\DB','jexm\models\DB');
 		}
 		
 	}

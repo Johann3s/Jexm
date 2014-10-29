@@ -44,8 +44,25 @@
 		
 		public function modelTest(){
 			$model = new \jexm\models\testModel();
-			$result = $model->getArticle(5);
+			$result = $model->getstuff();
+			$links = $result['paginationLinks'];
+			return View::send(["links" => $links])->send(["response" => $result])->render("qbtest");
+			//var_dump($result);
+		}
+		public function delete(){
+			$model = new \jexm\models\testModel();
+			$result = $model->deletestuff();
 			var_dump($result);
 		
 		}
+		public function update(){
+			$model = new \jexm\models\testModel();
+			$result = $model->updatestuff();
+			var_dump($result);
+		}		
+		public function add(){
+			$model = new \jexm\models\testModel();
+			$result = $model->addstuff();
+			var_dump($result);
+		}	
 	}

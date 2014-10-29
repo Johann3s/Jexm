@@ -46,24 +46,15 @@ When you create a controller you extend the Controller in the controllers direct
 To pass data to the view you use the send method. 
 The data must be passed as an associative array ['myVar' => $anydata]. 
 The data is then retrieved from the defined template as $myVar.
+To render a view you must chain the render method as below
 
 ```php
-View::send(['myVar' => $anydata, 'foo' => 'bar']);
+View::send(['myVar' => $anydata, 'foo' => 'bar'])->render('foo');
 ```
-This however would not render without chaining the render method.
 
-Defining a template to use is done last and with the render method. This is when you return the view. 
-If template recides in a deeper folderstructure (/views/foobar/foo) the folderpath must be appended. 
-*nix users also use the windows directory separators. These will be converted inside Jexm.
-
+You can send data as one big array or with multiple send methods chained.
 ```php
-return View::render('foo');
-return View::render('foobar/foo');
-```
-######
-These methods Must be chained though to actually render any data.
-```php
-return View::send(["myVar" => $anydata])->render('foo');
+View::send(['myVar' => $anydata])->send(['foo' => $moreData])->render('foo');
 ```
 Jexm comes with Twig templating. To render a twig template save the template as foo.tpl.php. 
 Then return it from controller as below : 
@@ -120,10 +111,19 @@ Note that you cannot hash something more than once and expect it to work.
 To login a user utilize the Authenticate class and call the method login().
 You need to pass an associative array with 2 checkups. No more, no less. The checkups
 must contain columnname and corresponding value. (See codeexample below).
-Method returns a userid if a succesful login was completed or false on failure
+Method returns a userid if a succesful login was completed or false on failure.
 ```php
-$userid = Authenticate::login(["columnname" => "tester@fakemail.com","columnname" => "secret"); //$userid == int||false 
+$userid = Authenticate::login(["columnname" => $username,"columnname" => $password); //$userid == int||false 
 ```
+Note that the login method expects the fetched column from database to be hashed. 
+For instance if columnnames are username and password, Jexmwould fetch username and password from tablename 
+where username = value. Then tries to hash the given password with the hashed password fetched from database.
+Note alse that order matters here. The last checkup item must be the one pointing to a hashed columnvalue in db.
+```php
+$userid = Authenticate::login(["username" => $username,"password" => $password); 
+```
+These columnnames can of course be any existing columnnames(email etc...)
+##### 
 To check if a user is logged use the check method: 
 Method returns userid if logged in and false if not.
 ```php
@@ -133,7 +133,109 @@ $id = Authenticate::check(); //$id == int||false
 ##Models
 When you create a Model you extend the Model in the models directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
-#####Query the database
+#####
+#####Query the database with Jexms' querybuilder
+Jexm comes with a light and easy to use querybuilder.
+To use the querybuilder use the DB class which lets you build
+up your query. All values are parameterized.
+
+######SELECT QUERIES
+The select method works as example below.
+First define which table to use in DB::table().
+Then choose which columns to fetch. 
+Then define (optional) conditionals.
+Declare an sorting (optional). If invoked accepts ASC or DESC as sorting. Defaults to ascending order when invoked.
+Then execute query with the get() method.
+NOTE that if select method is invoked without arguments SELECT * is assumed
+```php
+$result = DB::table('books')
+		  ->select('id','title','author')
+		  ->where('id','=',9)
+		  ->orderBy('id','ASC')
+		  ->get();
+```	
+Its possible to add multiple conditionals by chaining more of the where methods together.
+The where method assumes an AND relation if multiple conditions are declared.
+To use an OR relation use the orWhere() method.
+```php
+$result = DB::table('books')
+		  ->select('id','title','author')
+		  ->where('title','=','Foo Title')
+		  ->where('author','=','John Foe')
+		  ->orWhere('id','=',8)
+		  ->orderBy('id','ASC')
+		  ->get();
+```	
+To get a count simply execute your query with the getCount method instead of get()
+```php
+$result = DB::table('books')
+		  ->select('id','title','author')
+		  ->where('id','=',9)
+		  ->getCount();
+```	
+To paginate your query call the paginate() method. It expects an positive integer and will default to 0 if none given. 
+Meaning pagination will never be invoked.  
+```php
+$result = DB::table('books')
+		  ->select()
+		  ->where('id','<',25)
+		  ->orderBy('id','ASC')
+		  ->paginate(5)
+		  ->get();
+```
+When paginating Jexm returns a set of unstyled links. 
+These will correspond to your declared number of views per page (as stated as an argument in paginate() method).
+They come as an associative array appended to your query object. 
+Retrieve them as below:
+```php
+$links = $result['paginationLinks'];
+```
+Pagination and its links are explained further a few sections down.
+
+######INSERT QUERIES
+Insert queries are straightforward. Define the table name
+and use the add() method. Simply declare which columname to give which value.
+Execute the query with the execute() method.
+```php
+$result = DB::table('books')
+		  ->add('title','Excellent Title')
+		  ->add('author','Superb Authorname')
+		  ->add('discount',1)
+		  ->execute();
+```	
+Codeblock will return created id if succesful. 
+
+######UPDATE QUERIES 
+Updating columns is similar to insertions. However you are allowed to declare conditionals.
+In the change() method declare which column to be updated followed by new value.
+State if any conditions and execute the query with the execute() method.
+```php 
+$result = DB::table('books')
+		  ->change('title','New Title')
+		  ->change('discount',0)
+		  ->where('id','=',9)
+		  ->execute();
+```		
+Codeblock will return number of affected rows.
+
+######DELETE QUERIES 
+When deleting rows you as always define which table to delete from.
+Then invoke the remove method and any conditions.
+You may use the limit method. If given arguments it expects an positive integer and will default to 1 if not met. 
+If invoked without arguments it defaults to 1.
+```php	
+$result = DB::table('books')
+		  ->remove()
+		  ->where('id','=',9)
+		  ->limit()
+		  ->execute();
+```
+Codeblock will return number of affected rows.
+
+#####When querybuilder comes in short
+There will come times when you need to query database without the support of querybuilder.
+Jexm allows you to use the basemodels crudmethods.
+
 When quering the database Jexm comes with 4 methods, create,update,delete and fetch.
 The query is parameterized and should look like below:
 ```php

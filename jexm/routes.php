@@ -20,5 +20,8 @@
 	Routes::get('/user/logout','test@logoutUser');
 	
 	Routes::get('/update','test@updateSomething');
-	Routes::get('/test/model','test@modelTest');
+	Routes::get('/test/get','test@modelTest');
+	Routes::get('/test/add','test@add');	
+	Routes::get('/test/update','test@update');
+	Routes::get('/test/delete','test@delete');
 

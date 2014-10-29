@@ -1,25 +1,12 @@
 <?php
 	namespace jexm\models;
 	
-	class Model extends \jexm\core\BaseModel{
+	class Model extends \jexm\core\BaseModel implements \jexm\core\interfaces\Aliases{
 		
 		
 		public function __construct(){
 			parent::__construct();
+			$this->createAliases();
 		}
-		
-
-		
-		public function getAll(){
-			$resultset = $this->fetch("SELECT * FROM article_table WHERE articleid < ? ORDER BY articleid ASC",[50],10);
-			var_dump($resultset['paginationLinks']);
-			return $resultset;
-		}
-		
-		public function updateSomething(){
-			$result = $this->update("UPDATE users SET last_name = 'eftnamed' WHERE id = ?",[7]);
-			var_dump($result);
-		}
-		
 		
 	}
