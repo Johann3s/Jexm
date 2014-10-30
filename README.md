@@ -1,13 +1,18 @@
 #Jexm Framework#
-This framework was created as a graduating project for JensenEducation. Jexm is free to use and manipulate and what not. See license.
-##Dependencies##
+This framework was created as a graduating project for JensenEducation. 
+Jexm is light MVC framework written in PHP. Its released under GNU license.
+##CONTENTS
+[Dependencies](#Dependencies)
+[Install & Configuration](#install)
+
+##<a name="Dependencies"></a>Dependencies##
 Jexm is very easy to set up. Note though that it is tested more thoroughly 
 with use of a virtual host. Although the aim is to have it run flawlessly "as-is" this might not be the case. All methods might not be available without setting up a virtual host.
 #####
 #####Jexm requires >= PHP 5.4 the rewrite_module enabled and [composer](https://getcomposer.org/)
 
 
-##Install & Configuration##
+##<a name="install"></a>Install & Configuration##
 After downloading you need to run composer install and configure Jexm slightly. 
 Save the database-example.php file in directory /jexm/config/ as database.php and set up your database credentials. 
 (Jexm currently supports a mysql and sqlite connection).
@@ -198,8 +203,8 @@ $result = DB::table('books')
 	  ->orderBy('books.id','DESC')
 	  ->get();
 ```
-```php
 ######Count
+```php
 To get a count simply execute your query with the getCount method instead of get()
 $result = DB::table('books')
 		  ->select('id','title','author')
