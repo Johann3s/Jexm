@@ -24,4 +24,5 @@
 	Routes::get('/test/add','test@add');	
 	Routes::get('/test/update','test@update');
 	Routes::get('/test/delete','test@delete');
+	Routes::get('/test/join','test@join');
 

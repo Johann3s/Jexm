@@ -15,6 +15,8 @@
 		
 		protected $paginate = 0;
 		
+		protected $joins = "";
+		
 		/**
 		* Holds type of query (update,insert etc..)
 		*/
@@ -82,6 +84,15 @@
 			return $this;
 		}
 		
+		
+		/**
+		* JOINS
+		*/
+		public function join($tablename,array $conditions){
+			$this->joins .= " JOIN ".$tablename." ON ".implode(" ",$conditions);
+			return $this;
+		}
+		
 		/* ---------- CRUD METHODS ------------ */
 		
 		
@@ -137,7 +148,8 @@
 		* Builds, executes and returns fetch query
 		*/
 		public function get(){
-			$query = "SELECT ".implode(",",$this->columns)." FROM ".$this->table.$this->conditions.$this->order;
+			$query = "SELECT ".implode(",",$this->columns)." FROM ".$this->table.$this->joins.$this->conditions.$this->order;
+			//var_dump($query
 			return $this->fetch($query,$this->params,$this->paginate);	
 		}
 		
@@ -147,7 +159,7 @@
 		* Builds, executes and returns a count of determined query
 		*/
 		public function getCount(){
-			$query = "SELECT ".implode(",",$this->columns)." FROM ".$this->table.$this->conditions.$this->order;
+			$query = "SELECT ".implode(",",$this->columns)." FROM ".$this->table.$this->joins.$this->conditions.$this->order;
 			$res = $this->fetch($query,$this->params);
 			return $this->rowCount;
 		}		

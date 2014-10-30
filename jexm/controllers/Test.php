@@ -65,4 +65,9 @@
 			$result = $model->addstuff();
 			var_dump($result);
 		}	
+		public function join(){
+			$model = new \jexm\models\testModel();
+			$result = $model->joinstuff();
+			var_dump($result);
+		}			
 	}

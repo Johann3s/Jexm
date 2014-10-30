@@ -47,4 +47,16 @@
 					  ->execute();
 			return $result;		
 		}	
+		
+		public function joinstuff(){
+				$result = DB::table('books')
+					  ->select('title','author','name','income')
+					  ->join('publishers',['publisher_id','=','publishers.id'])
+					  ->join('revenue',['book_id','=','books.id'])
+					  ->where('author','LIKE','Tolk%')
+					  ->orWhere('income','>','8000')
+					  ->orderBy('books.id','DESC')
+					  ->get();
+			return $result;	
+		}
 	}

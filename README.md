@@ -166,13 +166,6 @@ $result = DB::table('books')
 		  ->orderBy('id','ASC')
 		  ->get();
 ```	
-To get a count simply execute your query with the getCount method instead of get()
-```php
-$result = DB::table('books')
-		  ->select('id','title','author')
-		  ->where('id','=',9)
-		  ->getCount();
-```	
 To paginate your query call the paginate() method. It expects an positive integer and will default to 0 if none given. 
 Meaning pagination will never be invoked.  
 ```php
@@ -192,6 +185,27 @@ $links = $result['paginationLinks'];
 ```
 Pagination and its links are explained further a few sections down.
 
+######Joins
+To join tables call the join method. It takes 2 arguments, the table to join as a string
+and conditions as an array.
+```php
+$result = DB::table('books')
+	  ->select('title','author','name','income')
+	  ->join('publishers',['publisher_id','=','publishers.id'])
+	  ->join('revenue',['book_id','=','books.id'])
+	  ->where('author','LIKE','Tolk%')
+	  ->orWhere('income','>','8000')
+	  ->orderBy('books.id','DESC')
+	  ->get();
+```
+```php
+######Count
+To get a count simply execute your query with the getCount method instead of get()
+$result = DB::table('books')
+		  ->select('id','title','author')
+		  ->where('id','=',9)
+		  ->getCount();
+```	
 ######INSERT QUERIES
 Insert queries are straightforward. Define the table name
 and use the add() method. Simply declare which columname to give which value.
