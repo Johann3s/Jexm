@@ -2,9 +2,16 @@
 This framework was created as a graduating project for JensenEducation. 
 Jexm is light MVC framework written in PHP. Its released under GNU license.
 ##CONTENTS
-[Dependencies](#Dependencies)
-[Install & Configuration](#install)
-
+- [Dependencies](#Dependencies)
+- [Install & Configuration](#install)
+- [Getting started](#start)
+- [Controllers](#controller)
+- [Redirects](#redirects)
+- [User handling](#users)
+- [Models](#models)
+- [Query Builder](#qb)
+- [Raw Querying](#regquery)
+####
 ##<a name="Dependencies"></a>Dependencies##
 Jexm is very easy to set up. Note though that it is tested more thoroughly 
 with use of a virtual host. Although the aim is to have it run flawlessly "as-is" this might not be the case. All methods might not be available without setting up a virtual host.
@@ -18,7 +25,7 @@ Save the database-example.php file in directory /jexm/config/ as database.php an
 (Jexm currently supports a mysql and sqlite connection).
 #####
 In the same directory theres a config.php file which allows you to alter the timezone and define if in production mode or not.
-##Getting started - Routes##
+##<a name="start"></a>Getting started - Routes##
 Setting up routes is very simple in Jexm. All you have to do define the url you wish and point it to a controller and method. 
 Note there are two different request methods.
 
@@ -43,7 +50,7 @@ public function showParam($myvar){
 }
 ``` 
 
-##Controllers##
+##<a name="controller"></a>Controllers##
 When you create a controller you extend the Controller in the controllers directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
@@ -70,7 +77,7 @@ return View::send(["myVar" => $anydata])->render('foo.tpl');
 Note that using Twig alters the scope of the helper objects. 
 See more in section about View helpers.
 #####
-#####Redirects
+#####<a name="redirects"></a>Redirects
 Redirections is straightforward in Jexm. 
 You can redirect with a path /path/to/something or with a controller@method request.
 
@@ -98,7 +105,7 @@ $all = Globals::postAll(); //returns $_POST
 
 
 #####
-#####Handling users
+#####<a name="users"></a>Handling users
 If you use the jexm user model you may use the jexm Authenticate class.
 It comes with easy methods to handle users within the application.
 To use the User model you only need to enter the tablename the model is using.
@@ -135,11 +142,11 @@ Method returns userid if logged in and false if not.
 $id = Authenticate::check(); //$id == int||false 
 ```
 #####
-##Models
+##<a name="models"></a>Models
 When you create a Model you extend the Model in the models directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
-###Query the database with Jexms' querybuilder
+###<a name="qb"></a>Query the database with Jexms' querybuilder
 Jexm comes with a light and easy to use querybuilder.
 To use the querybuilder use the DB class which lets you build
 up your query. All values are parameterized.
@@ -251,7 +258,7 @@ $result = DB::table('books')
 ```
 Codeblock will return number of affected rows.
 
-#####When querybuilder comes in short
+#####<a name="regquery"></a>When querybuilder comes in short
 There will come times when you need to query database without the support of querybuilder.
 Jexm allows you to use the basemodels crudmethods.
 
