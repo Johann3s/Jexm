@@ -41,7 +41,9 @@
 			}
 			catch(PDOException $e) {
 				\Log::write($e->getMessage());
-				die("Couldnt connect to database. Please check logfile for further information.");
+				if(!PRODUCTION){
+					throw new \Exception($e->getMessage());
+				}
 			}
 			$this->paginator = \Di::get("\jexm\core\Paginator");
 			

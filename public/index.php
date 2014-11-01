@@ -39,9 +39,7 @@
 	* Include composers vendor autoload
 	*/
 	require_once(ROOT."vendor".DS."autoload.php");
-	
 	Twig_Autoloader::register();
-	
 
 	
 	/**
@@ -52,6 +50,16 @@
 	require_once(JEXM_PATH."routes.php");
 	
 	
+	/**
+	* Set errorhandling
+	*/
+	use Whoops\Handler\PrettyPageHandler;
+
+	$run     = new Whoops\Run;
+	$handler = new PrettyPageHandler;
+	$handler->setPageTitle("Looks like you ran into problems!");
+	$run->pushHandler($handler);
+	$run->register();	
 	
 	
 	/**
@@ -59,8 +67,6 @@
 	*/
 	session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
 	session_start();
-	
-	
 	
 	
 	/**

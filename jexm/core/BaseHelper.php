@@ -25,20 +25,9 @@
 		*/
 		public static function send404(){
 			header("HTTP/1.0 404 Not Found");
-			\View::send(["currentRequest" => \jexm\core\helpers\JexmURL::getCurrentURLString()])->render("404")->display();
+			\View::send(["currentRequest" => \URL::getCurrentURLString()])->render("404")->display();
 			exit();
 		}
 		
-		public static function warn($message){
-			if(!PRODUCTION){
-				trigger_error($message,E_USER_WARNING);
-			}
-		}
-		
-		public static function kill($message){
-			if(!PRODUCTION){
-				trigger_error($message,E_USER_ERROR);
-			}			
-		}
 
 	}
