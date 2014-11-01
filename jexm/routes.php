@@ -9,6 +9,7 @@
 	Routes::get('/params','test@doRockAndRoll');
 	Routes::get('/test','test2@index');
 	
+	
 	Routes::get('/pagination','test@helloWorld');
 	Routes::get('/user/auth','test@authUser');
 	Routes::get('/user/logout','test@logoutUser');
@@ -20,3 +21,4 @@
 	Routes::get('/test/delete','test@delete');
 	Routes::get('/test/join','test@join');
 
+	//Routes::get('/invalid','test2');

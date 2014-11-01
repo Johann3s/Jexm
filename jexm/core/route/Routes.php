@@ -55,6 +55,10 @@
 		* @param string $reqMethod REQUEST_METHOD (POST || GET) 
 		*/
 		private function set($url,$location,$reqMethod){
+			//validate routeformat
+			$valid = explode("@",$location);
+			if(count($valid) != 2){ throw new \Exception("Trying to save invalid route format"); }
+			
 			$this->allRoutes[] = \Route::set($url,$location,$reqMethod);
 		}
 		
@@ -84,10 +88,7 @@
 		*/
 		public function useRoute(){
 			$routeParts = explode("@", $this->matchingRoute->location);
-			
-			//If a method has been declared the array has more than 1 index. Otherwise set method to "".
-			$method = (count($routeParts) > 1) ? $routeParts[1] : "";
-			return ["controller" => ucfirst($routeParts[0]), "method" => $method];
+			return ["controller" => ucfirst($routeParts[0]), "method" => $routeParts[1]];
 		}
 		
 		

@@ -40,14 +40,6 @@
 	*/
 	require_once(ROOT."vendor".DS."autoload.php");
 	Twig_Autoloader::register();
-
-	
-	/**
-	* Include configs and userdefined routes
-	*/
-	require_once(ROOT."config".DS."config.php");
-	require_once(ROOT."config".DS."root.php");
-	require_once(JEXM_PATH."routes.php");
 	
 	
 	/**
@@ -61,6 +53,13 @@
 	$run->pushHandler($handler);
 	$run->register();	
 	
+	
+	/**
+	* Include configs and userdefined routes
+	*/
+	require_once(ROOT."config".DS."config.php");
+	require_once(ROOT."config".DS."root.php");
+	require_once(JEXM_PATH."routes.php");	
 	
 	/**
 	* Start session.
