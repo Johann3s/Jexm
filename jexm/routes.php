@@ -1,14 +1,8 @@
 <?php
-	//$route = \jexm\core\route\Routes::getInstance();
-	
 	/**
-	*
-	*
 	* Here you define your routes.
-	* You can define a route with just a controller or controller with a method.
-	*
-	*
 	*/
+	
 	Routes::get('/','Test@idx');
 	Routes::post('/', 'test@postData');
 	Routes::get('/params/<anything>','test@showParam');

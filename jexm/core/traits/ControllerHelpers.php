@@ -3,15 +3,17 @@
 	
 	trait ControllerHelpers{
 		
-		protected function setControllerHelpers(){
-			class_alias('\View','\jexm\controllers\View');
-			class_alias('\Authenticate','\jexm\controllers\Authenticate');
-			class_alias('\Hasher','\jexm\controllers\Hasher');
-			class_alias('\Redirect','\jexm\controllers\Redirect');
-			class_alias('\Sanitizer','\jexm\controllers\Sanitizer');
-			class_alias('\Globals','\jexm\controllers\Globals');
-			class_alias('\Link','\jexm\controllers\Link');
-			class_alias('\User','\jexm\controllers\User');
+		public function createAliases(){
+			class_alias('\jexm\core\facades\View','\jexm\controllers\View');
+			class_alias('\jexm\core\facades\Authenticate','\jexm\controllers\Authenticate');
+			class_alias('\jexm\core\facades\Hasher','\jexm\controllers\Hasher');
+			class_alias('\jexm\core\facades\Redirect','\jexm\controllers\Redirect');
+			class_alias('\jexm\core\facades\Sanitizer','\jexm\controllers\Sanitizer');
+			class_alias('\jexm\core\facades\Globals','\jexm\controllers\Globals');
+			class_alias('\jexm\core\facades\Link','\jexm\controllers\Link');
+			class_alias('\jexm\core\facades\User','\jexm\controllers\User');
+			class_alias('\jexm\core\facades\Session','\jexm\controllers\Session');
+			class_alias('\jexm\core\facades\URL','\jexm\controllers\URL');
 		}
 		
 	}

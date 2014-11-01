@@ -15,23 +15,13 @@
 		protected $currentRequest;
 		
 		
-		
 		/**
 		* Constructor creates aliases and calls method when done traversing classes
 		*/
 		public function __construct(){
-			$this->createAliases();
 			$this->currentRequest = \Routes::getCurrentRequest();		
 		}
 		
-		
-		/**
-		* Create aliases for namespaced classes allowing them to be included in extended classes without "use"
-		*/
-		protected function createAliases(){
-			\class_alias('jexm\core\helpers\JexmURL','jexm\controllers\URL');
-			\class_alias('jexm\core\helpers\JexmSession','jexm\controllers\Session');
-		}
 		
 		
 		/**
@@ -52,7 +42,7 @@
 		*/
 		public function invoke(){
 			if(\jexm\core\BaseHelper::getClassName($this) == ucfirst($this->currentRequest->getController())){
-				$this->setControllerHelpers();
+				$this->createAliases();
 				return $this->callMethod();
 			}
 		}

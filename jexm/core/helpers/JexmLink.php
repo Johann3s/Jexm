@@ -16,13 +16,21 @@
 		*/
 		private $routes;
 		
+		
+		/**
+		* @var object URL instance
+		*/
+		private $url;
+		
+		
 		/**
 		* Path created in links. Useful for some other classes
 		*/
 		private $path;
 		
-		public function __construct(\jexm\core\route\Routes $routes){
+		public function __construct(\jexm\core\route\Routes $routes, \jexm\core\helpers\JexmURL $url){
 			$this->routes = $routes;
+			$this->url = $url;
 		}
 		
 		/**
@@ -71,11 +79,14 @@
 		/**
 		* Creates and returns simple breadcrumbs. Adds a class if is currentURL
 		* Adding URL_ROOT to each component for proper anchoring.
+		*
+		* NOte to self: Inject (setter) the text with text to "Home"
 		*/
 		public function breadcrumbs(){
+			$currentRequest = $this->routes->getCurrentRequest();
 			$crumb = $this->create("","Hem");
-			$controller = strtolower(JexmSession::getControllerRequest());
-			$method = strtolower(JexmSession::getMethodRequest());
+			$controller = strtolower($currentRequest->getController());
+			$method = strtolower($currentRequest->getMethod());
 			$crumb .= (!empty($controller)) ? $this->isCurrentURL($controller, ucfirst($controller)) : "";
 			$crumb .= (!empty($method)) ? $this->isCurrentURL($controller."/".$method, ucfirst($method)) : "";
 			return $crumb;
@@ -89,7 +100,7 @@
 			//This is only a problem in indexpage. If controller is HOME constant it is displayed twice. If so return empty.
 			if(strtolower($linkpath) == strtolower(URL_ROOT . HOME)){return "";}
 
-			if(URL_ROOT.$linkpath == JexmURL::getCurrentURLWithoutQueryString()){
+			if(URL_ROOT.$linkpath == $this->url->getCurrentURLWithoutQueryString()){
 				return "<span class='".$this->cssClass."'>".$this->create($linkpath,$text)."</span>";
 			}
 			return $this->create($linkpath,$text);

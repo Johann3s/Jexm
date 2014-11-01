@@ -25,14 +25,23 @@
 		*/
 		private static $self;
 		
+		/**
+		* @var object URL instance
+		*/
+		private $url;
+		
+		private function __construct(\jexm\core\helpers\JexmURL $url){
+			$this->url = $url;
+		}
 
+		
 		/**
 		* Singleton class
 		* @return object Routes(self)
 		*/
-		public static function getInstance(){
+		public static function getInstance(\jexm\core\helpers\JexmURL $url){
 			if(!isset(self::$self)){
-				self::$self = new \jexm\core\route\Routes();
+				self::$self = new \jexm\core\route\Routes($url);
 			}
 			return self::$self;
 		}
@@ -87,7 +96,7 @@
 		* @return object
 		*/
 		public function getArgs(){
-			return $this->matchingRoute->getParam(URL::getLastPartOfUrl());
+			return $this->matchingRoute->getParam($this->url->getLastPartOfUrl());
 		}
 		
 		

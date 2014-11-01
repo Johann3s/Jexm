@@ -7,28 +7,7 @@
 	*/
 	class JexmSession{
 		
-		/**
-		* Getter method for Current URLRequest
-		*/
-		public static function getUrlRequest(){
-			return $_SESSION['CurrentRequest'];
-		}
-		
-		/**
-		* Getter method for controllerpart of URLRequest
-		*/
-		public static function getControllerRequest(){
-			$request = self::getUrlRequest();
-			return $request['controller'];
-		}
-		
-		/**
-		* Getter method for methodpart of URLRequest
-		*/
-		public static function getMethodRequest(){
-			$request = self::getUrlRequest();
-			return $request['method'];
-		}
+
 		
 		
 	}

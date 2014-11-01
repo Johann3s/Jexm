@@ -44,8 +44,9 @@
 				return new \jexm\core\route\CurrentRequest();
 			});	
 			
-			$container->register("Routes",function(){
-				return \jexm\core\route\Routes::getInstance();
+			$container->register("Routes",function() use ($container){
+				$url = $container->getFromContainer("URL");
+				return \jexm\core\route\Routes::getInstance($url);
 			});	
 			
 			$container->register("Route",function(){
@@ -54,7 +55,8 @@
 			
 			$container->register("RouteMatcher",function() use ($container){
 				$routes = $container->getFromContainer("Routes");
-				return new \jexm\core\route\RouteMatcher($routes);
+				$url = $container->getFromContainer("URL");
+				return new \jexm\core\route\RouteMatcher($routes,$url);
 			});		
 			
 			/**
@@ -79,13 +81,22 @@
 			});		
 			
 			$container->register("Globals",function(){
-				return new \jexm\core\helpers\JexmGlobals;
+				return new \jexm\core\helpers\JexmGlobals();
 			});		
 			
 			$container->register("Link",function() use ($container){
+				$url = $container->getFromContainer("URL");
 				$routes = $container->getFromContainer("Routes");
-				return new \jexm\core\helpers\JexmLink($routes);
+				return new \jexm\core\helpers\JexmLink($routes,$url);
 			});	
+			
+			$container->register("URL",function(){
+				return new \jexm\core\helpers\JexmURL();
+			});		
+			
+			$container->register("Session",function(){
+				return new \jexm\core\helpers\JexmSession();
+			});				
 				
 			/**
 			* ----> Models <-----

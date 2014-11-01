@@ -1,13 +1,24 @@
 <?php
 	namespace jexm\core\route;		
-	use \jexm\core\helpers\JexmURL as URL;
 	use \jexm\core\BaseHelper as BaseHelper;
 			
 	class RouteMatcher{	
 		
+		/**
+		* @var object URL instance
+		*/
+		private $url;
 		
-		public function __construct(\jexm\core\route\Routes $routesInstance){
+		
+		/**
+		* @var object Holds all defined routes
+		*/
+		private $allRoutes;
+		
+		
+		public function __construct(\jexm\core\route\Routes $routesInstance, \jexm\core\helpers\JexmURL $url){
 			$this->allRoutes = $routesInstance->getAllRoutes();
+			$this->url = $url;
 		}
 		
 		
@@ -23,11 +34,11 @@
 			foreach($this->allRoutes as $route){
 			
 				//Parts prevents buggy behavior if argument is requested (/params/name) and preceeded with another route (/params).
-				$firstPart = ($route->hasParam) ? URL::getEverythingButLastPartOfUrl() : "";
-				$lastPart = URL::getLastPartOfUrl();
+				$firstPart = ($route->hasParam) ? $this->url->getEverythingButLastPartOfUrl() : "";
+				$lastPart = $this->url->getLastPartOfUrl();
 				
 				//Runs if no argument has been declared
-				if($route->url == URL::stripURLRequest() && $route->requestMethod == $_SERVER['REQUEST_METHOD'] && !($route->hasParam)){
+				if($route->url == $this->url->stripURLRequest() && $route->requestMethod == $_SERVER['REQUEST_METHOD'] && !($route->hasParam)){
 					return $route;
 				}
 				//Runs if argument has been declared
