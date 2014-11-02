@@ -9,6 +9,7 @@ Jexm is a light MVC framework written in PHP. Its released under GNU license.
 - [Responses - Views](#viewresponse)
 - [Responses - Json](#jsonresponse)
 - [Redirects](#redirects)
+- [Session](#session)
 - [User handling](#users)
 - [Models](#models)
 - [Query Builder](#qb)
@@ -103,7 +104,24 @@ Prepend the to() method with the with() method. The params must be an associativ
 ```php
 Redirect::with(["id" => 1])->to('FooController@barMethod');
 ```
+#####
+#####<a name="session"></a>Session
+You have access to the session class from controllers and models.
+It comes with smooth handling while inserting,retrieving and removing data from 
+the superglobal.
+######
+Adding data is done by the add method. It takes one or more associative arrays as arguments.
+The key given here will be the key when retrieving or removing data later on.
+```php
+Session::add(['userid' => $id,'firstname' => 'foo']);
+```
 
+Retrieving and removing data is done by simply calling the get method with a key as an argument.
+```php
+$name = Session::get('firstname');
+Session::remove('firstname');
+```
+#####
 #####Collecting GET & POST
 Jexm comes with a smooth method for collecting data.
 Methods below return null or populated. A null value doesnt throw a warning, Jexm checks for population internally.
@@ -113,7 +131,6 @@ $all = Globals::getAll(); //returns $_GET
 $id = Globals::post('id'); //returns $_POST['id']
 $all = Globals::postAll(); //returns $_POST
 ```
-
 
 #####
 #####<a name="users"></a>Handling users
