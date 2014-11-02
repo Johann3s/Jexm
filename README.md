@@ -1,11 +1,13 @@
 #Jexm Framework#
 This framework was created as a graduating project for JensenEducation. 
-Jexm is light MVC framework written in PHP. Its released under GNU license.
+Jexm is a light MVC framework written in PHP. Its released under GNU license.
 ##CONTENTS
 - [Dependencies](#Dependencies)
 - [Install & Configuration](#install)
 - [Getting started](#start)
 - [Controllers](#controller)
+- [Responses - Views](#viewresponse)
+- [Responses - Json](#jsonresponse)
 - [Redirects](#redirects)
 - [User handling](#users)
 - [Models](#models)
@@ -21,7 +23,7 @@ with use of a virtual host. Although the aim is to have it run flawlessly "as-is
 
 
 ##<a name="install"></a>Install & Configuration##
-After downloading you need to run composer install and configure Jexm slightly. 
+After downloading you need to run [composer install](https://getcomposer.org/doc/03-cli.md#install) and configure Jexm slightly. 
 Save the database-example.php file in directory /jexm/config/ as database.php and set up your database credentials. 
 (Jexm currently supports a mysql and sqlite connection).
 #####
@@ -55,7 +57,7 @@ public function showParam($myvar){
 When you create a controller you extend the Controller in the controllers directory. (Dont forget the namespace)
 #####Note that there must be a a constructor calling parent::__construct() before anything else.
 #####
-#####Returning views
+#####<a name="viewresponse"></a>Returning views from controllers
 To pass data to the view you use the send method. 
 The data must be passed as an associative array ['myVar' => $anydata]. 
 The data is then retrieved from the defined template as $myVar.
@@ -77,6 +79,14 @@ return View::send(["myVar" => $anydata])->render('foo.tpl');
 ```
 Note that using Twig alters the scope of the helper objects. 
 See more in section about View helpers.
+#####
+#####<a name="jsonresponse"></a>Returning json from controllers
+To return JSON from the controllers use the JSON class. Invoke the respond method
+and pass your data. The data must be an associative array or an array of objects with properties.
+Like a database fetch. The clas will convert your data into json and send proper headers.
+```php
+return Json::respond(["name" => $anydata]);
+```
 #####
 #####<a name="redirects"></a>Redirects
 Redirections is straightforward in Jexm. 

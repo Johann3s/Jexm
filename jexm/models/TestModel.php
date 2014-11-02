@@ -14,9 +14,9 @@
 					  ->select()
 					  //->where('title','=',"Imma title")
 					  //->where('active','=',85)
-					  ->where('articleid','<',22)
+					  ->where('articleid','<',5)
 					  ->orderBy('articleid','ASC')
-					  ->paginate(5)
+					  //->paginate(5)
 					  ->get();
 			return $result;
 		}

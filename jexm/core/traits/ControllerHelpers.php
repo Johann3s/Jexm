@@ -14,6 +14,7 @@
 			class_alias('\jexm\core\facades\User','\jexm\controllers\User');
 			class_alias('\jexm\core\facades\Session','\jexm\controllers\Session');
 			class_alias('\jexm\core\facades\URL','\jexm\controllers\URL');
+			class_alias('\jexm\core\facades\JSON','\jexm\controllers\JSON');
 		}
 		
 	}

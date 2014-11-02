@@ -32,10 +32,14 @@
 			$container->register("View",function(){
 				return new \jexm\core\View(new \Twig_Loader_Filesystem(TEMPLATE_PATH));
 			});
+			
 			$container->register("Di",function(){
 				return new \jexm\core\di\JexmDi();
-			});			
-
+			});		
+			
+			$container->register("JSON",function(){
+				return new \jexm\core\JSON();
+			});
 			
 			/**
 			* ----> Routes <----

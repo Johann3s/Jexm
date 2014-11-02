@@ -8,7 +8,6 @@
 	
 	abstract class BaseModel{
 		
-		use \jexm\core\traits\ModelAlias;
 		/**
 		* @var object PDO object
 		*/

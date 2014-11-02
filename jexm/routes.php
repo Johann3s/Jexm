@@ -12,6 +12,7 @@
 	
 	Routes::get('/pagination','test@helloWorld');
 	Routes::get('/user/auth','test@authUser');
+	Routes::get('/user/check','test@checkUser');
 	Routes::get('/user/logout','test@logoutUser');
 	
 	Routes::get('/update','test@updateSomething');
@@ -20,5 +21,6 @@
 	Routes::get('/test/update','test@update');
 	Routes::get('/test/delete','test@delete');
 	Routes::get('/test/join','test@join');
-
+	
+	Routes::get('/json','test@json');
 	//Routes::get('/invalid','test2');

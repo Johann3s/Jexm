@@ -1,6 +1,6 @@
 <?php
 	namespace jexm\core\helpers;
-	
+	use \jexm\core\facades\Session as Session;
 	/**
 	* Class for authentication
 	*/
@@ -47,8 +47,7 @@
 		* @return userid
 		*/
 		private function doLoginUser($credentials){
-			$_SESSION['jexm_user']['id'] = $credentials[0]->id;
-			$_SESSION['jexm_user']['authenticated'] = true;
+			Session::add(['jexmUserId' => $credentials[0]->id,'authenticated' => true]);
 			return $credentials[0]->id;
 		}
 		
@@ -59,7 +58,15 @@
 		* @return boolean || int False if not logged in and userid if logged in.
 		*/
 		public function check(){
-			return (!isset($_SESSION['jexm_user']) || !$_SESSION['jexm_user']['authenticated']) ? false : $_SESSION['jexm_user']['id'];
+			$auth = Session::get('authenticated');
+			return ($auth == true) ? Session::get('jexmUserId') : false;
+		}
+		
+		/**
+		* Logs out user
+		*/
+		public function logout(){
+			Session::kill();
 		}
 		
 		

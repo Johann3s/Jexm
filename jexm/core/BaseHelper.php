@@ -1,5 +1,7 @@
 <?php
 	namespace jexm\core;
+	use \jexm\core\facades\View as View;
+	use \jexm\core\facades\URL as URL;
 	/**
 	* Helper methods for classes
 	*/
@@ -25,7 +27,7 @@
 		*/
 		public static function send404(){
 			header("HTTP/1.0 404 Not Found");
-			\View::send(["currentRequest" => \URL::getCurrentURLString()])->render("404")->display();
+			View::send(["currentRequest" => URL::getCurrentURLString()])->render("404")->display();
 			exit();
 		}
 		

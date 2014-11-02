@@ -36,16 +36,23 @@
 			$loginId = Authenticate::login(["email" => "tester@fakemail.com","password" => "passwordz"]);
 			//$id = Authenticate::check();
 			var_dump($loginId);
+			var_dump($_SESSION);
 		}
-		
+		public function checkUser(){
+			$id = Authenticate::check();
+			var_dump($id);
+			var_dump($_SESSION);
+		}
 		public function logoutUser(){
-			unset($_SESSION['jexm_user']);
+			Authenticate::logout();
+			var_dump($_SESSION);
 		}
 		
 		public function modelTest(){
 			$model = new \jexm\models\testModel();
 			$result = $model->getstuff();
-			$links = $result['paginationLinks'];
+			//$links = $result['paginationLinks'];
+			var_dump($result);die();
 			return View::send(["links" => $links])->send(["response" => $result])->render("qbtest");
 			//var_dump($result);
 		}
@@ -70,4 +77,16 @@
 			$result = $model->joinstuff();
 			var_dump($result);
 		}			
+		
+		
+		public function json(){
+			if(Globals::get('test') == 'test'){
+				$model = new \jexm\models\testModel();
+				$result = $model->getstuff();	
+				//$result = ["tester" => "somename"];
+				
+				return JSON::respond($result);
+			}
+			return View::render('jsontest');
+		}
 	}
