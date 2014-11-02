@@ -2,6 +2,8 @@
 	namespace jexm\core;
 	use PDO;
 	use PDOException;
+	use \jexm\core\facades\Di;
+	use \jexm\core\facades\Log;
 	
 	
 	abstract class BaseModel{
@@ -40,12 +42,12 @@
 				if(!PRODUCTION){$this->db->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);}
 			}
 			catch(PDOException $e) {
-				\Log::write($e->getMessage());
+				Log::write($e->getMessage());
 				if(!PRODUCTION){
 					throw new \Exception($e->getMessage());
 				}
 			}
-			$this->paginator = \Di::get("\jexm\core\Paginator");
+			$this->paginator = Di::get("\jexm\core\Paginator");
 			
 		}
 		

@@ -1,5 +1,6 @@
 <?php 
 	namespace jexm\core;
+	use \jexm\core\facades\FolderCrawler as FolderCrawler;
 	
 	/**
 	* Dispatcher class uses the routes and returns controller object.
@@ -36,7 +37,7 @@
 		* @return object
 		*/
 		public function getController(){
-			$validFiles = \FolderCrawler::returnDirectory($this->controllerDir);
+			$validFiles = FolderCrawler::returnDirectory($this->controllerDir);
 			$controllerFile = ucfirst($this->route->getController()).".php";
 			
 			if(!in_array($controllerFile,$validFiles)){

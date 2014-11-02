@@ -30,7 +30,8 @@
 	require_once(JEXM_PATH.DS."core".DS."Autoloader.php");
 	new jexm\core\Autoloader();	
 	$container = \jexm\core\di\JexmContainer::getInstance(new \jexm\core\di\JexmDi());
-	(new \jexm\core\facades\alias\Aliases())->init();
+	(new \jexm\core\facades\alias\Aliases())->setGlobal();
+	class_alias('jexm\core\facades\Routes','Routes');
 	
 	
 	

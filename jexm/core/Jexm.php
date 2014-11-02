@@ -1,6 +1,7 @@
 <?php
 	namespace jexm\core;
 	use \jexm\core\tables\CreateTables as Tables;
+	use \jexm\core\facades\Dispatcher as Dispatcher;
 	/**
 	* This is the Jexm obj.
 	*
@@ -30,7 +31,7 @@
 			$tables = (new Tables())->createUserTable();
 			//$tables->createUserTable();
 			//$this->dispatcher = new Dispatcher();
-			$this->controller = \Dispatcher::getController();
+			$this->controller = Dispatcher::getController();
 			$this->view = $this->controller->invoke();
 			$this->renderResponse();
 		}

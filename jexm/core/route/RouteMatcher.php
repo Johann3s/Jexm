@@ -63,7 +63,7 @@
 				}
 			} 
 			if(!$isMailLink){
-				BaseHelper::kill("Unable to resolve matching route from link. Please check that route exists.");
+				throw new \Exception("Unable to resolve matching route from link. Please check that route exists.");
 			}
 			return $linkpath;		
 		}

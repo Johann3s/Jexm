@@ -1,7 +1,9 @@
 <?php
 	namespace jexm\core\route;
 	use \jexm\core\BaseHelper as BaseHelper;
-	use \jexm\core\helpers\JexmURL as URL;
+	use \jexm\core\facades\Route as Route;
+	use \jexm\core\facades\RouteMatcher as RouteMatcher;
+	use \jexm\core\facades\CurrentRequest as CurrentRequest;
 	
 	class Routes{
 		
@@ -59,7 +61,7 @@
 			$valid = explode("@",$location);
 			if(count($valid) != 2){ throw new \Exception("Trying to save invalid route format"); }
 			
-			$this->allRoutes[] = \Route::set($url,$location,$reqMethod);
+			$this->allRoutes[] = Route::set($url,$location,$reqMethod);
 		}
 		
 		public function post($url,$location){
@@ -76,7 +78,7 @@
 		
 		
 		public function routeMatches(){
-			 $matchingRoute = \RouteMatcher::matchRouteAndUrl();
+			 $matchingRoute = RouteMatcher::matchRouteAndUrl();
 			 $this->matchingRoute = (is_object($matchingRoute)) ? $matchingRoute : null;
 			 return (is_object($matchingRoute)) ? true : false;
 		}
@@ -108,7 +110,7 @@
 		* @return void
 		*/
 		public function setCurrentRequest(array $parsedRequest){
-			$this->currentRequest = \CurrentRequest::set($parsedRequest); 
+			$this->currentRequest = CurrentRequest::set($parsedRequest); 
 		}
 		
 		
@@ -126,7 +128,7 @@
 		* @param string $link Coming from JexmLink::create()
 		*/
 		public function matchLinkAndRoute($linkpath){
-			return \RouteMatcher::matchRouteAndLink($linkpath);
+			return RouteMatcher::matchRouteAndLink($linkpath);
 			
 		}
 		

@@ -1,7 +1,8 @@
 <?php
 	namespace jexm\core;
 	
-	use \jexm\core\helpers\JexmURL as URL;
+	use \jexm\core\facades\URL as URL;
+	use \jexm\core\facades\Link as Link;
 	
 	class Paginator{
 		
@@ -66,17 +67,17 @@
 				return;
 			}
 			if($this->previousPage() > 0){
-				$links .= \Link::paginate($url,"<<", ["page" => $this->previousPage()]);
+				$links .= Link::paginate($url,"<<", ["page" => $this->previousPage()]);
 			}
 			for($i = 1; $i<$this->totalPages() + 1;$i++){
 				if($i == $this->currentPage){ //Är det aktuell sida. Visa ingen länk.
 					$links .= "<b class='current'>" . $i . "</b>";
 				}else{
-					$links .= \Link::paginate($url,$i,["page" => $i]);
+					$links .= Link::paginate($url,$i,["page" => $i]);
 				}
 			}
 			if($this->nextPage() <= $this->totalPages()){
-				$links .= \Link::paginate($url,">>",["page" => $this->nextPage()]);;
+				$links .= Link::paginate($url,">>",["page" => $this->nextPage()]);;
 			}
 			$links .= "</p>";
 			return $links;
