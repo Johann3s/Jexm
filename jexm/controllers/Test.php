@@ -8,7 +8,7 @@
 		}
 		
 		public function testCustom(){
-			MyClass::printSomething("TESTTEST");
+			MySuperClass::printSomething("TESTTEST");
 		}
 		public function idx(){
 			return View::send(["first"=>"moahahah","second"=>"hehehe"])->send(["third"=>"hiihii"])->render("test");

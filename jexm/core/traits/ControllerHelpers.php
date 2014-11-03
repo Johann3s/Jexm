@@ -19,18 +19,9 @@
 		}
 		
 		public function createAliasFromCustomClasses(){
-			$facades = array();
-			foreach(glob(JEXM_PATH ."core" .DS. "facades".DS."*") as $facade){
-				if(is_dir($facade) || basename($facade,".php") == "Facades"){
-					continue;
-				}
-				$facades[] = basename($facade,".php");
-			}
-			foreach(glob(JEXM_PATH ."classes".DS. "*.php") as $custom){
-				$stripped = basename($custom,".php");
-				if(in_array($stripped,$facades)){
-					\class_alias('jexm\core\facades\\'.$stripped,'\jexm\controllers\\'.$stripped);
-				}
+			foreach(glob(JEXM_PATH ."core" .DS. "facades".DS."custom".DS."*.php") as $facade){
+				$stripped = basename($facade,".php");
+				\class_alias('jexm\core\facades\custom\\'.$stripped,'\jexm\controllers\\'.$stripped);
 			}
 		}
 	}

@@ -371,27 +371,30 @@ the constructor.
 ######Facades
 Jexm allows you to use facades. This is a two step process.
 First you will have to add your class to the dependancy register. This is done in jexm/core/di/ContainerRegistry.php.
+In the container you may call another objects from the container, singletons aswell. Thus removing the need
+to keep track of changes in dependencies and calling them when invoking a class. 
 The syntax is as below:
 ```php
-$container->register("MyClass",function() use ($container) {
+$container->register("MySuperClass",function() use ($container) {
 	$foo = $container->get("Foo");
 	return new \jexm\classes\MyCustomClass($foo);
 });
 ```
 You create an alias and a closure to invoked when that alias is called upon. Meaning the function
 triggers and returns your class. Note that the alias differs from the actual class and can be anything (not already in the register).
-However if your alias is the same as your class Jexm will automatically alias it for you.
 
 Step 2 is to create a facadeclass for your alias in the container. This is done by extending the facade class in 
-jexm/core/facades/ . This class only purpose is to return the alias you created in the registry. 
+jexm/core/facades/ . Your facade however should recide in the custom directory with namsepace accordingly. This allows Jexm to autoalias your facade
+for access in controllers and models. 
+This class only purpose is to return the alias you created in the registry. 
 The classname you give your facade will be the one you call on later on. This means you appear to
 invoke the class and method statically but you are actually not.
 ```php
-namespace jexm\core\facades;
-class MyClass extends Facades{
+namespace jexm\core\facades\custom;
+class MySuperClass extends \jexm\core\facades\Facades{
 	
 	public static function resolveClass(){
-		return "MyClass";
+		return "MySuperClass";
 	}
 	
 }
@@ -399,9 +402,7 @@ class MyClass extends Facades{
 Doing the steps above means you can now call your class MyCustomClass through the facade
 and getting the dependency injected as defined in the containerregistry.
 Note that you are actually calling the facade from now on thus it will be namespaced accordingly.
-However Jexm will alias the classes in the jexm/classes directory for you to access in controllers and models
-if the alias match the filename in that directory.
+However Jexm will alias the classes in the jexm/core/facades/custom directory for you to access in controllers and models.
 ```php
-$someValue = MyClass::getSomethingCool($argument); //with the same alias as file
-$someValue = \jexm\core\facades\MySuperClass::getSomethingCool($argument); //with different alias
+$someValue = MySuperClass::getSomethingCool($argument);
 ```
