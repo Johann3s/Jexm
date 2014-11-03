@@ -325,3 +325,82 @@ When updating Jexm returns the number of affected rows. I.e if nothing was updat
 ```php
 $rowcount = $this->update("UPDATE sometable SET somecolumn = 'somevalue' WHERE id = ?",[7]);
 ```
+#####Inserting data
+When inserting data Jexm will return the created id if successful. Affected rows
+if not successful (meaning 0).
+```php
+$id = $this->insert("INSERT INTO sometable (somecolumn) VALUES (?)",[$foo]);
+```
+#####Deleting data
+When deleting data Jexm will return the rowcount of rows affected by query.
+```php
+$rowcount = $this->delete("DELETE FROM sometable WHERE id = ?",[11]);
+```
+#####
+##<a name="custom"></a>Custom classes
+Jexm allows you to use your own classes. Put them in the classes directory (jexm\classes)
+with the namespace jexm\\classes.
+When it comes to actually use and instantiate yout classes jexm comes with a few different choices:
+######Normal instantation
+Jexm autoloads classes through the namespace. Thus if you want to instantiate a custom class
+you must prepend the class with the namespace or alias the namespace through use or class_alias().
+```php
+$myInstance = new \jexm\classes\MyClass();
+```
+#####
+######DI Instantiation
+If your class has dependencies in form of another class you might want to use Jexms dependancy injector.
+Its built upon Reflection and loads the dependencies recursively. Meaning if the class your class is loading has its own
+dependencies, they will be loaded aswell.
+Note that this will only work if dependencies are properly typehinted, are instantiable and NOT singletons.
+When instantiated this way class needs full namespace and you do NOT have to inject the dependencies manually.
+Consider the example below:
+```php
+namespace jexm\classes;
+class MyClass{
+	public function __construct(\jexm\classes\FooBar $foo){
+		$this->foo = $foo;
+	}
+}
+$myInstance = DI::get(\jexm\classes\MyClass);
+```
+$myInstance is now an instance with dependency injected without having to pass the class as an argument to
+the constructor.
+#####
+######Facades
+Jexm allows you to use facades. This is a two step process.
+First you will have to add your class to the dependancy register. This is done in jexm/core/di/ContainerRegistry.php.
+The syntax is as below:
+```php
+$container->register("MyClass",function() use ($container) {
+	$foo = $container->get("Foo");
+	return new \jexm\classes\MyCustomClass($foo);
+});
+```
+You create an alias and a closure to invoked when that alias is called upon. Meaning the function
+triggers and returns your class. Note that the alias differs from the actual class and can be anything (not already in the register).
+However if your alias is the same as your class Jexm will automatically alias it for you.
+
+Step 2 is to create a facadeclass for your alias in the container. This is done by extending the facade class in 
+jexm/core/facades/ . This class only purpose is to return the alias you created in the registry. 
+The classname you give your facade will be the one you call on later on. This means you appear to
+invoke the class and method statically but you are actually not.
+```php
+namespace jexm\core\facades;
+class MyClass extends Facades{
+	
+	public static function resolveClass(){
+		return "MyClass";
+	}
+	
+}
+```
+Doing the steps above means you can now call your class MyCustomClass through the facade
+and getting the dependency injected as defined in the containerregistry.
+Note that you are actually calling the facade from now on thus it will be namespaced accordingly.
+However Jexm will alias the classes in the jexm/classes directory for you to access in controllers and models
+if the alias match the filename in that directory.
+```php
+$someValue = MyClass::getSomethingCool($argument); //with the same alias as file
+$someValue = \jexm\core\facades\MySuperClass::getSomethingCool($argument); //with different alias
+```

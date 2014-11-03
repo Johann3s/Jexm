@@ -7,6 +7,9 @@
 			parent::__construct();
 		}
 		
+		public function testCustom(){
+			MyClass::printSomething("TESTTEST");
+		}
 		public function idx(){
 			return View::send(["first"=>"moahahah","second"=>"hehehe"])->send(["third"=>"hiihii"])->render("test");
 		}

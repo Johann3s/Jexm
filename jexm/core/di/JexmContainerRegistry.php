@@ -111,6 +111,9 @@
 			
 			$container->register("DB",function(){
 				return new \jexm\core\db\DatabaseQuery();
-			});					
+			});			
+			$container->register("MyClass",function(){
+				return new \jexm\classes\MyClass();
+			});				
 		}
 	}

@@ -23,4 +23,5 @@
 	Routes::get('/test/join','test@join');
 	
 	Routes::get('/json','test@json');
+	Routes::get('/custom','test@testCustom');
 	//Routes::get('/invalid','test2');
