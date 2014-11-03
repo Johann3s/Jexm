@@ -14,6 +14,7 @@ Jexm is a light MVC framework written in PHP. Its released under GNU license.
 - [Models](#models)
 - [Query Builder](#qb)
 - [Raw Querying](#regquery)
+- [Custom Classes](#custom)
 
 
 ##<a name="Dependencies"></a>Dependencies
