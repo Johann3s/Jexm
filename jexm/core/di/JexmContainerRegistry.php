@@ -112,7 +112,7 @@
 			$container->register("DB",function(){
 				return new \jexm\core\db\DatabaseQuery();
 			});			
-			$container->register("MyClass",function(){
+			$container->register("MySuperClass",function(){
 				return new \jexm\classes\MyClass();
 			});				
 		}
