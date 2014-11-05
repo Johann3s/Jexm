@@ -100,4 +100,9 @@
 			}
 			return View::render('jsontest');
 		}
+		public function diTest(){
+			$x = DI::get("\jexm\core\helpers\JexmPathResolver");
+			$link = $x->create("test@diTest");
+			var_dump($link);
+		}
 	}

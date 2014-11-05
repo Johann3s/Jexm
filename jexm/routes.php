@@ -26,4 +26,6 @@
 	Routes::get('/custom','test@testCustom');
 	Routes::get('/test/clean','test@cleanStuff');
 	Routes::post('/test/clean','test@cleanStuff');
+	
+	Routes::get('/test/di','test@diTest');
 	//Routes::get('/invalid','test2');

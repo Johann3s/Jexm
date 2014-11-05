@@ -15,6 +15,8 @@
 			class_alias('\jexm\core\facades\Session','\jexm\controllers\Session');
 			class_alias('\jexm\core\facades\URL','\jexm\controllers\URL');
 			class_alias('\jexm\core\facades\JSON','\jexm\controllers\JSON');
+			class_alias('\jexm\core\facades\DI','\jexm\controllers\DI');
+			class_alias('\jexm\core\facades\Path','\jexm\controllers\Path');
 			$this->createAliasFromCustomClasses();
 		}
 		

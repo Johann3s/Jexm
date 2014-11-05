@@ -32,7 +32,7 @@
 		*/
 		private $url;
 		
-		private function __construct(\jexm\core\helpers\JexmURL $url){
+		public function __construct(\jexm\core\helpers\JexmURL $url){
 			$this->url = $url;
 		}
 
