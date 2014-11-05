@@ -21,6 +21,8 @@
 		* Creates a path from controller@method
 		*/
 		public function create($path){
+			$check = explode("@",$path);
+			if(count($check) != 2){throw new \Exception('Faulty formatted path. Correct format is Controller@method');}
 			$garbage = $this->link->create($path,"");
 			return $this->link->getPath();
 		}
@@ -31,7 +33,7 @@
 		*/
 		public function asset($path){
 			if(file_exists(PUBLIC_PATH.$path)){
-				return URL_ROOT.$path;
+				return (URL_ROOT == "/") ? URL_ROOT.$path : URL_ROOT."/".$path;
 			}
 			throw new \Exception("Unable to locate requested file ".PUBLIC_PATH.$path);
 		}

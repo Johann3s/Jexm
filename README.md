@@ -426,3 +426,35 @@ It is also UTF-8 supportive using the multibyte functions when necessary.
 Jexm supports a convenient way to create link and paths similar to the way you set up routes.
 The Link class creates and returns an entire element with an anchor while the Path class simply 
 returns a path.
+######Links
+A link can be crafted with ease in a number of ways with Jexm. The Link class
+allows you to compose a href with controller@method or a plain path starting from root.
+You may send variables aswell thus making a link with getparams.
+The Link::create() method takes up to three arguments. The path, the text to display and optional params array.
+```php
+echo Link::create('TestController@someMethod',"my linktext");
+echo Link::create('/test/method/links',"my linktext");
+echo Link::create('TestController@someMethod',"my linktext",['testval' => 'someval']);
+```
+Note that when appending a getstring the array must be associative.
+These method all return an a element.
+######Paths
+In any application you would want to resolve paths without wrapping them in anchor tags. Luckily Jexm
+comes equipped with the Path class. It is able to resolve paths with the routing methodology.
+It also comes in handy when importing assets to your views. 
+Consider the example below:
+```php
+<form action="<?php echo Path::Create('test@postStuff'); ?>" method="post">
+```
+This would resolve in a path set up in your routes leading to this controller and method. 
+The create() method only accepts controller@method paths and will throw an exception if any other
+format is attempted.
+#####
+When importing assets you may use the asset() method. It will begin searching for your file in the public directory 
+and takes a path starting from there as an argument.
+```php
+<link rel="stylesheet" type="text/css" href="<?php echo Path::asset('css/style.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo Path::asset('js/demos/demo.js'); ?>">
+<img src="<?php echo Path::asset('images/testimg.jpg'); ?>" alt="test">
+```
+If the requested file is not found Jexm will throw an exception.

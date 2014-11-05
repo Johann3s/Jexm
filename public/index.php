@@ -51,7 +51,7 @@
 
 	$run     = new Whoops\Run;
 	$handler = new PrettyPageHandler;
-	$handler->setPageTitle("Looks like you ran into problems!");
+	$handler->setPageTitle("You Baad!!");
 	$run->pushHandler($handler);
 	$run->register();	
 	
