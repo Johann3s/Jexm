@@ -84,6 +84,11 @@
 				return new \jexm\core\helpers\JexmRedirect($link);
 			});		
 			
+			$container->register("Path",function() use ($container){
+				$link = $container->getFromContainer("Link");
+				return new \jexm\core\helpers\JexmPathResolver($link);
+			});				
+			
 			$container->register("Globals",function(){
 				return new \jexm\core\helpers\JexmGlobals();
 			});		

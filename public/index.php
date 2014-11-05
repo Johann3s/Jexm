@@ -19,6 +19,7 @@
 	define('ROOT',dirname(__DIR__) . DS);
 	define('JEXM_PATH',ROOT."jexm".DS);
 	define('TEMPLATE_PATH',JEXM_PATH."views".DS);
+	define('PUBLIC_PATH',ROOT."public".DS);
 	define('LOG_PATH',ROOT."logs".DS);
 	
 	//error_reporting(E_ALL);
@@ -31,7 +32,7 @@
 	new jexm\core\Autoloader();	
 	$container = \jexm\core\di\JexmContainer::getInstance(new \jexm\core\di\JexmDi());
 	(new \jexm\core\facades\alias\Aliases())->setGlobal();
-	class_alias('jexm\core\facades\Routes','Routes');
+	
 	
 	
 	

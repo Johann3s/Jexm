@@ -3,25 +3,17 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Jexm || Paginationtest</title>
-		<style>
-			a{
-				display:inline-block;
-				margin-right:10px;
-			}
-			.crumbs-current-url a{
-				text-decoration:none;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="<?php echo Path::asset('css/style.css'); ?>">
 	</head>
 	<body>
 		<h1>Post data</h1>
 		<div>
-			<form action="/" method="post">
+			<form action="<?php echo Path::Create('test@cleanStuff'); ?>" method="post">
 				<input type="hidden" value="tjoho" name="val" />
 				<input type="submit" value="send" />
 			</form>
 			<p><?php if(isset($links)){ echo $links; }?></p>
-			<p>Imma a link <?php echo Link::create('test@doRockAndRoll',"cool link with controllerz"); ?></p>
+			<p>Imma a linkb <?php echo Link::create('test@doRockAndRoll',"cool link with controllerz"); ?></p>
 			<p>Im also a link <?php echo Link::create('/test',"regular link"); ?></p>
 			<h2><?php echo $first; ?></h2>
 			<h2><?php echo $second; ?></h2>

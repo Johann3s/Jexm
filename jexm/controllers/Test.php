@@ -82,6 +82,8 @@
 		}			
 		
 		public function cleanStuff(){
+			$val = Globals::post('val');
+			var_dump($val);
 			$model = new \jexm\models\testModel();
 			$result = $model->getstuff();
 			//var_dump($result);

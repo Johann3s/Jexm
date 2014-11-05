@@ -16,6 +16,7 @@ Jexm is a light MVC framework written in PHP. Its released under GNU license.
 - [Raw Querying](#regquery)
 - [Custom Classes](#custom)
 - [Sanitizing & Filtering data](#sanitize)
+- [Links and Paths](#links)
 
 
 ##<a name="Dependencies"></a>Dependencies
@@ -420,3 +421,8 @@ $filtered = Sanitize::filter($varToClean,['tags','trim']);
 The Sanitizer will execute all methods defined in the array and return your data as it were. 
 Meaning it will not break any properties or keyvalues. 
 It is also UTF-8 supportive using the multibyte functions when necessary.
+#####
+##<a name="links"></a>Links and paths
+Jexm supports a convenient way to create link and paths similar to the way you set up routes.
+The Link class creates and returns an entire element with an anchor while the Path class simply 
+returns a path.

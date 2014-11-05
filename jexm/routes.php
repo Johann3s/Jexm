@@ -25,4 +25,5 @@
 	Routes::get('/json','test@json');
 	Routes::get('/custom','test@testCustom');
 	Routes::get('/test/clean','test@cleanStuff');
+	Routes::post('/test/clean','test@cleanStuff');
 	//Routes::get('/invalid','test2');
