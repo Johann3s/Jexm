@@ -444,7 +444,7 @@ comes equipped with the Path class. It is able to resolve paths with the routing
 It also comes in handy when importing assets to your views. 
 Consider the example below:
 ```php
-<form action="<?php echo Path::Create('test@postStuff'); ?>" method="post">
+<form action="<?php echo Path::create('test@postStuff'); ?>" method="post">
 ```
 This would resolve in a path set up in your routes leading to this controller and method. 
 The create() method only accepts controller@method paths and will throw an exception if any other
