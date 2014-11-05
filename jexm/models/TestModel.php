@@ -10,12 +10,12 @@
 		}
 		
 		public function getstuff(){//
-			$result = DB::table($this->table)
+			$result = DB::table('books')
 					  ->select()
 					  //->where('title','=',"Imma title")
 					  //->where('active','=',85)
-					  ->where('articleid','<',5)
-					  ->orderBy('articleid','ASC')
+					  ->where('id','<',99)
+					  ->orderBy('id','ASC')
 					  //->paginate(5)
 					  ->get();
 			return $result;
@@ -40,10 +40,10 @@
 		}		
 		
 		public function addstuff(){
-			$result = DB::table($this->table)
-					  ->add('text',"Jag är lite brödtext")
-					  ->add('title',"Imma title 2")
-					  ->add('active',89)
+			$result = DB::table('books')
+					  ->add('author',"Joh Testsson")
+					  ->add('title',"Super title 2, the sequal")
+					  ->add('publisher_id',7)
 					  ->execute();
 			return $result;		
 		}	

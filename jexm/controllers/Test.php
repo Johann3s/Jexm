@@ -81,7 +81,13 @@
 			var_dump($result);
 		}			
 		
-		
+		public function cleanStuff(){
+			$model = new \jexm\models\testModel();
+			$result = $model->getstuff();
+			//var_dump($result);
+			$res = Sanitizer::filter($result,['test']);
+			var_dump($res);die();
+		}
 		public function json(){
 			if(Globals::get('test') == 'test'){
 				$model = new \jexm\models\testModel();
