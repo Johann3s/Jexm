@@ -22,22 +22,9 @@
 		protected static function identifyClass($method,$args){
 			$container = \jexm\core\di\JexmContainer::getInstance(new \jexm\core\di\JexmDi());
 			$className = static::resolveClass();
-			//var_dump($container);
-			$instance = $container->getFromContainer($className);///->{$method}($args);
+			$instance = $container->getFromContainer($className);
 			
-			switch(count($args)){
-			
-				case 0 :
-					return $instance->{$method}();
-				case 1 : 
-					return $instance->{$method}($args[0]);
-				case 2 :
-					return $instance->{$method}($args[0],$args[1]);
-				case 3:
-					return $instance->{$method}($args[0],$args[1],$args[2]);
-					
-			}
-
+			return (count($args) > 0) ? call_user_func_array(array($instance, $method), $args) : $instance->{$method}();
 		}
 		
 	}

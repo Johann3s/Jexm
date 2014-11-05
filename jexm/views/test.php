@@ -8,7 +8,7 @@
 	<body>
 		<h1>Post data</h1>
 		<div>
-			<form action="<?php echo Path::Create('test@cleanStuff'); ?>" method="post">
+			<form action="<?php echo Path::create('test@cleanStuff'); ?>" method="post">
 				<input type="hidden" value="tjoho" name="val" />
 				<input type="submit" value="send" />
 			</form>
