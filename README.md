@@ -15,7 +15,7 @@ Jexm is a light MVC framework written in PHP. Its released under GNU license.
 - [Query Builder](#qb)
 - [Raw Querying](#regquery)
 - [Custom Classes](#custom)
-- [Sanitizing data](#sanitize)
+- [Sanitizing & Filtering data](#sanitize)
 
 
 ##<a name="Dependencies"></a>Dependencies
@@ -364,7 +364,7 @@ class MyClass{
 		$this->foo = $foo;
 	}
 }
-$myInstance = DI::get(\jexm\classes\MyClass);
+$myInstance = DI::get('\jexm\classes\MyClass');
 ```
 $myInstance is now an instance with dependency injected without having to pass the class as an argument to
 the constructor.
@@ -405,8 +405,18 @@ and getting the dependency injected as defined in the containerregistry.
 Note that you are actually calling the facade from now on thus it will be namespaced accordingly.
 However Jexm will alias the classes in the jexm/core/facades/custom directory for you to access in controllers and models.
 ```php
-$someValue = MyClass::getSomethingCool($argument); //with the same alias as file
-$someValue = \jexm\core\facades\MySuperClass::getSomethingCool($argument); //with different alias
-```
 $someValue = MySuperClass::getSomethingCool($argument);
 ```
+#####
+##<a name="sanitize"></a>Sanitize & filter data
+To clean and filter your data you may utilize Jexms' Sanitizer class. It can take 1-dimensional arrays and plain strings.
+However the class is able to clean an array containing objects, 
+such as a db-fetch, as long as it is NOT nested deeper than one dimension, which can come in handy.
+Sanitizer takes two arguments, the variable being filtered and an array of methods to invoke on that variable.
+The supported methods are tags,trim,upperFirst and lower. 
+```php
+$filtered = Sanitize::filter($varToClean,['tags','trim']);
+```
+The Sanitizer will execute all methods defined in the array and return your data as it were. 
+Meaning it will not break any properties or keyvalues. 
+It is also UTF-8 supportive using the multibyte functions when necessary.

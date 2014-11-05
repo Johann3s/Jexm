@@ -85,7 +85,7 @@
 			$model = new \jexm\models\testModel();
 			$result = $model->getstuff();
 			//var_dump($result);
-			$res = Sanitizer::filter($result,['test']);
+			$res = Sanitizer::filter($result,['lower','upperFirst']);
 			var_dump($res);die();
 		}
 		public function json(){

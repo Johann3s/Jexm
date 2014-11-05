@@ -26,33 +26,45 @@
 		
 		//Strips HTML tags
 		private function tags($var){
+			if($this->containsObjects($var)){
+				return $this->loopThrough($var,'tags');
+			}		
 			return (is_array($var)) ? array_map('strip_tags',$var) : strip_tags($var);
 		}
 		
 		
 		//Trims text
 		private function trim($var){
+			if($this->containsObjects($var)){
+				return $this->loopThrough($var,'trim');
+			}		
 			return (is_array($var)) ? array_map('trim',$var) : trim($var);	
 		}
 		
 		
 		//Uppercases first word (calls makeUpperFirst method)
 		private function upperFirst($var){
+			if($this->containsObjects($var)){
+				return $this->loopThrough($var,'upperFirst');
+			}		
 			return (is_array($var)) ? array_map([$this,'makeUpperFirst'],$var) : $this->makeUpperFirst($var);
 		}
 		
-		private function test($var){
-			if($this->containsObjects($var)){
-				return $this->loopThrough($var,'test');
-			}
-			return (is_array($var)) ? array_map([$this,'makeUpperFirst'],$var) : $this->makeUpperFirst($var);
-		}
 		
 		
 		//Returns ut8 in consideration uppercased words.
 		private function makeUpperFirst($str){
-			//return mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
-			return strtolower($str);
+			return mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
+		}
+		
+		
+		
+		//returns lower cased string
+		private function lower($var){
+			if($this->containsObjects($var)){
+				return $this->loopThrough($var,'lower');
+			}		
+			return (is_array($var)) ? array_map('strtolower',$var) : strtolower($var);	
 		}
 		
 		
