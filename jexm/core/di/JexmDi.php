@@ -49,7 +49,7 @@
 		private function gatherDependenciesFromParams($params){
 			foreach($params as $param){
 				if($param->isArray()){
-					throw new \Excpetion("An array was injected into the constructor. Only instantiable objects may be injected. Please use a setter if an array is a dependency");
+					throw new \Exception("An array was injected into the constructor. Only instantiable objects may be injected. Please use a setter if an array is a dependency");
 				}
 				if(is_null($param->getClass())){
 					continue;
