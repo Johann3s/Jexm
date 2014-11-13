@@ -42,8 +42,8 @@
 		public function addstuff(){
 			$result = DB::table('books')
 					  ->add('author',"Joh Testsson")
-					  ->add('title',"Super title 2, the sequal")
-					  ->add('publisher_id',7)
+					  ->add('title',"<h1>Super title 3</h1>, the threequal")
+					  ->add('publisher_id',8)
 					  ->execute();
 			return $result;		
 		}	

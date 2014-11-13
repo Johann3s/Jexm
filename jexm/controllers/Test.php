@@ -82,12 +82,12 @@
 		}			
 		
 		public function cleanStuff(){
-			$val = Globals::post('val');
-			var_dump($val);
+			//$val = Globals::post('val');
+			//var_dump($val);
 			$model = new \jexm\models\testModel();
 			$result = $model->getstuff();
 			//var_dump($result);
-			$res = Sanitizer::filter($result,['lower','upperFirst']);
+			$res = Sanitizer::filter($result,['lower','chars']);
 			var_dump($res);die();
 		}
 		public function json(){

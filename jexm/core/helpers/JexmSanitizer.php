@@ -33,6 +33,15 @@
 		}
 		
 		
+		//convert special chars
+		private function chars($var){
+			if($this->containsObjects($var)){
+				return $this->loopThrough($var,'chars');
+			}		
+			return (is_array($var)) ? array_map('htmlspecialchars',$var) : htmlspecialchars($var);		
+		}
+		
+		
 		//Trims text
 		private function trim($var){
 			if($this->containsObjects($var)){

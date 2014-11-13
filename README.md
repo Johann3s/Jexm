@@ -1,6 +1,7 @@
 #Jexm Framework#
-This framework was created as a graduating project for JensenEducation. 
-Jexm is a light MVC framework written in PHP. Its released under GNU license.
+Jexm is a light MVC framework written in PHP. 
+It was created as a graduating project for JensenEducation.
+
 ##CONTENTS
 - [Dependencies](#Dependencies)
 - [Install & Configuration](#install)
@@ -414,7 +415,8 @@ To clean and filter your data you may utilize Jexms' Sanitizer class. It can tak
 However the class is able to clean an array containing objects, 
 such as a db-fetch, as long as it is NOT nested deeper than one dimension, which can come in handy.
 Sanitizer takes two arguments, the variable being filtered and an array of methods to invoke on that variable.
-The supported methods are tags,trim,upperFirst and lower. 
+The supported methods are tags,chars,trim,upperFirst and lower. 
+They represent strip_tags(),htmlspecialchars(),trim(),ucfirst() and strtolower().
 ```php
 $filtered = Sanitize::filter($varToClean,['tags','trim']);
 ```
