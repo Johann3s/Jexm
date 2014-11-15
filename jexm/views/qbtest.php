@@ -16,8 +16,8 @@
 	<body>
 		<h1>Query builder</h1>
 		<div>
-			<p><?php if(isset($links)){ echo $links; }?></p>
-			<?php var_dump($response); ?>
+			<p><?php// if(isset($links)){ echo $links; }?></p>
+			<?php $x = Session::get('joh');var_dump($x);//var_dump($response); ?>
 
 		</div>
 	</body>

@@ -29,3 +29,5 @@
 	
 	Routes::get('/test/di','test@diTest');
 	//Routes::get('/invalid','test2');
+	Routes::get('/session/test','test@session');
+	

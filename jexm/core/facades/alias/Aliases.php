@@ -7,6 +7,7 @@
 			class_alias('jexm\core\facades\Link','Link');
 			class_alias('jexm\core\facades\Path','Path');
 			class_alias('jexm\core\facades\Sanitizer','Sanitizer');
+			class_alias('jexm\core\facades\Session','Session');
 			
 		}
 		

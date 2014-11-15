@@ -105,4 +105,9 @@
 			$link = $x->create("test@diTest");
 			var_dump($link);
 		}
+		
+		public function session(){
+			Session::add(['joh' => "TESTAR SESSION"]);
+			return View::render("qbtest");
+		}
 	}
