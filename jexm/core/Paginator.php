@@ -6,15 +6,28 @@
 	
 	class Paginator{
 		
+		/**
+		* @var int Holds current page
+		*/
 		protected $currentPage = 1;
+		
+		/**
+		* @var int Holds number of posts/items per page
+		*/		
 		protected $perPage = 3;
+		
+		/**
+		* @var int Holds total number of posts/items
+		*/				
 		protected $totalCount;
 		
-		protected $link;
+		
 
+		
 		/**
 		* SETTERS
 		*/
+		
 		
 		/**
 		* Sets limit
@@ -24,6 +37,7 @@
 			return $this;
 		}
 		
+		
 		/**
 		* Sets total count
 		*/
@@ -31,6 +45,7 @@
 			$this->totalCount = $totCount;
 			return $this;
 		}
+		
 		
 		/**
 		* Sets the current page (determined via getstring in pagination links)
@@ -40,25 +55,56 @@
 			return $this;
 		}
 		
-		protected function totalPages(){
-			return ceil($this->totalCount/$this->perPage); 
-		}
-		protected function previousPage(){
-			return $this->currentPage - 1;
-		}
-		protected function nextPage(){
-			return $this->currentPage + 1;
-		}
 		
 		/**
 		* GETTERS
 		*/
+		
+		
+		/**
+		* Calculate num of total pages to display
+		*/
+		protected function totalPages(){
+			return ceil($this->totalCount/$this->perPage); 
+		}
+		
+		
+		/**
+		* Calc prev page
+		*/
+		protected function previousPage(){
+			return $this->currentPage - 1;
+		}
+		
+		
+		/**
+		* calc next page
+		*/
+		protected function nextPage(){
+			return $this->currentPage + 1;
+		}
+		
+
+		
+		/**
+		* Cacl offset for SQL-query
+		*/
 		public function getOffset(){
 			return ($this->currentPage - 1) * $this->perPage;
 		}
+		
+		
+		/**
+		* Calc limit for SQL-query
+		*/
 		public function getLimit(){
 			return $this->perPage;
 		}
+		
+		
+		/**
+		* Get links for display
+		*/
 		public function getLinks(){
 			$url = URL::getCurrentURLWithoutQueryString();
 			

@@ -1,7 +1,1 @@
 # This file holds errorlogs from within Jexm application.
-
-Logged at 2014-10-25 23:46:19
-SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
-
-Logged at 2014-11-01 15:32:18
-SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)

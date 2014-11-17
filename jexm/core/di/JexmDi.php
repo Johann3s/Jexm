@@ -4,8 +4,19 @@
 	
 	class JexmDi{
 		
+		/**
+		* @var array Holds all objects that are to be instantiated
+		*/
 		protected $objects = [];
+		
+		/**
+		* @var array Holds all instantiated objects
+		*/
 		protected $instantiatedObjects = [];
+		
+		/**
+		* @var object Holds self
+		*/
 		protected $reflection;
 		
 		

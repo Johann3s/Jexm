@@ -2,24 +2,54 @@
 <html lang="sv">
 	<head>
 		<meta charset="UTF-8">
-		<title>Jexm || Paginationtest</title>
-		<link rel="stylesheet" type="text/css" href="<?php echo Path::asset('css/style.css'); ?>">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Welcome || Jexm</title>
+		<style>
+			*{
+				font-family: Tahoma,Verdana;
+			}
+			html,body,.overlay{
+				margin:0;
+				position:relative;
+				width:100%;
+				height:100%;
+				min-height:100%;
+			}
+			body{
+				background-image:url('/images/background.jpg');
+				background-size:cover;
+				background-repeat:no-repeat;
+				background-position:center;
+				text-align:center;
+			}
+			.overlay{
+				position:absolute;
+				width:100%;
+				min-height:100%;
+				background-color:rgba(0,0,0,0.9);
+			}
+			.text-wrap{
+				display:inline-block;
+				padding:40px;
+				margin-top:150px;
+			}
+			img{
+				display:block;
+				margin:0 auto;
+				border-radius:10px;
+			}
+			h2{
+				text-align:center;
+				color:#FFFFFF;
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Post data</h1>
-		<div>
-			<form action="<?php echo Path::create('test@cleanStuff'); ?>" method="post">
-				<input type="hidden" value="tjoho" name="val" />
-				<input type="submit" value="send" />
-			</form>
-			<p><?php if(isset($links)){ echo $links; }?></p>
-			<p>Imma a linkb <?php echo Link::create('test@doRockAndRoll',"cool link with controllerz",["testval" => "someval"]); ?></p>
-			<p>Im also a link <?php echo Link::create('/test',"regular link"); ?></p>
-			<p>Im a getlink <?php echo Link::create('/test/get',"get link",["testval" => "someval"]); ?></p>
-			<h2><?php echo $first; ?></h2>
-			<h2><?php echo $second; ?></h2>
-			<h2><?php echo $third; ?></h2>
-			<img src="<?php echo Path::asset('images/arrow.jpg'); ?>" alt="alt">
-		</div>
+		<div class="overlay">
+			<div class="text-wrap">
+				<img src="<?php echo Path::asset('images/logo-jexm.png'); ?>" alt="jexmlogo">
+				<h2>You are up and running!!</h2>
+			</div>	
+		</div>	
 	</body>
 </html>

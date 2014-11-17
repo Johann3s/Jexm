@@ -11,13 +11,23 @@
 		*/
 		protected $data = array();
 		
+		
+		/**
+		* @var string Holds templatename
+		*/
 		protected $templateName;
 		
+		
+		/**
+		* @var object holds Twig env.
+		*/
 		protected $twig;
+		
 		
 		public function __construct($loader){
 			$this->twig = new \Twig_Environment($loader, ['debug' => true]);
 		}
+		
 		
 		/**
 		* Passes data to property
@@ -40,6 +50,8 @@
 			return $this;
 		}
 		
+		
+		
 		/**
 		* Returns a string with os safe directory separators
 		* @return string		
@@ -57,13 +69,21 @@
 		}
 		
 		
+		
 		/**
-		* Renders view with twig. Helpers must be passed into twig environment
+		* Renders view with twig. 
+		* Helpers must be passed into twig environment
 		*/
 		protected function renderTwig(){
-			$this->send(["link" => new \jexm\core\helpers\JexmLink(\jexm\core\route\Routes::getInstance())]);
+			$this->send([
+				"link" => new \jexm\core\helpers\JexmLink(\jexm\core\route\Routes::getInstance(new \jexm\core\helpers\JexmURL()),new \jexm\core\helpers\JexmURL()),
+				"path" => new \jexm\core\helpers\JexmPathResolver(new \jexm\core\helpers\JexmLink(\jexm\core\route\Routes::getInstance(new \jexm\core\helpers\JexmURL()),new \jexm\core\helpers\JexmURL())),
+				"session" => new \jexm\core\helpers\JexmSession(),
+				"globals" => new \jexm\core\helpers\JexmGlobals()
+				]);
 			echo $this->twig->render($this->osSafe($this->templateName) . ".php", $this->data);
 		}
+		
 		
 		
 		/**

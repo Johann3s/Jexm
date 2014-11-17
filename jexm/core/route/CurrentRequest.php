@@ -1,6 +1,10 @@
 <?php
 	namespace jexm\core\route;
 	
+	/**
+	* Holds current request.
+	* Methods and props are self-explanatory.
+	*/
 	class CurrentRequest{
 		
 		protected $controller;
@@ -10,6 +14,9 @@
 		protected $args;
 		
 		
+		/**
+		* @param array $request Injected from Routesobject.
+		*/
 		public function set(array $request){
 			$this->controller = $request['controller'];
 			$this->method = $request['method'];

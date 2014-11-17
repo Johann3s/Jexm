@@ -1,9 +1,17 @@
 <?php
 	namespace jexm\core\di;
 	
+	/**
+	* Registers classes in containerclass
+	*/
 	class JexmContainerRegistry{
 		
 		
+		
+		/**
+		* Registers classes and saves closure in containerClass.
+		* @var object $container Container-class
+		*/
 		public function registerObjects(\jexm\core\di\JexmContainer $container){
 			
 			$container->register("Router",function() use ($container){
@@ -105,6 +113,10 @@
 			
 			$container->register("Session",function(){
 				return new \jexm\core\helpers\JexmSession();
+			});	
+			
+			$container->register("DB",function(){
+				return new \jexm\core\db\DatabaseQuery();
 			});				
 				
 			/**
@@ -114,11 +126,6 @@
 				return new \jexm\models\User();
 			});	
 			
-			$container->register("DB",function(){
-				return new \jexm\core\db\DatabaseQuery();
-			});			
-			$container->register("MySuperClass",function(){
-				return new \jexm\classes\MyClass();
-			});				
+					
 		}
 	}
