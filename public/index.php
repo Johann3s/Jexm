@@ -22,7 +22,8 @@
 	define('PUBLIC_PATH',ROOT."public".DS);
 	define('LOG_PATH',ROOT."logs".DS);
 	
-	//error_reporting(E_ALL);
+	
+	
 
 	/**
 	* Include autoloader and settings.
@@ -36,7 +37,6 @@
 	
 	
 	
-	
 	/**
 	* Include composers vendor autoload
 	*/
@@ -45,23 +45,38 @@
 	
 	
 	/**
-	* Set errorhandling
+	* Include configs
 	*/
-	use Whoops\Handler\PrettyPageHandler;
+	require_once(ROOT."config".DS."config.php");
+	
+	
+	/**
+	* Turn off errors if in production
+	*/
+	if(!PRODUCTION){
+		error_reporting(E_ALL);
 
-	$run     = new Whoops\Run;
-	$handler = new PrettyPageHandler;
-	$handler->setPageTitle("You Baad!!");
-	$run->pushHandler($handler);
-	$run->register();	
+		//Set errorhandling
+		$run     = new Whoops\Run;
+		$handler = new Whoops\Handler\PrettyPageHandler();
+		$handler->setPageTitle("You Baad!!");
+		$run->pushHandler($handler);
+		$run->register();			
+	}else{
+		error_reporting(0);
+	}
+
+	
 	
 	
 	/**
 	* Include configs and userdefined routes
 	*/
-	require_once(ROOT."config".DS."config.php");
 	require_once(ROOT."config".DS."root.php");
 	require_once(JEXM_PATH."routes.php");	
+	
+	
+	
 	
 	/**
 	* Start session.
