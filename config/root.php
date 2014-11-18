@@ -9,9 +9,3 @@
 	
 	define('URL_ROOT',$urlRoot);
 	
-	/*function jexmExceptions($exception) {
-		\jexm\core\BaseHelper::kill($exception->getMessage());
-	}
-
-	set_exception_handler('jexmExceptions');	*/
-	
