@@ -1,21 +1,12 @@
 <?php
 	namespace jexm\core\helpers;
 	use \jexm\core\facades\Session as Session;
+	use \jexm\core\facades\User as User;
 	/**
 	* Class for authentication
 	*/
 	
 	class JexmAuthentication{
-		
-		/**
-		* @var object Usermodel
-		*/
-		protected $user;
-		
-		public function __construct(\jexm\models\User $user){
-			$this->user = $user;
-		}
-		
 		
 		
 		/**
@@ -33,7 +24,7 @@
 			$accessorData = $chunk[0];
 			$passwordData = $chunk[1];
 			
-			$credentials = $this->user->getCredentials($accessorData); //Fetch credentials from model (must be usermodel)
+			$credentials = User::getCredentials($accessorData); //Fetch credentials from model (must be usermodel)$this->user->
 			
 			$passwordValue = array_values($passwordData);
 			$passwordColName = array_keys($passwordData);

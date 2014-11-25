@@ -74,9 +74,8 @@
 			/**
 			* ----> Helpers <----
 			*/	
-			$container->register("Authenticate",function() use ($container){
-				$user = $container->getFromContainer("User");
-				return new \jexm\core\helpers\JexmAuthentication($user);
+			$container->register("Authenticate",function(){
+				return new \jexm\core\helpers\JexmAuthentication();
 			});		
 			
 			$container->register("Hasher",function(){
@@ -123,7 +122,7 @@
 			* ----> Models <-----
 			*/
 			$container->register("User",function(){
-				return new \jexm\models\User();
+				return new \jexm\models\Users();
 			});	
 			
 					

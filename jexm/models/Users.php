@@ -1,7 +1,7 @@
 <?php
 	namespace jexm\models;
 	
-	class User extends Model{
+	class Users extends Model{
 		
 		/**
 		* Change if tablename is NOT users
@@ -16,7 +16,6 @@
 				throw new \Exception("Unable to find table ".$this->table);
 			}
 		}
-		
 		
 		
 		/**
