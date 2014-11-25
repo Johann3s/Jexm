@@ -110,7 +110,7 @@ Redirect::with(["id" => 1])->to('FooController@barMethod');
 ```
 #####
 #####<a name="session"></a>Session
-You have access to the session class from controllers and models.
+You have access to the session class from the whole framework.
 It comes with smooth handling while inserting,retrieving and removing data from 
 the superglobal.
 ######
@@ -418,7 +418,7 @@ Sanitizer takes two arguments, the variable being filtered and an array of metho
 The supported methods are tags,chars,trim,upperFirst and lower. 
 They represent strip_tags(),htmlspecialchars(),trim(),ucfirst() and strtolower().
 ```php
-$filtered = Sanitize::filter($varToClean,['tags','trim']);
+$filtered = Sanitizer::filter($varToClean,['tags','trim']);
 ```
 The Sanitizer will execute all methods defined in the array and return your data as it were. 
 Meaning it will not break any properties or keyvalues. 
